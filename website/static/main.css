@@ -1,0 +1,52 @@
+body {
+  background-color: #d48498
+}
+
+.navbar {
+    background: #d48498;
+}
+
+.nav-link {
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navTextLineBreak {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+    .navbar {
+      flex-flow: wrap;
+    }
+
+    .navbar-brand {
+      width: 100%;
+      text-align: center;
+    }
+
+    .navbar-brand img {
+      height: 100px; /*Set a logo size*/
+      width: auto;
+    }
+
+    .navbar-collapse {
+      justify-content: center;
+    }
+ }
+
+ body video {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  min-width: 10%;
+  min-height: 100%;
+  width: 80%;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}

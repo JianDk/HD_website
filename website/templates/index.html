@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="dk">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href={% static 'main.css'%}>
+    <title>We are dimsum!</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md">
+    <a class="navbar-brand" href="#" target="_blank">
+        <img src={% static 'media/HIDDEN DIMSUM logo final.png'%} width="100" alt="">
+    </a>
+
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Hidden Dimsum <br> 
+                <div class="navTextLineBreak"> Nytorv </div></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#" target="_blank">
+                Hidden Dimsum 
+                <br><div class="navTextLineBreak">2900</div></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="http://www.dimsumshop.dk" target="_blank">
+                Order Takeaway</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="http://www.dimsumbox.dk" target="_blank">
+                Order Dimsum Box</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#" target="_blank">
+                Late Night Dimsum</a>
+            </li>
+
+        </ul>
+    </div>
+    </nav>
+    
+    <script href="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+<!--video to be pasted somewhere else 
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" controls="controls">
+        <source src={% static 'media/Hidden-dimsum-web.mp4'%} type="video/mp4">
+    </video>
+
+-->

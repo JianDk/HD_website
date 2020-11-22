@@ -1,0 +1,20 @@
+.jumbotron {
+    text-align: center; 
+    background: url("media/cover.jpg") no-repeat center center fixed;
+    background-size: cover;
+    justify-content: center;
+    color: white;
+}
+
+
+
+body {
+    background-color: #d48498;
+}
+
+.p-2 {
+    font-size : 50px;
+    font-weight : bold;
+}
+
+a > img {width : 500px;}
