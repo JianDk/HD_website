@@ -1,12 +1,10 @@
-.jumbotron {
+#header {
     text-align: center; 
     background: url("media/cover.jpg") no-repeat center center fixed;
     background-size: cover;
     justify-content: center;
     color: white;
 }
-
-
 
 body {
     background-color: #d48498;
@@ -18,3 +16,20 @@ body {
 }
 
 a > img {width : 500px;}
+
+#footerJumbotron {
+    margin-top : 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#footerContainer {
+    margin: 0px;
+    max-width:100%;
+}
+
+#title_contact {
+    font-weight : bold;
+    font-size: 28px;
+    text-align : center;
+}
