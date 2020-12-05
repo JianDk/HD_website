@@ -38,83 +38,176 @@
 {% endblock %}
 
 {% block cardDeck %}
-
 <section>
-    <div class="container-fluid" id = "cardDecks">
-        <div class="card-deck">
-            <div class="card">
-                <a href='#'>
-                    <img class="card-img-top" src={% static 'media/HiddenDimsumNytorvFacade.jpg' %} alt="Hidden Dimsum Nytorv image">
-                </a>
+<div class="container-fluid" id = "mainContainer">
+    <div class ="container-fluid" id = "cardDecksHeading">
+        <h1>SECTION HEADING</h1>
+        <hr class="cardDeckHorisontalLine">
+        <br>
+        <br>
+    </div>
+            
+    <div class="card-deck" id ="card-deck">
+        <div class="card">
+            <a href='#'>
+                <img class="card-img-top" src={% static 'media/HiddenDimsumNytorvFacade.jpg' %} alt="Hidden Dimsum Nytorv image">
+            </a>
 
-                    <div class="card-body">
-                            <h5 class="card-title">Hidden Dimsum Nytorv </h5>
-                        <p class="card-text">Our main dimsum house located at heart of Copenhagen. This is the place where
-                            dimsum started.
-                            <ul>
-                                <li><a href="#">Menu</a></li>
-                                <li><a href="#">Book table</a></li>
-                            </ul>
-                            <a href="#" class="btn btn-primary">More Info</a>
-                        </p>
-                    </div>
-            </div>
-
-            <div class="card">
-                <a href="#">
-                    <img class="card-img-top" src={% static 'media/HiddenDimsumByNight.jpg' %} alt="Hidden Dimsum By Night">
-                </a>
                 <div class="card-body">
-                    <h5 class="card-title">Hidden Dimsum by Night</h5>
-                    <p class="card-text">Late night dimsum and Hongkong street food with Asian beers. A night has different shades!</p>
-                    <ul>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#">Opening Hours</a></li>
-                    </ul>
-                    <a href = "#" class = "btn btn-primary">More Info</a>
+                        <h5 class="card-title">Hidden Dimsum Nytorv </h5>
+                    <p class="card-text">Our main dimsum house located at heart of Copenhagen. This is the place where
+                        dimsum started.
+                        <ul>
+                            <li><a href="#">Menu</a></li>
+                            <li><a href="#">Book table</a></li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">More Info</a>
+                    </p>
                 </div>
-            </div>
+        </div>
 
-            <div class="card">
-                <a href="#">
-                    <img class="card-img-top" src={% static 'media/HiddenDimsum2900Facade.jpg' %} alt="Hidden Dimsum Strandvejen 163, 2900 Hellerup">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">Hidden Dimsum 2900</h5>
-                    <p class="card-text">Dimsum takeaway. Order your dimsum dinner and pick it up at Hidden Dimsum 2900, Strandvejen 163, 2900 Hellerup.</p>
-                    <ul>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#">Order takeaway online></a></li>
-                        <li><a href="#">Order takeaway over phone</a></li>
-                        <li><a href="#">Opening hours</a></li>
-                    </ul>
-                    <a href="#" class="btn btn-primary">More Info</a>
-                </div>
+        <div class="card">
+            <a href="#">
+                <img class="card-img-top" src={% static 'media/HiddenDimsumByNight.jpg' %} alt="Hidden Dimsum By Night">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">Hidden Dimsum by Night</h5>
+                <p class="card-text">Late night dimsum and Hongkong street food with Asian beers. A night has different shades!</p>
+                <ul>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Opening Hours</a></li>
+                </ul>
+                <a href = "#" class = "btn btn-primary">More Info</a>
             </div>
+        </div>
 
-            <div class="card">
-                <a href="#">
-                    <img class="card-img-top" src={% static 'media/DimsumBox.jpg' %} alt="Dimsum Box">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">Dimsum Box</h5>
-                    <p class="card-text">A box of dimsum delivered to your front door with instructions on how to warm up. Dimsum at your convenience!</p>
-                    <a href="#" class="btn btn-primary">Order</a>
-                </div>
+        <div class="card">
+            <a href="#">
+                <img class="card-img-top" src={% static 'media/HiddenDimsum2900Facade.jpg' %} alt="Hidden Dimsum Strandvejen 163, 2900 Hellerup">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">Hidden Dimsum 2900</h5>
+                <p class="card-text">Dimsum takeaway. Order your dimsum dinner and pick it up at Hidden Dimsum 2900, Strandvejen 163, 2900 Hellerup.</p>
+                <ul>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Order takeaway online></a></li>
+                    <li><a href="#">Order takeaway over phone</a></li>
+                    <li><a href="#">Opening hours</a></li>
+                </ul>
+                <a href="#" class="btn btn-primary">More Info</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <a href="#">
+                <img class="card-img-top" src={% static 'media/DimsumBox.jpg' %} alt="Dimsum Box">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">Dimsum Box</h5>
+                <p class="card-text">A box of dimsum delivered to your front door with instructions on how to warm up. Dimsum at your convenience!</p>
+                <a href="#" class="btn btn-primary">Order</a>
+            </div>
+        </div>
+    </div>        
+</div>
+</section>
+{% endblock %}
+
+{% block aboutUs %}
+<section>
+    <div class="container-fluid" id = "aboutUsContainer">
+        <div class="row" id="firstRow">
+                <img src = {% static 'media/cover.jpg' %} class="col-md" alt = 'About us' id = "aboutUsLeftImage">
+
+            <div class="col-md" id="right"> 
+                <img src={% static 'media/HIDDEN DIMSUM logo final.png' %} alt="logo" id = "aboutUsLogo">
+                    <h1 id = "aboutUsRightHeader">We are dimsum!</h1>
+                    <hr class = "cardDeckHorisontalLine">
+                    <h3>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe iure a quia ab, animi magni repellendus voluptatem quo magnam recusandae id sit, nam enim illum voluptatibus error possimus ratione quisquam.
+                    </h3>
             </div>
         </div>
     </div>
 </section>
 {% endblock %}
 
-{% block landingPageFooter %}
-<div class="jumbotron jumbotron-fluid" id="footerJumbotron">
-    <div class="container-fluid" id="footerContainer">
-        <h1 class="display-4" id = "title_contact">Follow us!</h1>
-        <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non natus reiciendis molestias corrupti neque deleniti cupiditate illo, animi, sapiente id alias saepe voluptatum itaque velit, assumenda in ipsum minima tenetur.</p>
-        <div class = "socialMediaIcons">
-            <a href="#" class="fa fa-facebook"></a>
-        <div>
+{% block aboutUsVideo %}
+<div class="container-fluid" id ="aboutUsVideoMainContainer">
+    <div class="embed-responsive embed-responsive-16by9">
+        <video>
+            <source src = {% static 'media/til-mac.mp4' %} type="video/mp4">
+        </video>
     </div>
 </div>
+{% endblock %}
+
+{% block landingPageFooter %}
+<footer class="mainfooter" role="contentinfo">
+    <div class="footer-middle">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <!--Column1-->
+          <div class="footer-pad">
+            <h4>Heading 1</h4>
+            <ul class="list-unstyled">
+              <li><a href="#"></a></li>
+              <li><a href="#">Payment Center</a></li>
+              <li><a href="#">Contact Directory</a></li>
+              <li><a href="#">Forms</a></li>
+              <li><a href="#">News and Updates</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <!--Column1-->
+          <div class="footer-pad">
+            <h4>Heading 2</h4>
+            <ul class="list-unstyled">
+              <li><a href="#">Website Tutorial</a></li>
+              <li><a href="#">Accessibility</a></li>
+              <li><a href="#">Disclaimer</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Webmaster</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <!--Column1-->
+          <div class="footer-pad">
+            <h4>Heading 3</h4>
+            <ul class="list-unstyled">
+              <li><a href="#">Parks and Recreation</a></li>
+              <li><a href="#">Public Works</a></li>
+              <li><a href="#">Police Department</a></li>
+              <li><a href="#">Fire</a></li>
+              <li><a href="#">Mayor and City Council</a></li>
+              <li>
+                <a href="#"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+          <div class="col-md-3">
+              <h4>Follow Us</h4>
+              <ul class="social-network social-circle">
+               <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+               <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+              </ul>				
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12 copy">
+              <p class="text-center">&copy; Copyright 2018 - Company Name.  All rights reserved.</p>
+          </div>
+      </div>
+  
+  
+    </div>
+    </div>
+  </footer>
+  
 {% endblock %}
