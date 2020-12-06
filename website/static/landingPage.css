@@ -86,7 +86,15 @@
     justify-content: center;
     margin-top: 0px;
     margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+#aboutUsVideoFlexbox {
+  margin: 5% 10% 5% 10%; /* top right bottom left*/
+}
+
 
 /* footer */
 footer {

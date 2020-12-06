@@ -134,10 +134,12 @@
 
 {% block aboutUsVideo %}
 <div class="container-fluid" id ="aboutUsVideoMainContainer">
-    <div class="embed-responsive embed-responsive-16by9">
-        <video>
-            <source src = {% static 'media/til-mac.mp4' %} type="video/mp4">
-        </video>
+    <div class="row">
+        <div class="embed-responsive embed-responsive-16by9" id = "aboutUsVideoFlexbox">
+            <video controls autoplay muted loop id ="aboutUsVideoTag">
+                <source src = {% static 'media/til-mac.mp4' %} type="video/mp4">
+            </video>
+        </div>
     </div>
 </div>
 {% endblock %}
