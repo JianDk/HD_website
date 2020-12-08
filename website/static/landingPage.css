@@ -102,10 +102,23 @@ footer {
     background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
     background: linear-gradient(59deg, #3A6073, #16222A);
     color: white;
-    margin-top:100px;
+    margin-top:0px;
   }
-  
-  footer a {
+
+  #footerRow {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #footerTitle {
+    text-align: center; 
+  }
+
+#footerContactFlex {
+  text-align: center;
+}
+
+footer a {
     color: #fff;
     font-size: 14px;
     transition-duration: 0.2s;
@@ -156,7 +169,7 @@ footer {
   }
   
   .social-network a.icoFacebook:hover i,
-  .social-network a.icoLinkedin:hover i {
+  .social-network a.icoInstagram:hover i {
     color: #fff;
   }
   
