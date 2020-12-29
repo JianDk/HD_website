@@ -50,7 +50,7 @@
     <div class="card-deck" id ="card-deck">
         <div class="card">
             <a href='#'>
-                <img class="card-img-top" src={% static 'media/HiddenDimsumNytorvFacade.jpg' %} alt="Hidden Dimsum Nytorv image">
+                <img class="card-img-top" src={% static 'media/card_hiddendimsumNytorv.jpg' %} alt="Hidden Dimsum Nytorv image">
             </a>
 
                 <div class="card-body">
@@ -61,14 +61,14 @@
                             <li><a href="#">Menu</a></li>
                             <li><a href="#">Book table</a></li>
                         </ul>
-                        <a href="#" class="btn btn-primary">More Info</a>
+                        <a href="{% url 'hdnytorv' %}" class="btn btn-primary">More Info</a>
                     </p>
                 </div>
         </div>
 
         <div class="card">
             <a href="#">
-                <img class="card-img-top" src={% static 'media/HiddenDimsumByNight.jpg' %} alt="Hidden Dimsum By Night">
+                <img class="card-img-top" src={% static 'media/card_bynight.jpg' %} alt="Hidden Dimsum By Night">
             </a>
             <div class="card-body">
                 <h5 class="card-title">Hidden Dimsum by Night</h5>
@@ -83,7 +83,7 @@
 
         <div class="card">
             <a href="#">
-                <img class="card-img-top" src={% static 'media/HiddenDimsum2900Facade.jpg' %} alt="Hidden Dimsum Strandvejen 163, 2900 Hellerup">
+                <img class="card-img-top" src={% static 'media/card_hiddendimsum2900.jpg' %} alt="Hidden Dimsum Strandvejen 163, 2900 Hellerup">
             </a>
             <div class="card-body">
                 <h5 class="card-title">Hidden Dimsum 2900</h5>
@@ -100,7 +100,7 @@
 
         <div class="card">
             <a href="#">
-                <img class="card-img-top" src={% static 'media/DimsumBox.jpg' %} alt="Dimsum Box">
+                <img class="card-img-top" src={% static 'media/card_dimsumbox.jpg' %} alt="Dimsum Box">
             </a>
             <div class="card-body">
                 <h5 class="card-title">Dimsum Box</h5>
@@ -117,7 +117,7 @@
 <section>
     <div class="container-fluid" id = "aboutUsContainer">
         <div class="row" id="firstRow">
-                <img src = {% static 'media/cover.jpg' %} class="col-md" alt = 'About us' id = "aboutUsLeftImage">
+                <img src = {% static 'media/aboutus.jpg' %} class="col-md" alt = 'About us' id = "aboutUsLeftImage">
 
             <div class="col-md" id="right"> 
                 <img src={% static 'media/HIDDEN DIMSUM logo final.png' %} alt="logo" id = "aboutUsLogo">
