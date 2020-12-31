@@ -1,0 +1,28 @@
+{% load static %}
+
+<section>
+    <div class="container-fluid" id = "aboutUsContainer">
+        <div class="row" id="firstRow">
+                <img src = {% static 'media/aboutus.jpg' %} class="col-md" alt = 'About us' id = "aboutUsLeftImage">
+
+            <div class="col-md" id="right"> 
+                <img src={% static 'media/HIDDEN DIMSUM logo final.png' %} alt="logo" id = "aboutUsLogo">
+                    <h1 id = "aboutUsRightHeader">We are dimsum!</h1>
+                    <hr class = "cardDeckHorisontalLine">
+                    <h3>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe iure a quia ab, animi magni repellendus voluptatem quo magnam recusandae id sit, nam enim illum voluptatibus error possimus ratione quisquam.
+                    </h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid" id ="aboutUsVideoMainContainer">
+    <div class="row">
+        <div class="embed-responsive embed-responsive-16by9" id = "aboutUsVideoFlexbox">
+            <video controls autoplay muted loop id ="aboutUsVideoTag">
+                <source src = {% static 'media/til-mac.mp4' %} type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
