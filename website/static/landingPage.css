@@ -30,7 +30,7 @@
 
 /* Card deck section */
 #mainContainer {
-    background: url("media/backgroundCardDeck.gif") no-repeat center center;
+    background: url("media/backgroundCardDeck.jpg") no-repeat center center;
     background-size: cover;
     min-height: 100%;
     justify-content: center;
@@ -80,7 +80,7 @@
 
 /* About Us Video Section */
 #aboutUsVideoMainContainer {
-    background: url("media/backgroundCardDeck.gif") no-repeat center center;
+    background: url("media/backgroundCardDeck.jpg") no-repeat center center;
     background-size: cover;
     min-height: 100%;
     justify-content: center;
