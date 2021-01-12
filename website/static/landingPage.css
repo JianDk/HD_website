@@ -28,6 +28,18 @@
     font-weight: bold;
 }
 
+.headerTitle {
+  font-size: 60px;
+  font-weight: normal;
+  color: black;
+}
+
+.lead {
+  font-size: 40px;
+  font-weight: normal;
+  color: black;
+}
+
 /* Card deck section */
 #mainContainer {
     background: url("media/backgroundCardDeck.jpg") no-repeat center center;
