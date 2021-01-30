@@ -1,5 +1,5 @@
 {% load static %}
-<section>
+<section id = "anchor_locations"> 
     <div class="container-fluid" id = "mainContainer">
         <div class ="container-fluid" id = "cardDecksHeading">
             <h1>LOCATIONS AND DIMSUM BOX</h1>
@@ -55,7 +55,7 @@
                         <li><a href="#">Order takeaway over phone</a></li>
                         <li><a href="#">Opening hours</a></li>
                     </ul>
-                    <a href="#" class="btn btn-primary">More Info</a>
+                    <a href="{% url 'hd2900' %}" target = "_blank" class="btn btn-primary">More Info</a>
                 </div>
             </div>
     
@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Dimsum Box</h5>
                     <p class="card-text">A box of dimsum delivered to your front door with instructions on how to warm up. Dimsum at your convenience!</p>
-                    <a href="#" class="btn btn-primary">Order</a>
+                    <a href="http://www.dimsumbox.dk" target = "_blank" class="btn btn-primary">Order</a>
                 </div>
             </div>
         </div>        

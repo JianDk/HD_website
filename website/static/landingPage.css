@@ -31,13 +31,13 @@
 .headerTitle {
   font-size: 60px;
   font-weight: normal;
-  color: black;
+  color: white;
 }
 
 .lead {
   font-size: 40px;
   font-weight: normal;
-  color: black;
+  color: white;
 }
 
 /* Card deck section */
@@ -75,7 +75,6 @@
   object-fit: cover;
   flex: 1;
   overflow: hidden;
-  height: 1200px;
   padding: 0px;
   border: 1px solid transparent;
 }

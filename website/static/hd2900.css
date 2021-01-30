@@ -1,0 +1,19 @@
+/* about us */
+
+#aboutUsLeftImage {
+    object-fit: cover;
+    flex: 1;
+    overflow: hidden;
+    padding: 0px;
+    border: 1px solid transparent;
+  }
+
+  #aboutUsLogo {
+    width: 20%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#aboutUsRightHeader {text-align: center;}
