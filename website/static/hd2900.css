@@ -1,14 +1,19 @@
-/* about us */
+/*navbar*/
+/*About us */
+
+.row {
+    display: flex;
+}
 
 #aboutUsLeftImage {
-    object-fit: cover;
-    flex: 1;
-    overflow: hidden;
-    padding: 0px;
-    border: 1px solid transparent;
-  }
+  object-fit: cover;
+  flex: 1;
+  overflow: hidden;
+  padding: 0px;
+  border: 1px solid transparent;
+}
 
-  #aboutUsLogo {
+#aboutUsLogo {
     width: 20%;
     height: auto;
     margin-left: auto;
@@ -17,3 +22,9 @@
 }
 
 #aboutUsRightHeader {text-align: center;}
+
+.cardDeckHorisontalLine {
+    border: 5px solid grey;
+    width: 5%;
+    text-align: center;
+}
