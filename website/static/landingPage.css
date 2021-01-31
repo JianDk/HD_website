@@ -1,3 +1,15 @@
+/*font to be used*/
+@font-face {
+  font-family: hdFont;
+  src: url("media/font/Gotham-Light.otf");
+}
+
+@font-face {
+  font-family: hdFont;
+  src: url("media/font/Gotham-Medium.otf");
+  font-weight: bold;
+}
+
 /* cover section */
 #header {
     text-align: center; 
@@ -25,6 +37,7 @@
 #mainNavlink {
     color: white;
     font-size: 22px;
+    font-family: hdFont;
 }
 
 .nav-item {
@@ -36,12 +49,15 @@
   font-size: 60px;
   font-weight: normal;
   color: white;
+  font-family: hdFont;
+  font-weight: bold;
 }
 
 .lead {
-  font-size: 40px;
+  font-size: 60px;
   font-weight: normal;
   color: white;
+  font-family: hdFont;
 }
 
 /* Card deck section */
@@ -52,6 +68,7 @@
     justify-content: center;
     margin-top: 0px;
     margin-bottom: 0px;
+    font-family: hdFont;
 }
 
 #cardDecksHeading {
@@ -67,6 +84,15 @@
 
 #card-deck {
     padding-bottom: 50px;
+}
+
+.card-title {
+  font-family: hdFont;
+  font-weight: bold;
+}
+
+.card-text {
+  font-family: hdFont;
 }
 
 /*About us */
@@ -91,7 +117,10 @@
     display: block;
 }
 
-#aboutUsRightHeader {text-align: center;}
+#aboutUsRightHeader {
+  text-align: center;
+  font-family: hdFont;
+}
 
 /* About Us Video Section */
 #aboutUsVideoMainContainer {
@@ -104,6 +133,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+#aboutUsLogo {
+  width: 10%;
+  height: auto;
+  padding-top: 100px;
+}
+
+#aboutUsContent {
+  padding-left: 100px;
+  padding-right: 50px;
+  font-family: hdFont;
+  text-align: left;
+  font-size: 20px;
 }
 
 #aboutUsVideoFlexbox {
@@ -126,6 +169,17 @@ footer {
 
   #footerTitle {
     text-align: center; 
+    font-family: hdFont;
+    font-weight: bold;
+  }
+
+  #footerText {
+    font-family: hdFont;
+  }
+
+  #footerFollowUsText {
+    font-family: hdFont;
+    font-weight: bold;
   }
 
 #footerContactFlex {

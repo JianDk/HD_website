@@ -9,16 +9,14 @@
     <!--social media icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href={% static 'landingPage.css'%}>
-    <link rel="stylesheet" href="text/css" href={% static 'hd2900.css'%}>
+    <link rel="stylesheet" type="text/css" href={% static 'hd2900.css'%}>
     <title>Hidden Dimsum 2900</title>
     <link rel="shortcut icon" type="image/png" href="{% static 'media/favicon_hd290032x32.png' %}"/>
   </head>
 
   <body>
     {% include 'hd2900coverContent.html' %}
-    this text should be placed below navbar
-    
-    <!-- {% include 'hd2900aboutUs.html' %} -->
+    {% include 'hd2900aboutUs.html' %}
     <!-- {% include 'hd2900menu.html' %}-->
     
   <script href="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
