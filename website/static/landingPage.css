@@ -152,7 +152,20 @@
 #aboutUsVideoFlexbox {
   margin: 5% 10% 5% 10%; /* top right bottom left*/
 }
+/* Contact form */
+#contactField {
+  list-style-type: none;
+  padding-left: 20px;
+  font-family: hdFont;
+  font-weight: bold;
+}
 
+#contactSubmitButton {
+  padding-left: 20px;
+  font-family: hdFont;
+  font-weight: bold;
+  font-size: 18px;
+}
 /* footer */
 footer {
     background: #16222A;

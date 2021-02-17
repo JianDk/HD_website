@@ -1,0 +1,28 @@
+{% load static %}
+<div class="container-fluid" id = "contactContainer">
+    <h1 id = "menuHeader">CONTACT</h1>
+    <hr class = "cardDeckHorisontalLine">
+
+    {{ emailStatus }}
+
+    <form action="/your-name/" method="post">
+        {% csrf_token %}
+        <ul id ="contactField">
+        {{ form.yourName.label }} 
+        {{ form.yourName|linebreaks }}
+
+        {{ form.sender.label }} 
+        {{ form.sender|linebreaks }}
+
+        {{ form.phone.label }}
+        {{ form.phone|linebreaks}}
+
+        {{ form.message.label|linebreaks }}
+        {{ form.message }}
+
+        </ul>
+        <button type="submit" class="btn btn-success" value ="Submit" id="contactSubmitButton">Submit</button>
+    
+    </form>
+
+</div>
