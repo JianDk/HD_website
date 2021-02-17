@@ -153,6 +153,16 @@
   margin: 5% 10% 5% 10%; /* top right bottom left*/
 }
 /* Contact form */
+#contactContainer {
+  padding-bottom: 20px;
+}
+#emailStatusMsg {
+  font-size: 18px;
+  margin-left: 20px;
+  font-family: hdFont;
+  font-weight: bold;
+}
+
 #contactField {
   list-style-type: none;
   padding-left: 20px;
@@ -161,7 +171,7 @@
 }
 
 #contactSubmitButton {
-  padding-left: 20px;
+  margin-left: 20px;
   font-family: hdFont;
   font-weight: bold;
   font-size: 18px;

@@ -2,8 +2,7 @@
 <div class="container-fluid" id = "contactContainer">
     <h1 id = "menuHeader">CONTACT</h1>
     <hr class = "cardDeckHorisontalLine">
-
-    {{ emailStatus }}
+    <h2 id="emailStatusMsg">{{ emailStatus }}</h2>
 
     <form action="/your-name/" method="post">
         {% csrf_token %}
