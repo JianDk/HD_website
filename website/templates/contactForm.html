@@ -2,9 +2,8 @@
 <div class="container-fluid" id = "contactContainer">
     <h1 id = "menuHeader">CONTACT</h1>
     <hr class = "cardDeckHorisontalLine">
-    <h2 id="emailStatusMsg">{{ emailStatus }}</h2>
 
-    <form action="/your-name/" method="post">
+    <form action="/hd2900" method="post">
         {% csrf_token %}
         <ul id ="contactField">
         {{ form.yourName.label }} 
@@ -21,6 +20,14 @@
 
         </ul>
         <button type="submit" class="btn btn-success" value ="Submit" id="contactSubmitButton">Submit</button>
+        
+        <h2 id="emailStatusMsg">
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        </h2>
     
     </form>
 

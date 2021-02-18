@@ -158,20 +158,20 @@
 }
 #emailStatusMsg {
   font-size: 18px;
-  margin-left: 20px;
+  margin-left: 40%;
   font-family: hdFont;
   font-weight: bold;
 }
 
 #contactField {
   list-style-type: none;
-  padding-left: 20px;
+  padding-left: 40%;
   font-family: hdFont;
   font-weight: bold;
 }
 
 #contactSubmitButton {
-  margin-left: 20px;
+  margin-left: 40%;
   font-family: hdFont;
   font-weight: bold;
   font-size: 18px;
