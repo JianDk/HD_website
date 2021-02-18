@@ -6,21 +6,25 @@
     <form action="/hd2900" method="post">
         {% csrf_token %}
         <ul id ="contactField">
-        {{ form.yourName.label }} 
-        {{ form.yourName|linebreaks }}
+            
+        {{ form.senderName.label }} 
+        {{ form.senderName|linebreaks }}
 
-        {{ form.sender.label }} 
-        {{ form.sender|linebreaks }}
+        {{ form.senderEmail.label }} 
+        {{ form.senderEmail|linebreaks }}
 
-        {{ form.phone.label }}
-        {{ form.phone|linebreaks}}
+        {{ form.senderPhone.label }}
+        {{ form.senderPhone|linebreaks}}
 
-        {{ form.message.label|linebreaks }}
-        {{ form.message }}
+        {{ form.senderMessage.label|linebreaks }}
+        {{ form.senderMessage }}
+        
+        {{ form.ccSender.label|linebreaks }}
+        {{ form.ccSender }}
 
         </ul>
         <button type="submit" class="btn btn-success" value ="Submit" id="contactSubmitButton">Submit</button>
-        
+
         <h2 id="emailStatusMsg">
             {% if messages %}
                 {% for message in messages %}
@@ -28,7 +32,6 @@
                 {% endfor %}
             {% endif %}
         </h2>
-    
+        
     </form>
-
 </div>

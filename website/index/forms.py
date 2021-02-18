@@ -2,8 +2,8 @@ from django import forms
 from django.utils.safestring import mark_safe
 
 class contactForm(forms.Form):
-    yourName = forms.CharField(label='Your name', max_length=50)
-    sender = forms.EmailField(label= 'Your email')
-    phone = forms.CharField(label = 'Phone', max_length=20, required=False)
-    message = forms.CharField(widget=forms.Textarea)
-    cc_myself = forms.BooleanField(required=False)
+    senderName = forms.CharField(label='Your name', max_length=50)
+    senderEmail = forms.EmailField(label= 'Your email')
+    senderPhone = forms.CharField(label = 'Phone', max_length=20, required=False)
+    senderMessage = forms.CharField(widget=forms.Textarea)
+    ccSender = forms.BooleanField(label = 'cc myself', required=False)
