@@ -18,13 +18,13 @@
 
         {{ form.senderMessage.label|linebreaks }}
         {{ form.senderMessage }}
+        <br>
         
-        {{ form.ccSender.label|linebreaks }}
         {{ form.ccSender }}
+        {{ form.ccSender.label }}
 
         </ul>
         <button type="submit" class="btn btn-success" value ="Submit" id="contactSubmitButton">Submit</button>
-
         <h2 id="emailStatusMsg">
             {% if messages %}
                 {% for message in messages %}
@@ -32,6 +32,6 @@
                 {% endfor %}
             {% endif %}
         </h2>
-        
+
     </form>
 </div>
