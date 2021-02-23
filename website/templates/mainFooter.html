@@ -1,40 +1,48 @@
 {% load static %}
 <section id = "anchor-mainContact">
-  <footer class="mainfooter" role="contentinfo">
-      <div class="footer-middle">
-      <div class="container" id = "footerContainer">
-        <div class="row" id = "footerRow">
-          
-          <div class="col-md-3 col-sm-6">
-            <!--Column1-->
-            <div class="footer-pad" id = "footerContactFlex">
-              <h4 id = "footerTitle">Contact</h4>
-              <h5 id = "footerText">
-                  Hidden Dimsum <br>
-                  Nytorv 19 <br>
-                  1450 København K<br>
-                  +45-33128828 <br>
-                  kontakt@dimsum.dk <br>
-                  CVR: 38908901 <br>
-              </h5>
+  <footer class="bg-light text-center text-white">
+    <div class="container p-4">
+      <!--Social media icons-->
+      <section class="mb-4">
+        <a href="{{ facebookLink }}" target="_blank" class="fa fa-facebook"></a>
+        <a href="{{ instagramLink }}" target="_blank" class="fa fa-instagram"></a>
+        <a href="{{ youtubeLink }}" class="fa fa-youtube"></a>
+      </section>
+
+      <!--News letter subscription form-->
+      <section class="">
+          <!--Grid row-->
+          <div class="row d-flex justify-content-center">
+            <!--Grid column email newsletter subscription-->
+            <div class="col-auto">
+              <p class="pt-2">
+                <form action="/hd2900" method="post" id="newsletterForm">
+                  {% csrf_token %}
+                  <strong id="signUpEmailTitle">
+                    {{ emailSignUpForm.signUpEmail.label }}
+                    {{ emailSignUpForm.signUpEmail }}
+                  </strong>
+
+                  <!--Button -->
+                  <button type="submit" class="btn btn-success" value ="Submit" id="newsLetterSubmitButton">Submit</button>
+                  <h2 id="emailStatusMsg">
+                    {% if messages %}
+                        {% for message in messages %}
+                          {% if 'emailSubscription' in message.tags %}
+                            {{ message }}
+                          {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </h2>
+                </form>
+              </p>
             </div>
+            
           </div>
+        
+      </section>
 
-            <div class="col-md-3" id = "footerFont">
-                <h4 id = "footerFont">Follow Us</h4>
-                <ul class="social-network social-circle">
-                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#" class="icoInstagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
-                </ul>				
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-md-12 copy">
-                <p class="text-center" id ="footerText">&copy;All rights reserved @ Hidden Dimsum 2020.</p>
-            </div>
-        </div>
-      </div>
-      </div>
+    </div>
   </footer>
+
 </section>

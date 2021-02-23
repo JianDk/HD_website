@@ -7,3 +7,6 @@ class contactForm(forms.Form):
     senderPhone = forms.CharField(label = 'Phone', max_length=20, required=False)
     senderMessage = forms.CharField(label = 'Message', widget=forms.Textarea)
     ccSender = forms.BooleanField(label = 'cc myself', required=False)
+
+class newsLetterForm(forms.Form):
+    signUpEmail = forms.EmailField(label='Sign up for our news letter email')

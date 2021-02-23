@@ -1,37 +1,58 @@
 {% load static %}
-<div class="container-fluid" id = "contactContainer">
-    <h1 id = "menuHeader">CONTACT</h1>
-    <hr class = "cardDeckHorisontalLine">
+<div class="container-fluid" id = "contactMainContainer">
+    <div class='row' id='contactRowItems'>
+        <div class="col-md" id='openingHour'>
+            <h1 id='openingHourHeader'>OPENING HOUR</h1>
+            <hr class = "cardDeckHorisontalLine">
 
-    <form action="/hd2900" method="post">
-        {% csrf_token %}
-        <ul id ="contactField">
-            
-        {{ form.senderName.label }} 
-        {{ form.senderName|linebreaks }}
+            <h2 id='openingHourContent'>
+                {{ dayRange1 }}
+                <br>
+                <br>
+                {{ timeRange1 }}
+                <br>
+                <br>
+                {{ dayRange2 }}
+                <br>
+                <br>
+                {{ timeRange2 }}
+            </h2>
+        </div>
 
-        {{ form.senderEmail.label }} 
-        {{ form.senderEmail|linebreaks }}
+        <div class="col-md" id="containerContactForm">
+            <h1 id = "contactHeader">CONTACT</h1>
+            <hr class = "cardDeckHorisontalLine">
 
-        {{ form.senderPhone.label }}
-        {{ form.senderPhone|linebreaks}}
+            <form action="/hd2900" method="post" id="contactForm">
+                {% csrf_token %}
+                <ul id ="contactField">
+                    
+                {{ form.senderName.label }} 
+                {{ form.senderName|linebreaks }}
 
-        {{ form.senderMessage.label|linebreaks }}
-        {{ form.senderMessage }}
-        <br>
-        
-        {{ form.ccSender }}
-        {{ form.ccSender.label }}
+                {{ form.senderEmail.label }} 
+                {{ form.senderEmail|linebreaks }}
 
-        </ul>
-        <button type="submit" class="btn btn-success" value ="Submit" id="contactSubmitButton">Submit</button>
-        <h2 id="emailStatusMsg">
-            {% if messages %}
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            {% endif %}
-        </h2>
+                {{ form.senderPhone.label }}
+                {{ form.senderPhone|linebreaks}}
 
-    </form>
-</div>
+                {{ form.senderMessage.label|linebreaks }}
+                {{ form.senderMessage }}
+                <br>
+                
+                {{ form.ccSender }}
+                {{ form.ccSender.label }}
+
+                </ul>
+                <button type="submit" class="btn btn-success" value ="Submit" id="contactSubmitButton">Submit</button>
+                <h2 id="emailStatusMsg">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+                </h2>
+            </form>
+        </div>
+    </div>
+<div>

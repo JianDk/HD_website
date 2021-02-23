@@ -152,166 +152,86 @@
 #aboutUsVideoFlexbox {
   margin: 5% 10% 5% 10%; /* top right bottom left*/
 }
+
 /* Contact form */
-#contactContainer {
-  padding-bottom: 20px;
-}
-#emailStatusMsg {
-  font-size: 18px;
-  margin-left: 40%;
-  font-family: hdFont;
-  font-weight: bold;
+#contactMainContainer {
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-#contactField {
-  list-style-type: none;
-  padding-left: 40%;
+#openingHourHeader {
+  font-family: hdFont;
+  text-align: center;
+  margin-top: 5%;
+}
+
+#openingHourContent {
+  font-family: hdFont;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20%;
+}
+
+#contactHeader {
+  margin-top: 5%;
+  text-align: center;
+  font-family: hdFont;
+}
+
+#contactForm {
+  margin-left: 5%;
   font-family: hdFont;
   font-weight: bold;
 }
 
 #contactSubmitButton {
-  margin-left: 40%;
+  margin-left: 5%;
+}
+
+#emailStatusMsg {
+  font-size: 18px;
+  margin-left: 5%;
   font-family: hdFont;
   font-weight: bold;
-  font-size: 18px;
 }
-/* footer */
-footer {
-    background: #16222A;
-    background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
-    background: linear-gradient(59deg, #3A6073, #16222A);
-    color: white;
-    margin-top:0px;
-  }
 
-  #footerRow {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  #footerTitle {
-    text-align: center; 
-    font-family: hdFont;
-    font-weight: bold;
-  }
-
-  #footerText {
-    font-family: hdFont;
-  }
-
-  #footerFollowUsText {
-    font-family: hdFont;
-    font-weight: bold;
-  }
-
-#footerContactFlex {
+/*Footer social media icons*/
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 60px;
+  height: 60px;
   text-align: center;
+  text-decoration: none;
+  border-radius: 30px;
 }
 
-footer a {
-    color: #fff;
-    font-size: 14px;
-    transition-duration: 0.2s;
-  }
-  
-  footer a:hover {
-    color: #FA944B;
-    text-decoration: none;
-  }
-  
-  .copy {
-    font-size: 12px;
-    padding: 10px;
-    border-top: 1px solid #FFFFFF;
-  }
-  
-  .footer-middle {
-    padding-top: 2em;
-    color: white;
-  }
-  
-  
-  /*SOCİAL İCONS*/
-  
-  /* footer social icons */
-  
-  ul.social-network {
-    list-style: none;
-    display: inline;
-    margin-left: 0 !important;
-    padding: 0;
-  }
-  
-  ul.social-network li {
-    display: inline;
-    margin: 0 5px;
-  }
-  
-  
-  /* footer social icons */
-  
-  .social-network a.icoFacebook:hover {
-    background-color: #3B5998;
-  }
-  
-  .social-network a.icoLinkedin:hover {
-    background-color: #007bb7;
-  }
-  
-  .social-network a.icoFacebook:hover i,
-  .social-network a.icoInstagram:hover i {
-    color: #fff;
-  }
-  
-  .social-network a.socialIcon:hover,
-  .socialHoverClass {
-    color: #44BCDD;
-  }
-  
-  .social-circle li a {
-    display: inline-block;
-    position: relative;
-    margin: 0 auto 0 auto;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    text-align: center;
-    width: 30px;
-    height: 30px;
-    font-size: 15px;
-  }
-  
-  .social-circle li i {
-    margin: 0;
-    line-height: 30px;
-    text-align: center;
-  }
-  
-  .social-circle li a:hover i,
-  .triggeredHover {
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -ms--transform: rotate(360deg);
-    transform: rotate(360deg);
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    transition: all 0.2s;
-  }
-  
-  .social-circle i {
-    color: #595959;
-    -webkit-transition: all 0.8s;
-    -moz-transition: all 0.8s;
-    -o-transition: all 0.8s;
-    -ms-transition: all 0.8s;
-    transition: all 0.8s;
-  }
-  
-  .social-network a {
-    background-color: #F9F9F9;
-  }
-  
+/* Style all font awesome icons */
 
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Social media icons */
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+/*News letter sign up*/
+
+#signUpEmailTitle {
+  color: black;
+  font-family: hdFont;
+}
