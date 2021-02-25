@@ -1,7 +1,7 @@
 {% load static %}
 <section id = "anchor-mainContact">
   <footer class="bg-light text-center text-white">
-    <div class="container p-4">
+    <div class="container-fluid bg-secondary" id="footerMain">
       <!--Social media icons-->
       <section class="mb-4">
         <a href="{{ facebookLink }}" target="_blank" class="fa fa-facebook"></a>
@@ -16,16 +16,16 @@
             <!--Grid column email newsletter subscription-->
             <div class="col-auto">
               <p class="pt-2">
-                <form action="/hd2900" method="post" id="newsletterForm">
+                <form method="post" id="newsletterForm">
                   {% csrf_token %}
                   <strong id="signUpEmailTitle">
-                    {{ emailSignUpForm.signUpEmail.label }}
+                    {{ emailSignUpForm.signUpEmail.label|linebreaks }}
                     {{ emailSignUpForm.signUpEmail }}
                   </strong>
 
                   <!--Button -->
                   <button type="submit" class="btn btn-success" value ="Submit" id="newsLetterSubmitButton">Submit</button>
-                  <h2 id="emailStatusMsg">
+                  <div id="emailStatusMsg">
                     {% if messages %}
                         {% for message in messages %}
                           {% if 'emailSubscription' in message.tags %}
@@ -33,13 +33,27 @@
                           {% endif %}
                         {% endfor %}
                     {% endif %}
-                </h2>
+                  </div>
                 </form>
               </p>
             </div>
-            
           </div>
-        
+      </section>
+
+      <section class="mb-4" id="footerAddress">
+        <p>
+          <div id="shopTitle">{{ shopTitle }}</div> 
+          {{ addressStreet }}
+          <br>
+          {{ addressPhone }}
+          <br>
+          {{ addressEmail }}
+          <br>
+          {{ addressCVR }}
+          <br>
+          © 2020 Copyright Hidden Dimsum
+
+        </p>
       </section>
 
     </div>

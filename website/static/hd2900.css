@@ -35,3 +35,7 @@
   font-family: hdFont;
   padding-top: 5%;
 }
+
+#shopTitle {
+  font-weight: bold;
+}

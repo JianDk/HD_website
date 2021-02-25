@@ -10,8 +10,10 @@ class registerEmail:
         '''
         try:
             self.conn = sqlite3.connect('subscriptionEmail.db')
-            return conn
+            c = self.conn.cursor()
+            c.execute(sqlstr)
         except:
+            self.conn.close()
             self.conn = False
     
     def insertEmailToDatabase(self, email, notifyTopic):
@@ -20,11 +22,12 @@ class registerEmail:
             information together with date will be inserted into the data base.
             Both email and notifyTopic are str
         '''
-        c = self.conn.cursor()
         dateStampStr = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-        c.execute(f'''INSERT INTO registerEmail (emailAddress, dateRegistered, notifyTopic)
-        VALUES({email},{dateStampStr},{notifyTopic})
-        ''')
+        sqlStr = f'''INSERT INTO registerEmail (emailAddress, dateRegistered, notifyTopic)
+        VALUES('{email}','{dateStampStr}','{notifyTopic}')
+        '''
+        c = self.conn.cursor()
+        c.execute(sqlStr)
         self.conn.commit()
         self.conn.close()
         

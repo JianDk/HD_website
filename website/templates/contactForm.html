@@ -48,7 +48,9 @@
                 <h2 id="emailStatusMsg">
                     {% if messages %}
                         {% for message in messages %}
-                            {{ message }}
+                            {% if 'contactSubmitStatus' in message.tags %}
+                                {{ message }}
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 </h2>

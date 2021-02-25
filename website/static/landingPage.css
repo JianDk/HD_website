@@ -196,6 +196,7 @@
 }
 
 /*Footer social media icons*/
+
 .fa {
   padding: 20px;
   font-size: 30px;
@@ -204,6 +205,7 @@
   text-align: center;
   text-decoration: none;
   border-radius: 30px;
+  margin-top: 50px;
 }
 
 /* Style all font awesome icons */
@@ -232,6 +234,16 @@
 /*News letter sign up*/
 
 #signUpEmailTitle {
+  color: black;
+  font-family: hdFont;
+}
+
+#emailStatusMsg {
+  color: black;
+  font-family: hdFont;
+}
+
+#footerAddress {
   color: black;
   font-family: hdFont;
 }

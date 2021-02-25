@@ -9,4 +9,4 @@ class contactForm(forms.Form):
     ccSender = forms.BooleanField(label = 'cc myself', required=False)
 
 class newsLetterForm(forms.Form):
-    signUpEmail = forms.EmailField(label='Sign up for our news letter email')
+    signUpEmail = forms.EmailField(label='Newsletter email signup')
