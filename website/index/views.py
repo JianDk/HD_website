@@ -14,7 +14,7 @@ def index(request):
             #Insert the email to sqlite3 data base
             regEmailObj = registerEmail()
             if regEmailObj.conn != False: #successfully connected to register email sql database
-                regEmailObj.insertEmailToDatabase(emailToRegister,'www.dimsum.dk')
+                regEmailObj.insertEmailToDatabase(emailToRegister,'HiddenDimsum Nytorv')
                 messages.success(request, 'Email registered', extra_tags='emailSubscription')
             else:
                 messages.warning(request, 'Something wrong, email not registered!', extra_tags='emailSubscription')
@@ -44,9 +44,9 @@ def index(request):
 def hdnytorv(request):
     #cover link name and url address
     links = list()
-    links.append(('Link1', 'http://www.google.com'))
-    links.append(('Link2', '#'))
-    links.append(('Link3', '#'))
+    links.append(('MENU', '/hdnytorv#menuHeader'))
+    links.append(('ABOUT US', '/hdnytorv#aboutUsLogo'))
+    links.append(('CONTACT', '/hdnytorv#contactForm'))
 
     if request.method == 'POST':
         form = contactForm(request.POST)
@@ -88,7 +88,7 @@ def hdnytorv(request):
         #get the contact form fields and news letter form fields
         form = contactForm(request.POST)
         emailSignUpForm = newsLetterForm(request.POST)
-        
+
         #import about us text
         with open('aboutUsNytorv.txt','r') as fid:
             aboutUsText = fid.read()
