@@ -1,33 +1,25 @@
 {% load static %}
 <section>
-    <div class="jumbotron jumbotron-fluid" id ="header">
+    <div class="jumbotron jumbotron-fluid" id ="coverNytorv" style="background-image: url({{imagePath}});">
         <div class="container-fluid">
-            
+        
             <nav class="navbar navbar-expand-md" id ="navbar">
-                <img src={% static 'media/hiddendimsum_maincoverLogo.png' %} width="25%" height=auto alt="">
-    
                 <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link px-5" id ="mainNavlink" href="#anchor_locations">LOCATIONS<span class="sr-only">(current)</span></a>
-                            </li>
-    
-                            <li class="nav-item active">
-                                <a class="nav-link px-5" id ="mainNavlink" href="#anchor-aboutUs">ABOUT US<span class="sr-only">(current)</span></a>
-                            </li>
-    
-                            <li class="nav-item active">
-                                <a class="nav-link px-5" id ="mainNavlink" href="#anchor-mainContact">CONTACT<span class="sr-only">(current)</span></a>
-                            </li>
+                            {% for link in links %}
+                                <li class="nav-item active">
+                                    <a class="nav-link px-5" id ="mainNavlink" href="{{ link.1 }}">{{ link.0 }}<span class="sr-only">(current)</span></a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
             </nav>
-            <p class ="lead">We are dimsum!</p>
-            <p class="lead">at</p>
-          <h1 class="headerTitle" id="coverTextTitle">HIDDEN DIMSUM</h1>
+            <p class ="lead">{{ coverTitle1 }}</p>
+            <p class="lead">{{ coverTitle2 }}</p>
+          <h1 class="headerTitle" id="coverTextTitle">{{ coverTitle3 }}</h1>
         </div>
     </div>
 </section>

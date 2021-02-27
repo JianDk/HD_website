@@ -11,17 +11,18 @@
 }
 
 /* cover section */
-#header {
-    text-align: center; 
-    align-items: center;
-    background: url("media/cover.jpg") no-repeat center center;
-    background-size: cover;
-    min-height: 100%;
-    justify-content: center;
-    color: white;
-    height: 700px;
-    display: flex;
-    margin-bottom: 0px;
+#coverNytorv {
+  text-align: center; 
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100%;
+  justify-content: center;
+  color: white;
+  height: 700px;
+  display: flex;
+  margin-bottom: 0px;
 }
 
 #navbar {

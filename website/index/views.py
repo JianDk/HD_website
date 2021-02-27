@@ -21,7 +21,18 @@ def index(request):
             return redirect('/#newsLetterSubmitButton')
     
     if request.method == 'GET':
-        context = {'emailSignUpForm' : emailSignupForm,
+        #Links in the cover section on the top part of the page
+        links = list()
+        links.append(('LOCATIONS', '#anchor_locations'))
+        links.append(('ABOUT US', '#anchor-aboutUs'))
+        links.append(('CONTACT', '#anchor-mainContact'))
+
+        context = {'links' : links,
+        'imagePath' : 'static/media/cover.jpg',
+        'coverTitle1' : 'We are dimsum!',
+        'coverTitle2' : 'at',
+        'coverTitle3' : 'HIDDEN DIMSUM',
+        'emailSignUpForm' : emailSignupForm,
         'shopTitle' : 'Hidden Dimsum',
         'addressStreet' : 'Nytorv 19',
         'addressPostcodeCity' : '1450 København K',
@@ -31,7 +42,17 @@ def index(request):
         return render(request, template_name='index.html', context = context)
 
 def hdnytorv(request):
-    return render(request, template_name='hdnytorv.html')
+    #cover link name and url address
+    links = list()
+    links.append(('Link1', 'http://www.google.com'))
+    links.append(('Link2', '#'))
+    links.append(('Link3', '#'))
+
+    context = {'imagePath' : 'static/media/coverNytorv1.jpg',
+    'links' : links,
+    'menuImgPath' : 'static/media/hdNytorvMenu.png'}
+
+    return render(request, template_name='hdnytorv.html', context = context)
 
 def hd2900(request):
 
@@ -76,8 +97,10 @@ def hd2900(request):
         emailSignUpForm = newsLetterForm(request.POST)
         context = {'form' : form,
         'emailSignUpForm' : emailSignUpForm,
+        'menuImgPath' : 'static/media/hd2900Menu.png',
         'dayRange1' : 'Everyday',
         'timeRange1': '16:00 - 20:30',
+        'dayRange2' : 'Takeaway order: 40388884',
         'shopTitle' : 'Hidden Dimsum 2900',
         'addressStreet' : 'Strandvejen 163, 2900 Hellerup',
         'addressPhone' : '+45-40 38 88 84',
