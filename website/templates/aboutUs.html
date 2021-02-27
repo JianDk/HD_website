@@ -1,0 +1,19 @@
+{% load static %}
+
+<section id = "anchor-aboutUs">
+    <div class="container-fluid" id = "aboutUsContainer">
+        <div class="row" id="firstRow">
+                <img src ="{{ aboutUsImagePath }}" class="col-md" alt = 'About us' id = "aboutUsLeftImage">
+
+            <div class="col-md" id="right"> 
+                <img src={% static 'media/baoIcon.png' %} alt="logo" id = "aboutUsLogo">
+                <br>
+                    <h1 id = "aboutUsRightHeader">OUR STORY</h1>
+                    <hr class = "cardDeckHorisontalLine">
+                    <h3 id= "aboutUsContent">
+                        {{ aboutUsText|linebreaks }}
+                    </h3>
+            </div>
+        </div>
+    </div>
+</section>
