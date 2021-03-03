@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.index, name = 'index'),
     path('hdnytorv', views.hdnytorv, name='hdnytorv'),
     path('hd2900', views.hd2900, name='hd2900'),
+    path('hdbynight', views.hdbynight, name='hdbynight'),
 ]

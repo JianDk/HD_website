@@ -10,7 +10,7 @@
                 
         <div class="card-deck" id ="card-deck">
             <div class="card">
-                <a href='#'>
+                <a href="{% url 'hdnytorv' %}">
                     <img class="card-img-top" src={% static 'media/card_hiddendimsumNytorv.jpg' %} alt="Hidden Dimsum Nytorv image">
                 </a>
     
@@ -19,8 +19,8 @@
                         <p class="card-text">Our main dimsum house located at heart of Copenhagen. This is the place where
                             dimsum started.
                             <ul>
-                                <li><a href="#" id ="cardLinkText">Menu</a></li>
-                                <li><a href="#" id ="cardLinkText">Book table</a></li>
+                                <li><a href="/hdnytorv#menuHeader" id ="cardLinkText">Menu</a></li>
+                                <li><a href="/hdnytorv#openingHourHeader" id ="cardLinkText">Opening hours</a></li>
                             </ul>
                             <a href="{% url 'hdnytorv' %}" class="btn btn-primary">More Info</a>
                         </p>
@@ -28,7 +28,7 @@
             </div>
     
             <div class="card">
-                <a href="#">
+                <a href="{% url 'hdbynight' %}">
                     <img class="card-img-top" src={% static 'media/card_bynight.jpg' %} alt="Hidden Dimsum By Night">
                 </a>
                 <div class="card-body">
@@ -36,14 +36,14 @@
                     <p class="card-text">Late night dimsum and Hongkong street food with Asian beers. A night has different shades!</p>
                     <ul>
                         <li><a href="#" id ="cardLinkText">Menu</a></li>
-                        <li><a href="#" id ="cardLinkText">Opening Hours</a></li>
+                        <li><a href="#" id ="cardLinkText">Opening hours</a></li>
                     </ul>
-                    <a href = "#" class = "btn btn-primary" id ="cardLinkText">More Info</a>
+                    <a href = "{% url 'hdbynight' %}" class = "btn btn-primary" id ="cardLinkText">More Info</a>
                 </div>
             </div>
     
             <div class="card">
-                <a href="#">
+                <a href="{% url 'hd2900' %}">
                     <img class="card-img-top" src={% static 'media/card_hiddendimsum2900.jpg' %} alt="Hidden Dimsum Strandvejen 163, 2900 Hellerup">
                 </a>
                 <div class="card-body">
@@ -59,7 +59,7 @@
             </div>
     
             <div class="card">
-                <a href="#">
+                <a href="http://www.dimsumbox.dk">
                     <img class="card-img-top" src={% static 'media/card_dimsumbox.jpg' %} alt="Dimsum Box">
                 </a>
                 <div class="card-body">

@@ -93,9 +93,10 @@ def hdnytorv(request):
         with open('aboutUsNytorv.txt','r') as fid:
             aboutUsText = fid.read()
 
-        context = {'imagePath' : 'static/media/coverNytorv1.jpg',
+        context = {'imagePath' : 'static/media/coverNytorv.jpg',
+        'navbarLogoPath' : 'static/media/hiddendimsum_maincoverLogo.png',
         'links' : links,
-        'menuImgPath' : 'static/media/hdNytorvMenu.png',
+        'menuImgPath' : 'static/media/hdNytorvMenu.jpg',
         'aboutUsImagePath' : 'static/media/aboutus2900.jpg',
         'aboutUsText' : aboutUsText,
         'dayRange1' : 'Closed due to COVID-19 restrictions',
@@ -112,6 +113,79 @@ def hdnytorv(request):
         'facebookLink' : 'https://www.facebook.com/hiddendimsum/'}
 
         return render(request, template_name='hdnytorv.html', context = context)
+
+def hdbynight(request):
+    #cover link name and url address
+    links = list()
+    links.append(('MENU', '/hdbynight#menuHeader'))
+    links.append(('ABOUT US', '/hdbynight#aboutUsLogo'))
+    links.append(('CONTACT', '/hdbynight#contactForm'))
+
+    if request.method == 'POST':
+        form = contactForm(request.POST)
+        newsletterForm = newsLetterForm(request.POST)
+        if form.is_valid():
+            #Take the form content and send it via en email 
+            senderName = form.cleaned_data['senderName']
+            senderEmail = form.cleaned_data['senderEmail']
+            senderPhone = form.cleaned_data['senderPhone']
+            senderMessage = form.cleaned_data['senderMessage']
+            ccSender = form.cleaned_data['ccSender']
+            
+            emailObject = sendEmail(form = form, 
+            sourceFrom = 'Web message from Hidden Dimsum by Night', 
+            emailTo = 'kontakt@dimsum.dk')
+            
+            #if email was sent successful
+            if emailObject.status[0]:
+                messages.success(request, 'Message sent', extra_tags='contactSubmitStatus')
+                return redirect('/hdbynight#contactForm')
+            else:
+                messages.warning(request, 'Something wrong. Contact kontakt@dimsum.dk', extra_tags='contactSubmitStatus')
+                return redirect('/hdbynight#contactForm')
+        elif newsletterForm.is_valid():
+            emailToRegister = newsletterForm.cleaned_data['signUpEmail']
+            #Insert the email to sqlite3 data base
+            regEmailObj = registerEmail()
+            if regEmailObj.conn != False: #successfully connected to register email sql database
+                regEmailObj.insertEmailToDatabase(emailToRegister,'HiddenDimsum_byNight')
+                messages.success(request,'Email registered', extra_tags='emailSubscription')
+            else:
+                messages.warning(request, 'Something wrong, email not registered!', extra_tags='emailSubscription')
+
+            return redirect('/hdbynight#newsLetterSubmitButton')
+        else:
+            messages.warning(request, 'Form not valid')
+            return redirect('/hdbynight#contactForm')
+    else:
+        #get the contact form fields and news letter form fields
+        form = contactForm(request.POST)
+        emailSignUpForm = newsLetterForm(request.POST)
+
+        #import about us text
+        with open('aboutUsNytorv.txt','r') as fid:
+            aboutUsText = fid.read()
+
+        context = {'imagePath' : 'static/media/coverByNight2.jpg',
+        'navbarLogoPath' : 'static/media/hiddendimsum_maincoverLogo.png',
+        'links' : links,
+        'menuImgPath' : 'static/media/hdNytorvMenu.jpg',
+        'aboutUsImagePath' : 'static/media/aboutus2900.jpg',
+        'aboutUsText' : aboutUsText,
+        'dayRange1' : 'Closed due to COVID-19 restrictions',
+        'timeRange1' : 'Subscribe to our newsletter and get informed when we reopen!',
+        'form' : form,
+        'emailSignUpForm' : emailSignUpForm,
+        'shopTitle' : 'Hidden Dimsum',
+        'addressStreet' : 'Nytorv 19, 1450 København K',
+        'addressPhone' : '+45-33 12 88 28',
+        'addressEmail' : 'kontakt@dimsum.dk',
+        'addressCVR' : 'CVR: 38908901',
+        'instagramLink' : 'https://www.instagram.com/hiddendimsum2900/?hl=da',
+        'youtubeLink' : 'https://www.youtube.com/channel/UC-ryuXvGrMK2WQHBDui2lxw',
+        'facebookLink' : 'https://www.facebook.com/hiddendimsum/'}
+
+        return render(request, template_name='hdbynight.html', context = context)
 
 def hd2900(request):
 
