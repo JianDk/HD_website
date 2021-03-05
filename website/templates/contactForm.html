@@ -23,7 +23,7 @@
             <h1 id = "contactHeader">CONTACT</h1>
             <hr class = "cardDeckHorisontalLine">
 
-            <form action="/hd2900" method="post" id="contactForm">
+            <form method="post" id="contactForm">
                 {% csrf_token %}
                 <ul id ="contactField">
                     
@@ -42,7 +42,7 @@
                 
                 {{ form.ccSender }}
                 {{ form.ccSender.label }}
-
+                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
                 </ul>
                 <button type="submit" class="btn btn-success" value ="Submit" id="contactSubmitButton">Submit</button>
                 <h2 id="emailStatusMsg">

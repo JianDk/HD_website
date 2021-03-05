@@ -1,68 +1,158 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.views import View
 from .forms import contactForm
 from .forms import newsLetterForm
+
 from website.Modules.emailMessage import sendEmail 
 from website.Modules.registerEmailSubscription import registerEmail
+from website.Modules.recaptchaValidate import Validate
+
 
 # Create your views here.
-def index(request):
-    emailSignupForm = newsLetterForm(request.POST)
-    if request.method == 'POST':
-        if emailSignupForm.is_valid():
-            emailToRegister = emailSignupForm.cleaned_data['signUpEmail']
+class ContextBuilder:
+    def __init__(self):
+        self.context = {'imagePath' : None,
+        'navbarLogoPath' : None,
+        'links' : None,
+        'menuImgPath' : None,
+        'aboutUsImagePath' : None,
+        'aboutUsText' : None,
+        'dayRange1' : None,
+        'timeRange1' : None,
+        'form' : None,
+        'emailSignUpForm' : None,
+        'shopTitle' : None,
+        'addressStreet' : None,
+        'addressPhone' : None,
+        'addressEmail' : None,
+        'addressCVR' : None,
+        'instagramLink' : None,
+        'youtubeLink' : None,
+        'facebookLink' : None}
+
+    def Set_headerCoverImageLinks(self, linksList):
+        '''
+        Accepts a list of tuples containing ('Link_title', 'url')
+        '''
+        self.links = list()
+        for linkTuple in linksList:
+            self.links.append(linkTuple)
+
+    def Set_context(self, **kwargs):
+        '''
+        The kwargs points to the dictionary keys in context, and the values are inserted
+        '''
+        for key in kwargs.keys():
+            self.context[key] = kwargs[key]
+    
+    def importTextFile(self, filePath):
+        with open(filePath,'r') as fid:
+            self.textString = fid.read()
+
+
+class indexPage(View):
+    def __init__(self, *args, **kwargs):
+        ContextObject = ContextBuilder()
+        ContextObject.Set_headerCoverImageLinks(linksList = [
+            ('LOCATIONS', '#anchor_locations'),
+            ('ABOUT US', '#anchor-aboutUs'),
+            ('CONTACT', '#anchor-mainContact')
+            ]
+        )
+
+        self.emailSignupForm = newsLetterForm
+        ContextObject.Set_context(
+        links = ContextObject.links,
+        imagePath = 'static/media/cover.jpg', 
+        coverTitle1 = 'We are dimsum!', 
+        coverTitle2 = 'at',
+        coverTitle3 = 'HIDDEN DIMSUM', 
+        emailSignUpForm = self.emailSignupForm,
+        shopTitle = 'Hidden Dimsum', 
+        addressStreet = 'Nytorv 19', 
+        addressPostcodeCity = '1450 København K',
+        addressPhone = '+45-33 12 88 28',
+        addressEmail = 'kontakt@dimsum.dk',
+        addressCVR = 'CVR: 38908901')
+
+        self.context = ContextObject.context
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='index.html', context = self.context)
+    
+    def post(self, request, *args, **kwargs):
+        emailForm = newsLetterForm(request.POST)
+
+        if emailForm.is_valid():
+            signUpEmail = emailForm.cleaned_data['signUpEmail']
             #Insert the email to sqlite3 data base
             regEmailObj = registerEmail()
             if regEmailObj.conn != False: #successfully connected to register email sql database
-                regEmailObj.insertEmailToDatabase(emailToRegister,'HiddenDimsum Nytorv')
+                regEmailObj.insertEmailToDatabase(signUpEmail,'HiddenDimsum Nytorv')
                 messages.success(request, 'Email registered', extra_tags='emailSubscription')
             else:
                 messages.warning(request, 'Something wrong, email not registered!', extra_tags='emailSubscription')
             return redirect('/#newsLetterSubmitButton')
+        else:
+            return redirect('/')
+
+class hdnytorv(View):
+    def __init__(self, *args, **kwargs):
+        self.ContextObject = ContextBuilder()
+        self.ContextObject.Set_headerCoverImageLinks(linksList = [
+            ('MENU', '/hdnytorv#menuHeader'),
+            ('ABOUT US', '/hdnytorv#aboutUsLogo'),
+            ('CONTACT', '/hdnytorv#contactForm')
+        ])
+
+        if 'contactFrom' in kwargs: #Then this comes from a post that has failed and data needs to be saved
+            self.form = kwargs['contactForm']
+        else:
+            self.form = contactForm()
     
-    if request.method == 'GET':
-        #Links in the cover section on the top part of the page
-        links = list()
-        links.append(('LOCATIONS', '#anchor_locations'))
-        links.append(('ABOUT US', '#anchor-aboutUs'))
-        links.append(('CONTACT', '#anchor-mainContact'))
+    def get(self, request, *args, **kwargs):
 
-        context = {'links' : links,
-        'imagePath' : 'static/media/cover.jpg',
-        'coverTitle1' : 'We are dimsum!',
-        'coverTitle2' : 'at',
-        'coverTitle3' : 'HIDDEN DIMSUM',
-        'emailSignUpForm' : emailSignupForm,
-        'shopTitle' : 'Hidden Dimsum',
-        'addressStreet' : 'Nytorv 19',
-        'addressPostcodeCity' : '1450 København K',
-        'addressPhone' : '+45-33 12 88 28',
-        'addressEmail' : 'kontakt@dimsum.dk',
-        'addressCVR' : 'CVR: 38908901'}
-        return render(request, template_name='index.html', context = context)
-
-def hdnytorv(request):
-    #cover link name and url address
-    links = list()
-    links.append(('MENU', '/hdnytorv#menuHeader'))
-    links.append(('ABOUT US', '/hdnytorv#aboutUsLogo'))
-    links.append(('CONTACT', '/hdnytorv#contactForm'))
-
-    if request.method == 'POST':
+        #get the contact form fields and news letter form fields
+        self.ContextObject.importTextFile('aboutUsNytorv.txt')
+        self.ContextObject.Set_context(imagePath ='static/media/coverNytorv.jpg',
+            navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
+            links = self.ContextObject.links,
+            menuImgPath = 'static/media/hdNytorvMenu.jpg',
+            aboutUsImagePath = 'static/media/aboutus2900.jpg',
+            aboutUsText = self.ContextObject.textString,
+            dayRange1 = 'Closed due to COVID-19 restrictions',
+            timeRange1 = 'Subscribe to our newsletter and get informed when we reopen!',
+            form = self.form,
+            emailSignUpForm = newsLetterForm(),
+            shopTitle = 'Hidden Dimsum',
+            addressStreet = 'Nytorv 19, 1450 København K',
+            addressPhone = '+45-33 12 88 28',
+            addressEmail  = 'kontakt@dimsum.dk',
+            addressCVR = 'CVR: 38908901',
+            instagramLink = 'https://www.instagram.com/hiddendimsum2900/?hl=da',
+            youtubeLink = 'https://www.youtube.com/channel/UC-ryuXvGrMK2WQHBDui2lxw',
+            facebookLink = 'https://www.facebook.com/hiddendimsum/')
+        
+        self.context = self.ContextObject.context
+        
+        return render(request, template_name='hdnytorv.html', context = self.context)
+    
+    def post(self, request, *args, **kwargs):
         form = contactForm(request.POST)
         newsletterForm = newsLetterForm(request.POST)
+
         if form.is_valid():
-            #Take the form content and send it via en email 
-            senderName = form.cleaned_data['senderName']
-            senderEmail = form.cleaned_data['senderEmail']
-            senderPhone = form.cleaned_data['senderPhone']
-            senderMessage = form.cleaned_data['senderMessage']
-            ccSender = form.cleaned_data['ccSender']
-            
+            #check recaptcha 
+            validate = Validate(request = request)
+
+            if validate.result['success'] is False:
+                messages.warning(request, 'Validation failed. Try again.', extra_tags='contactSubmitStatus')
+                return redirect('/hdnytorv#contactForm')
+
             emailObject = sendEmail(form = form, 
             sourceFrom = 'Web message from Hidden Dimsum Nytorv', 
             emailTo = 'kontakt@dimsum.dk')
-            
             #if email was sent successful
             if emailObject.status[0]:
                 messages.success(request, 'Message sent', extra_tags='contactSubmitStatus')
@@ -70,6 +160,7 @@ def hdnytorv(request):
             else:
                 messages.warning(request, 'Something wrong. Contact kontakt@dimsum.dk', extra_tags='contactSubmitStatus')
                 return redirect('/hdnytorv#contactForm')
+        
         elif newsletterForm.is_valid():
             emailToRegister = newsletterForm.cleaned_data['signUpEmail']
             #Insert the email to sqlite3 data base
@@ -79,40 +170,7 @@ def hdnytorv(request):
                 messages.success(request,'Email registered', extra_tags='emailSubscription')
             else:
                 messages.warning(request, 'Something wrong, email not registered!', extra_tags='emailSubscription')
-
             return redirect('/hdnytorv#newsLetterSubmitButton')
-        else:
-            messages.warning(request, 'Form not valid')
-            return redirect('/hdnytorv#contactForm')
-    else:
-        #get the contact form fields and news letter form fields
-        form = contactForm(request.POST)
-        emailSignUpForm = newsLetterForm(request.POST)
-
-        #import about us text
-        with open('aboutUsNytorv.txt','r') as fid:
-            aboutUsText = fid.read()
-
-        context = {'imagePath' : 'static/media/coverNytorv.jpg',
-        'navbarLogoPath' : 'static/media/hiddendimsum_maincoverLogo.png',
-        'links' : links,
-        'menuImgPath' : 'static/media/hdNytorvMenu.jpg',
-        'aboutUsImagePath' : 'static/media/aboutus2900.jpg',
-        'aboutUsText' : aboutUsText,
-        'dayRange1' : 'Closed due to COVID-19 restrictions',
-        'timeRange1' : 'Subscribe to our newsletter and get informed when we reopen!',
-        'form' : form,
-        'emailSignUpForm' : emailSignUpForm,
-        'shopTitle' : 'Hidden Dimsum',
-        'addressStreet' : 'Nytorv 19, 1450 København K',
-        'addressPhone' : '+45-33 12 88 28',
-        'addressEmail' : 'kontakt@dimsum.dk',
-        'addressCVR' : 'CVR: 38908901',
-        'instagramLink' : 'https://www.instagram.com/hiddendimsum2900/?hl=da',
-        'youtubeLink' : 'https://www.youtube.com/channel/UC-ryuXvGrMK2WQHBDui2lxw',
-        'facebookLink' : 'https://www.facebook.com/hiddendimsum/'}
-
-        return render(request, template_name='hdnytorv.html', context = context)
 
 def hdbynight(request):
     #cover link name and url address

@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from index import views
+from index.views import indexPage, hdnytorv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name = 'index'),
-    path('hdnytorv', views.hdnytorv, name='hdnytorv'),
+    path('', indexPage.as_view(), name = 'index'),
+    path('hdnytorv', hdnytorv.as_view(), name='hdnytorv'),
     path('hd2900', views.hd2900, name='hd2900'),
     path('hdbynight', views.hdbynight, name='hdbynight'),
 ]
