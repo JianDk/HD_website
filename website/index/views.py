@@ -145,13 +145,6 @@ class hdnytorv(View):
             emailTo = 'kontakt@dimsum.dk')
             messages.success(request, 'Message sent', extra_tags='contactSubmitStatus')
             return redirect('/hdnytorv#contactForm')
-            #if email was sent successful
-            # if emailObject.status[0]:
-            #     messages.success(request, 'Message sent', extra_tags='contactSubmitStatus')
-            #     return redirect('/hdnytorv#contactForm')
-            # else:
-            #     messages.warning(request, 'Something wrong. Contact kontakt@dimsum.dk', extra_tags='contactSubmitStatus')
-            #     return redirect('/hdnytorv#contactForm')
         
         elif newsletterForm.is_valid():
             emailToRegister = newsletterForm.cleaned_data['signUpEmail']
@@ -213,14 +206,6 @@ class hdbynight(View):
             emailTo = 'kontakt@dimsum.dk')
             messages.success(request, 'Message sent', extra_tags='contactSubmitStatus')
             return redirect('/hdbynight#contactForm')
-                
-            #if email was sent successful
-            # if emailObject.status[0]:
-            #     messages.success(request, 'Message sent', extra_tags='contactSubmitStatus')
-            #     return redirect('/hdbynight#contactForm')
-            # else:
-            #     messages.warning(request, 'Something wrong. Contact kontakt@dimsum.dk', extra_tags='contactSubmitStatus')
-            #     return redirect('/hdbynight#contactForm')
         
         elif newsletterForm.is_valid():
             emailToRegister = newsletterForm.cleaned_data['signUpEmail']
@@ -285,14 +270,6 @@ class hd2900(View):
             emailTo = 'kontakt@dimsum.dk')
             messages.success(request, 'Message sent', extra_tags='contactSubmitStatus')
             return redirect('/hd2900#contactForm')
-
-            #if email was sent successful
-            # if emailObject.status[0]:
-            #     messages.success(request, 'Message sent', extra_tags='contactSubmitStatus')
-            #     return redirect('/hd2900#contactForm')
-            # else:
-            #     messages.warning(request, 'Something wrong. Contact kontakt@dimsum.dk', extra_tags='contactSubmitStatus')
-            #     return redirect('/hd2900#contactForm')
 
         elif newsletterForm.is_valid():
             emailToRegister = newsletterForm.cleaned_data['signUpEmail']
