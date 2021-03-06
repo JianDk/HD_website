@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 
+
 class registerEmail:
     def __init__(self):
         sqlstr = '''CREATE TABLE IF NOT EXISTS registerEmail (id integer PRIMARY KEY,

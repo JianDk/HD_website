@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', indexPage.as_view(), name = 'index'),
     path('hdnytorv', hdnytorv.as_view(), name='hdnytorv'),
-    path('hd2900', views.hd2900, name='hd2900'),
-    path('hdbynight', views.hdbynight, name='hdbynight'),
+    path('hd2900', views.hd2900.as_view(), name='hd2900'),
+    path('hdbynight', views.hdbynight.as_view(), name='hdbynight'),
 ]

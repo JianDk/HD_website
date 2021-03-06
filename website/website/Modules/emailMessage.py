@@ -1,6 +1,7 @@
 import smtplib
 import email
 import json
+import multiprocessing
 
 class sendEmail:
     def __init__(self, form, sourceFrom, emailTo):
@@ -33,9 +34,13 @@ class sendEmail:
         msg['To'] = emailTo
         msg['Subject'] = sourceFrom
 
-        #send the email
-        sucessSentToTarget = self.sendEmailNow(emailFrom = form.cleaned_data['senderEmail'],
-        emailTo = emailTo, msg = msg)
+        #send the email using multiprocessing
+        p1 = multiprocessing.Process(target = self.sendEmailNow_Multiprocessing,
+        args = (form.cleaned_data['senderEmail'], emailTo, msg,) )
+        p1.start()
+
+        #sucessSentToTarget = self.sendEmailNow(emailFrom = form.cleaned_data['senderEmail'],
+        #emailTo = emailTo, msg = msg)
 
         if form.cleaned_data['ccSender']:
             #Create the email body to sender
@@ -56,18 +61,20 @@ class sendEmail:
             msg['To'] = form.cleaned_data['senderEmail']
             msg['Subject'] = 'Receipt of your message - Hidden Dimsum'
 
-            #Send message
-            successCCsent = self.sendEmailNow(emailFrom = emailTo,
-            emailTo = form.cleaned_data['senderEmail'], msg = msg)
-        else:
-            successCCsent = None
+            #Send message. To minimize the wait time send email using multiprocessing
+            p2 = multiprocessing.Process(target = self.sendEmailNow_Multiprocessing,
+            args = (emailTo, form.cleaned_data['senderEmail'], msg,) )
+            p2.start()
+            #successCCsent = self.sendEmailNow(emailFrom = emailTo,
+            #emailTo = form.cleaned_data['senderEmail'], msg = msg)
+        #else:
+          #  successCCsent = None
 
-        self.status = (sucessSentToTarget, successCCsent)
+        #self.status = (sucessSentToTarget, successCCsent)
 
     def sendEmailNow(self, emailFrom, emailTo, msg):
         with open('emailCred.txt','r') as f:
             cred = json.load(f)
-
         try:
             smtpObj = smtplib.SMTP(host=cred['host'], port = cred['port'])
             smtpObj.starttls()
@@ -79,6 +86,16 @@ class sendEmail:
             status = False
         
         return status
+    
+    def sendEmailNow_Multiprocessing(self, emailFrom, emailTo, msg):
+        with open('emailCred.txt','r') as f:
+            cred = json.load(f)
+
+        smtpObj = smtplib.SMTP(host=cred['host'], port = cred['port'])
+        smtpObj.starttls()
+        smtpObj.login(cred['emailName'], cred['password'])
+        smtpObj.sendmail(emailFrom, emailTo, msg.as_string())
+        smtpObj.quit()
         
 
 
