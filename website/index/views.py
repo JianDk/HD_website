@@ -53,8 +53,9 @@ class ContextBuilder:
 
 class indexPage(View):
     def __init__(self, *args, **kwargs):
-        ContextObject = ContextBuilder()
-        ContextObject.Set_headerCoverImageLinks(linksList = [
+        self.ContextObject = ContextBuilder()
+        self.ContextObject.importTextFile('mainAboutUs.txt')
+        self.ContextObject.Set_headerCoverImageLinks(linksList = [
             ('LOCATIONS', '#anchor_locations'),
             ('ABOUT US', '#anchor-aboutUs'),
             ('CONTACT', '#anchor-mainContact')
@@ -62,9 +63,11 @@ class indexPage(View):
         )
 
         self.emailSignupForm = newsLetterForm
-        ContextObject.Set_context(
-        links = ContextObject.links,
+        self.ContextObject.Set_context(
+        links = self.ContextObject.links,
         imagePath = 'static/media/cover.jpg', 
+        aboutUsImagePath = 'static/media/aboutus2900.jpg',
+        aboutUsText = self.ContextObject.textString,
         coverTitle1 = 'We are dimsum!', 
         coverTitle2 = 'at',
         coverTitle3 = 'HIDDEN DIMSUM', 
@@ -74,7 +77,7 @@ class indexPage(View):
         addressPostcodeCity = '1450 København K',
         addressPhone = '+45-33 12 88 28')
 
-        self.context = ContextObject.context
+        self.context = self.ContextObject.context
 
     def get(self, request, *args, **kwargs):
         return render(request, template_name='index.html', context = self.context)
