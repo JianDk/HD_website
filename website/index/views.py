@@ -55,6 +55,7 @@ class indexPage(View):
     def __init__(self, *args, **kwargs):
         self.ContextObject = ContextBuilder()
         self.ContextObject.importTextFile('mainAboutUs.txt')
+        
         self.ContextObject.Set_headerCoverImageLinks(linksList = [
             ('LOCATIONS', '#anchor_locations'),
             ('ABOUT US', '#anchor-aboutUs'),
@@ -62,7 +63,7 @@ class indexPage(View):
             ]
         )
 
-        self.emailSignupForm = newsLetterForm
+        self.emailSignupForm = newsLetterForm()
         self.ContextObject.Set_context(
         links = self.ContextObject.links,
         imagePath = 'static/media/cover.jpg', 
