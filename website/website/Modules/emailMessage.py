@@ -73,7 +73,7 @@ class sendEmail:
         #self.status = (sucessSentToTarget, successCCsent)
 
     def sendEmailNow(self, emailFrom, emailTo, msg):
-        with open('emailCred.txt','r') as f:
+        with open('static/emailCred.txt','r') as f:
             cred = json.load(f)
         try:
             smtpObj = smtplib.SMTP(host=cred['host'], port = cred['port'])
@@ -88,7 +88,7 @@ class sendEmail:
         return status
     
     def sendEmailNow_Multiprocessing(self, emailFrom, emailTo, msg):
-        with open('emailCred.txt','r') as f:
+        with open('static/emailCred.txt','r') as f:
             cred = json.load(f)
 
         smtpObj = smtplib.SMTP(host=cred['host'], port = cred['port'])
