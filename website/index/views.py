@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.views import View
+from django.conf import settings
 from .forms import contactForm
 from .forms import newsLetterForm
 
@@ -45,17 +46,15 @@ class ContextBuilder:
         '''
         for key in kwargs.keys():
             self.context[key] = kwargs[key]
-    
+
     def importTextFile(self, filePath):
         with open(filePath,'r',encoding='utf-8') as fid:
             self.textString = fid.read()
 
-
 class indexPage(View):
     def __init__(self, *args, **kwargs):
         self.ContextObject = ContextBuilder()
-        self.ContextObject.importTextFile('/home/jianwu/HD_website/website/static/mainAboutUs.txt')
-        
+        self.ContextObject.importTextFile(str(settings.BASE_DIR) + '/static/mainAboutUs.txt')
         self.ContextObject.Set_headerCoverImageLinks(linksList = [
             ('LOCATIONS', '#anchor_locations'),
             ('ABOUT US', '#anchor-aboutUs'),
@@ -110,7 +109,7 @@ class hdnytorv(View):
     
     def get(self, request, *args, **kwargs):
         #get the contact form fields and news letter form fields
-        self.ContextObject.importTextFile('static/aboutUsNytorv.txt')
+        self.ContextObject.importTextFile(settings.BASE_DIR + '/static/aboutUsNytorv.txt')
         self.ContextObject.Set_context(imagePath ='static/media/coverNytorv.jpg',
             navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
             links = self.ContextObject.links,
@@ -171,7 +170,7 @@ class hdbynight(View):
             ('CONTACT', '/hdbynight#contactForm')])
     
     def get(self, request, *args, **kwargs):
-        self.ContextObject.importTextFile('static/aboutUs2900.txt')
+        self.ContextObject.importTextFile(settings.BASE_DIR + '/static/aboutUs2900.txt')
         self.ContextObject.Set_context(
             imagePath = 'static/media/coverByNight2.jpg',
             navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
@@ -230,7 +229,7 @@ class hd2900(View):
     def __init__(self, *args, **kwargs):
         #cover link name and url address
         self.ContextObject = ContextBuilder()
-        self.ContextObject.importTextFile('static/aboutUs2900.txt')
+        self.ContextObject.importTextFile(settings.BASE_DIR + '/static/aboutUs2900.txt')
         
     def get(self, request, *args, **kwargs):
         #import about us text
