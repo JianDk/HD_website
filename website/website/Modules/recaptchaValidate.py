@@ -4,7 +4,7 @@ import json
 class Validate:
     def __init__(self, request):
         #Import recaptcha secret key
-        with open('emailCred.txt','r') as fileId:
+        with open('static/emailCred.txt','r') as fileId:
             cred = json.load(fileId)
 
         #validate recaptha

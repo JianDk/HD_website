@@ -47,9 +47,9 @@ class ContextBuilder:
             self.context[key] = kwargs[key]
     
     def importTextFile(self, filePath):
-        with open(filePath,'r') as fid:
+        with open(filePath,'r', encoding='utf-8') as fid:
             self.textString = fid.read()
-
+        
 
 class indexPage(View):
     def __init__(self, *args, **kwargs):
