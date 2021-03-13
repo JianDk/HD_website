@@ -109,7 +109,7 @@ class hdnytorv(View):
     
     def get(self, request, *args, **kwargs):
         #get the contact form fields and news letter form fields
-        self.ContextObject.importTextFile(settings.BASE_DIR + '/static/aboutUsNytorv.txt')
+        self.ContextObject.importTextFile(str(settings.BASE_DIR) + '/static/aboutUsNytorv.txt')
         self.ContextObject.Set_context(imagePath ='static/media/coverNytorv.jpg',
             navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
             links = self.ContextObject.links,
@@ -170,7 +170,7 @@ class hdbynight(View):
             ('CONTACT', '/hdbynight#contactForm')])
     
     def get(self, request, *args, **kwargs):
-        self.ContextObject.importTextFile(settings.BASE_DIR + '/static/aboutUs2900.txt')
+        self.ContextObject.importTextFile(str(settings.BASE_DIR) + '/static/aboutUs2900.txt')
         self.ContextObject.Set_context(
             imagePath = 'static/media/coverByNight2.jpg',
             navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
@@ -229,7 +229,7 @@ class hd2900(View):
     def __init__(self, *args, **kwargs):
         #cover link name and url address
         self.ContextObject = ContextBuilder()
-        self.ContextObject.importTextFile(settings.BASE_DIR + '/static/aboutUs2900.txt')
+        self.ContextObject.importTextFile(str(settings.BASE_DIR) + '/static/aboutUs2900.txt')
         
     def get(self, request, *args, **kwargs):
         #import about us text
