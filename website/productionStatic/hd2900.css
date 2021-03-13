@@ -1,0 +1,41 @@
+/*font to be used*/
+@font-face {
+    font-family: hdFont;
+    src: url("media/font/Gotham-Light.otf");
+  }
+  
+  @font-face {
+    font-family: hdFont;
+    src: url("media/font/Gotham-Medium.otf");
+    font-weight: bold;
+  }
+  
+/*navbar*/
+#hd2900Navlink {
+    color: black;
+    font-size: 22px;
+    font-family: hdFont;
+}
+/*About us */
+#menuContainer {
+  background: url("media/backgroundCardDeck.jpg") no-repeat center center;
+  background-size: cover;
+  text-align: center;
+}
+
+#menuImage {
+  padding-top: 5%;
+  width: 70%;
+  height: auto;
+  padding-bottom: 5%;
+}
+
+#menuHeader {
+  text-align: center;
+  font-family: hdFont;
+  padding-top: 5%;
+}
+
+#shopTitle {
+  font-weight: bold;
+}
