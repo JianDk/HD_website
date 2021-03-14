@@ -128,6 +128,18 @@
   font-family: hdFont;
 }
 
+#aboutUsContent {
+  padding-left: 5%;
+  padding-right: 2.5%;
+  font-family: hdFont;
+  text-align: left;
+  font-size: 1rem;
+}
+
+@media (min-width:544px) {
+  #aboutUsContent {font-size: 1.5rem;}
+}
+
 /* About Us Video Section */
 #aboutUsVideoMainContainer {
     background: url("media/backgroundCardDeck.jpg") no-repeat center center;
@@ -145,14 +157,6 @@
   width: 10%;
   height: auto;
   padding-top: 100px;
-}
-
-#aboutUsContent {
-  padding-left: 100px;
-  padding-right: 50px;
-  font-family: hdFont;
-  text-align: left;
-  font-size: 20px;
 }
 
 #aboutUsVideoFlexbox {
