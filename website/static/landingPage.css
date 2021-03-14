@@ -95,10 +95,12 @@
 .card-title {
   font-family: hdFont;
   font-weight: bold;
+  text-align: center;
 }
 
 .card-text {
   font-family: hdFont;
+  text-align: center;
 }
 
 /*About us */
