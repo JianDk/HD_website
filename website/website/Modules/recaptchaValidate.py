@@ -4,13 +4,13 @@ import json
 class Validate:
     def __init__(self, request):
         #Import recaptcha secret key
-        with open('static/emailCred.txt','r') as fileId:
+        with open('/etc/config.json','r') as fileId:
             cred = json.load(fileId)
 
         #validate recaptha
         url = 'https://www.google.com/recaptcha/api/siteverify'
         values = {
-            'secret': cred['recaptchaSecretKey'],
+            'secret': cred['GOOGLE_RECAPTCHA_SECRET_KEY'],
             'response': request.POST.get('g-recaptcha-response')
             }
             
