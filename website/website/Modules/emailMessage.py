@@ -1,7 +1,7 @@
 import smtplib
 import email
 import json
-import multiprocessing
+from threading import Thread
 
 class sendEmail:
     def __init__(self, form, sourceFrom, emailTo):
@@ -35,12 +35,9 @@ class sendEmail:
         msg['Subject'] = sourceFrom
 
         #send the email using multiprocessing
-        p1 = multiprocessing.Process(target = self.sendEmailNow_Multiprocessing,
+        t1 = Thread(target = self.sendEmailNow_Thread,
         args = (form.cleaned_data['senderEmail'], emailTo, msg,) )
-        p1.start()
-
-        #sucessSentToTarget = self.sendEmailNow(emailFrom = form.cleaned_data['senderEmail'],
-        #emailTo = emailTo, msg = msg)
+        t1.start()
 
         if form.cleaned_data['ccSender']:
             #Create the email body to sender
@@ -62,32 +59,12 @@ class sendEmail:
             msg['Subject'] = 'Receipt of your message - Hidden Dimsum'
 
             #Send message. To minimize the wait time send email using multiprocessing
-            p2 = multiprocessing.Process(target = self.sendEmailNow_Multiprocessing,
+            t2 = Thread(target = self.sendEmailNow_Thread,
             args = (emailTo, form.cleaned_data['senderEmail'], msg,) )
-            p2.start()
-            #successCCsent = self.sendEmailNow(emailFrom = emailTo,
-            #emailTo = form.cleaned_data['senderEmail'], msg = msg)
-        #else:
-          #  successCCsent = None
-
-        #self.status = (sucessSentToTarget, successCCsent)
-
-    def sendEmailNow(self, emailFrom, emailTo, msg):
-        with open('static/emailCred.txt','r') as f:
-            cred = json.load(f)
-        try:
-            smtpObj = smtplib.SMTP(host=cred['host'], port = cred['port'])
-            smtpObj.starttls()
-            smtpObj.login(cred['emailName'], cred['password'])
-            smtpObj.sendmail(emailFrom, emailTo, msg.as_string())
-            smtpObj.quit()
-            status = True
-        except:
-            status = False
-        
-        return status
+            t2.start()
     
-    def sendEmailNow_Multiprocessing(self, emailFrom, emailTo, msg):
+    def sendEmailNow_Thread(self, emailFrom, emailTo, msg):
+        
         with open('static/emailCred.txt','r') as f:
             cred = json.load(f)
 
@@ -96,6 +73,3 @@ class sendEmail:
         smtpObj.login(cred['emailName'], cred['password'])
         smtpObj.sendmail(emailFrom, emailTo, msg.as_string())
         smtpObj.quit()
-        
-
-
