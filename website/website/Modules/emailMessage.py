@@ -65,11 +65,11 @@ class sendEmail:
     
     def sendEmailNow_Thread(self, emailFrom, emailTo, msg):
         
-        with open('static/emailCred.txt','r') as f:
+        with open('/etc/config.json','r') as f:
             cred = json.load(f)
 
-        smtpObj = smtplib.SMTP(host=cred['host'], port = cred['port'])
-        smtpObj.starttls()
-        smtpObj.login(cred['emailName'], cred['password'])
+        smtpObj = smtplib.SMTP(host=cred['email']['host'], port = cred['email']['port'])
+        #smtpObj.starttls()
+        smtpObj.login(cred['email']['emailName'], cred['email']['password'])
         smtpObj.sendmail(emailFrom, emailTo, msg.as_string())
         smtpObj.quit()
