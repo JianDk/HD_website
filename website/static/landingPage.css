@@ -47,7 +47,7 @@
 }
 
 .headerTitle {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: normal;
   color: white;
   font-family: hdFont;
@@ -55,10 +55,18 @@
 }
 
 .lead {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: normal;
   color: white;
   font-family: hdFont;
+}
+
+#navbarLogo {
+  width : 25%;
+  height: auto;
+}
+@media (max-width:544px) {
+  #navbarLogo {width: 40%; height: auto;}
 }
 
 @media (min-width:544px) {

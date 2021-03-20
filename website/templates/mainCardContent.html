@@ -16,14 +16,16 @@
                     </a>
 
                         <div class="card-body">
+                            <a href="{% url 'hdnytorv' %}">
                                 <h5 class="card-title">HIDDEN DIMSUM NYTORV </h5>
-                            <p class="card-text">Our main dimsum house located at heart of Copenhagen. This is the place where
-                                dimsum started.
-                                <ul>
+                                <h5 class="card-title">RESTAURANT</h5>
+                            </a>
+                            <p class="card-text">Main dimsum house at the heart of Copenhagen
+                                <!--<ul>
                                     <li><a href="/hdnytorv#menuHeader" id ="cardLinkText">Menu</a></li>
                                     <li><a href="/hdnytorv#openingHourHeader" id ="cardLinkText">Opening hours</a></li>
                                 </ul>
-                                <a href="{% url 'hdnytorv' %}" class="btn btn-primary">More Info</a>
+                                <a href="{% url 'hdnytorv' %}" class="btn btn-primary">More Info</a> -->
                             </p>
                         </div>
                 </div>
@@ -35,13 +37,18 @@
                         <img class="card-img-top" src={% static 'media/card_bynight.jpg' %} alt="Hidden Dimsum By Night">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title">HIDEN DIMSUM BY NIGHT</h5>
+                        <a href= "{% url 'hdbynight' %}">
+                            <h5 class="card-title">HIDDEN DIMSUM BY NIGHT</h5>
+                            <h5 class="card-title">ASIAN BAR</h5>
+                        </a>
                         <p class="card-text">Late night dimsum and Hongkong street food with Asian beers. A night has different shades!</p>
+                        <!--
                         <ul>
                             <li><a href="/hdbynight" id ="cardLinkText">Menu</a></li>
                             <li><a href="/hdbynight" id ="cardLinkText">Opening hours</a></li>
                         </ul>
                         <a href = "{% url 'hdbynight' %}" class = "btn btn-primary" id ="cardLinkText">More Info</a>
+                        -->
                     </div>
                 </div>
             </div>
@@ -52,14 +59,19 @@
                         <img class="card-img-top" src={% static 'media/card_hiddendimsum2900.jpg' %} alt="Hidden Dimsum Strandvejen 163, 2900 Hellerup">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title">HIDDEN DIMSUM 2900</h5>
+                        <a href="{% url 'hd2900' %}">
+                            <h5 class="card-title">HIDDEN DIMSUM 2900</h5>
+                            <h5 class="card-title">TAKEAWAY</h5>
+                        </a>
                         <p class="card-text">Dimsum takeaway. Order your dimsum dinner and pick it up at Hidden Dimsum 2900, Strandvejen 163, 2900 Hellerup.</p>
+                        <!--
                         <ul>
                             <li><a href="/hd2900#menuHeader" id ="cardLinkText">Menu</a></li>
                             <li><a href="/hd2900#openingHourContent" id ="cardLinkText">Order takeaway over phone</a></li>
                             <li><a href="/hd2900#openingHourContent" id ="cardLinkText">Opening hours</a></li>
                         </ul>
                         <a href="{% url 'hd2900' %}" target = "_blank" class="btn btn-primary" id ="cardLinkText">More Info</a>
+                        -->
                     </div>
                 </div>
             </div>
@@ -70,9 +82,13 @@
                         <img class="card-img-top" src={% static 'media/card_dimsumbox.jpg' %} alt="Dimsum Box">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title">DIMSUM BOX</h5>
-                        <p class="card-text">A box of dimsum delivered to your front door with instructions on how to warm up. Dimsum at your convenience!</p>
+                        <a href="http://www.dimsumbox.dk}">
+                            <h5 class="card-title">DIMSUM BOX</h5>
+                        </a>
+                        <p class="card-text">Dimsum mealbox delivery</p>
+                        <!--
                         <a href="http://www.dimsumbox.dk" target="_blank" class="btn btn-primary" id ="cardLinkText">Order</a>
+                        -->
                     </div>
                 </div>
             </div>
