@@ -105,7 +105,8 @@ class hdnytorv(View):
         self.ContextObject.Set_headerCoverImageLinks(linksList = [
             ('MENU', '/hdnytorv#menuHeader'),
             ('ABOUT US', '/hdnytorv#aboutUsLogo'),
-            ('CONTACT', '/hdnytorv#contactForm')
+            ('CONTACT', '/hdnytorv#contactForm'),
+            ('BOOK TABLE', 'https://book.easytablebooking.com/book/?id=bb7ae&lang=da')
         ])
     
     def get(self, request, *args, **kwargs):
