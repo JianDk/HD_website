@@ -18,3 +18,5 @@ class Validate:
         req =  urllib.request.Request(url, data=data)
         response = urllib.request.urlopen(req)
         self.result = json.loads(response.read().decode())
+        print('here is the result')
+        print(self.result)
