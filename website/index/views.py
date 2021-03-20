@@ -64,6 +64,7 @@ class indexPage(View):
 
         self.emailSignupForm = newsLetterForm()
         self.ContextObject.Set_context(
+        navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
         links = self.ContextObject.links,
         imagePath = 'static/media/cover.jpg', 
         aboutUsImagePath = 'static/media/aboutus2900.jpg',
