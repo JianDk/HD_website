@@ -239,7 +239,7 @@ class hd2900(View):
         form = contactForm(request.POST)
         context = {'form' : contactForm(),
         'emailSignUpForm' : newsLetterForm(),
-        'menuImgPath' : 'static/media/hd2900Menu.png',
+        'menuImgPath' : 'static/media/hd2900Menu.jpg',
         'aboutUsImagePath' : 'static/media/aboutus2900.jpg',
         'aboutUsText' : self.ContextObject.textString,
         'dayRange1' : 'Everyday',
