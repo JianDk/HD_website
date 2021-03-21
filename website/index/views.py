@@ -13,11 +13,15 @@ from website.Modules.recaptchaValidate import Validate
 # Create your views here.
 class ContextBuilder:
     def __init__(self):
-        self.context = {'imagePath' : None,
+        self.context = {
+        'backgroundImageAlt' : None,
+        'imagePath' : None,
         'navbarLogoPath' : None,
+        'navbarLogoAlt' : None,
         'links' : None,
         'menuImgPath' : None,
         'aboutUsImagePath' : None,
+        'aboutUsImageAlt' : None,
         'aboutUsText' : None,
         'dayRange1' : None,
         'timeRange1' : None,
@@ -63,11 +67,15 @@ class indexPage(View):
         )
 
         self.emailSignupForm = newsLetterForm()
+
         self.ContextObject.Set_context(
+        backgroundImageAlt = "A steamer of dimsum at Hidden Dimsum",
         navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
+        navbarLogoAlt = 'Hidden Dimsum',
         links = self.ContextObject.links,
         imagePath = 'static/media/cover.jpg', 
         aboutUsImagePath = 'static/media/aboutus2900.jpg',
+        aboutUsImageAlt = 'Owner of Hidden Dimsum the siblings Wang and Mai',
         aboutUsText = self.ContextObject.textString,
         coverTitle1 = 'We are dimsum!', 
         coverTitle2 = 'at',

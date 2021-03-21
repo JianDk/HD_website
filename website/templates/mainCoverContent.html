@@ -1,6 +1,6 @@
 {% load static %}
 <section>
-    <div class="jumbotron jumbotron-fluid" id ="coverNytorv" style="background-image: url({{imagePath}});">
+    <div class="jumbotron jumbotron-fluid" id ="coverNytorv" style="background-image: url({{imagePath}});" alt="{{ backgroundImageAlt }}">
         <div class="container-fluid">
         
             <nav class="navbar navbar-expand-md" id ="navbar">
@@ -8,7 +8,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                    <img src="{{ navbarLogoPath }}" id="navbarLogo" alt="">
+                    <img src="{{ navbarLogoPath }}" id="navbarLogo" alt="{{ navbarLogoAlt }}">
 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto">
