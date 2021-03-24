@@ -25,12 +25,8 @@
   margin-bottom: 0px;
 }
 
-#navbar {
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
 
+/*
 .navbar-toggler {
   border-color: black;
 } 
@@ -60,7 +56,7 @@
   color: white;
   font-family: hdFont;
 }
-
+*/
 /* Card deck section */
 #mainContainer {
     background: url("media/backgroundCardDeck.jpg") no-repeat center center;

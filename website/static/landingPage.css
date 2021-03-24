@@ -12,19 +12,79 @@
 
 /* cover section */
 #coverNytorv {
-  text-align: center; 
-  align-items: center;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   min-height: 100%;
-  justify-content: center;
   color: white;
   height: 700px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 0px;
+  text-align: center;
+  font-family: hdFont;
+  font-weight: bold;
 }
 
+#navbar {
+  max-width: 100%;
+}
+
+.navbar-brand img {
+  height: 50px;
+  width: auto;
+  padding-left: 30px; 
+}
+
+#linkText {
+  font-family: hdFont;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+#navbarNav {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#navbarListItem {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#coverTitle {
+  font-family: hdFont;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width:375px) {
+  #navbarLogo {height: 40px;
+  width: auto;}
+
+  #coverTitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (min-width:375px) and (max-width:812px) {
+  #coverTitle {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  #coverTitle {
+    font-size: 2.5rem;
+  }
+}
+
+
+
+
+/*
 #navbar {
     position: absolute;
     top: 0;
@@ -73,7 +133,7 @@
   .headerTitle {font-size: 3rem;}
   .lead {font-size: 3rem}
 }
-
+*/
 /* Card deck section */
 #mainContainer {
     background: url("media/backgroundCardDeck.jpg") no-repeat center center;

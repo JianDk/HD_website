@@ -1,34 +1,35 @@
 {% load static %}
-<section>
-    <div class="jumbotron jumbotron-fluid" id ="coverNytorv" style="background-image: url({{imagePath}});" alt="{{ backgroundImageAlt }}">
-        <div class="container-fluid">
-        
-            <nav class="navbar navbar-expand-md" id ="navbar">
-                <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                    <img src="{{ navbarLogoPath }}" id="navbarLogo" alt="{{ navbarLogoAlt }}">
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary" id ="navbar">
+    <button class="navbar-toggler m-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <a class="navbar-brand navbar-left" href="/" id="navbarLogoLink">
+        <img src="{{ navbarLogoPath }}" alt="{{ navbarLogoAlt }}" id="navbarLogo">
+    </a>
 
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ml-auto">
-                            {% for link in links %}
-                                {% if link.0 == 'BOOK TABLE' %}
-                                <li class="nav-item active">
-                                    <a class="nav-link px-5" id ="mainNavlink" href="{{ link.1 }}" target="_blank">{{ link.0 }}<span class="sr-only">(current)</span></a>
-                                </li>
-                                {% else %}
-                                    <li class="nav-item active">
-                                        <a class="nav-link px-5" id ="mainNavlink" href="{{ link.1 }}">{{ link.0 }}<span class="sr-only">(current)</span></a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-            </nav>
-            <p class ="lead">{{ coverTitle1 }}</p>
-            <p class="lead">{{ coverTitle2 }}</p>
-          <h1 class="headerTitle" id="coverTextTitle">{{ coverTitle3 }}</h1>
-        </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            {% for link in links %}
+                {% if link.0 == 'BOOK TABLE' %}
+                <li class="nav-item active" id="navbarListItem">
+                    <a class="nav-link px-6" id ="mainNavlink" href="{{ link.1 }}" target="_blank"><h3 id="linkText">{{ link.0 }}</h3></a>
+                </li>
+                {% else %}
+                    <li class="nav-item active" id="navbarListItem">
+                        <a class="nav-link px-6" id ="mainNavlink" href="{{ link.1 }}"><h3 id="linkText">{{ link.0 }}</h3></a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
     </div>
-</section>
+</nav>
+
+<div class="jumbotron jumbotron-fluid" id ="coverNytorv" style="background-image: url({{imagePath}});" alt="{{ backgroundImageAlt }}">      
+    <h1 id="coverTitle">
+        {{ coverTitle1 }}<br>
+        {{ coverTitle2 }}<br>
+        {{ coverTitle3 }}
+    </h1>
+</div>
