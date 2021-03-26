@@ -179,6 +179,14 @@
     font-size: 1.8rem;
   }
 
+  .card-title {
+    font-size: 1.6rem;
+  }
+
+  .card-text {
+    font-size: 1.6rem;
+  }
+
   #aboutUsRightHeader {
     font-size: 2rem;
   }
