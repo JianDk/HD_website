@@ -2,77 +2,77 @@
 <section id = "anchor_locations"> 
     <div class="container-fluid" id = "mainContainer">
         <div class ="container-fluid" id = "cardDecksHeading">
-            <h1>LOCATIONS AND DIMSUM BOX</h1>
+            <h1 id="cardSectionTitle">LOCATIONS AND DIMSUM BOX</h1>
             <hr class="cardDeckHorisontalLine">
             <br>
             <br>
         </div>
 
         <div class="card-deck" id ="card-deck">
-
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">HIDDEN DIMSUM NYTORV</h5>
-                  </div>
-                <a href="{% url 'hdnytorv' %}">
-                    <img class="card-img-top" src={% static 'media/card_hiddendimsumNytorv.jpg' %} alt="Hidden Dimsum restaurant in Nytorv image">
-                </a>
-
-                <div class="card-body">
-                    <a href="{% url 'hdnytorv' %}">
-                        <h5 class="card-title">RESTAURANT</h5>
-                    </a>
-                    <p class="card-text">Main dimsum house at the heart of Copenhagen</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">HIDDEN DIMSUM BY NIGHT</h5>
-                </div>
-
-                <a href="{% url 'hdbynight' %}">
-                    <img class="card-img-top" src={% static 'media/card_bynight.jpg' %} alt="Hidden Dimsum By Night an Asian bar in Copenhagen city center">
-                </a>
-                <div class="card-body">
-                    <a href= "{% url 'hdbynight' %}">
-                        <h5 class="card-title">ASIAN BAR</h5>
-                    </a>
-                    <p class="card-text">Late night dimsum and Hongkong street food with Asian beers.</p>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">HIDDEN DIMSUM NYTORV</h5>
                     </div>
-            </div>
-           
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">HIDDEN DIMSUM 2900</h5>
+                    <a href="{% url 'hdnytorv' %}">
+                        <img class="card-img-top" src={% static 'media/card_hiddendimsumNytorv.jpg' %} alt="Hidden Dimsum restaurant in Nytorv image">
+                    </a>
+
+                    <div class="card-body">
+                        <a href="{% url 'hdnytorv' %}">
+                            <h5 class="card-title">RESTAURANT</h5>
+                        </a>
+                        <p class="card-text">Main dimsum house at the heart of Copenhagen</p>
+                    </div>
                 </div>
-                <a href="{% url 'hd2900' %}">
-                    <img class="card-img-top" src={% static 'media/card_hiddendimsum2900.jpg' %} alt="Hidden Dimsum 2900 takeaway restaurant in Hellerup">
-                </a>
-                <div class="card-body">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">HIDDEN DIMSUM BY NIGHT</h5>
+                    </div>
+
+                    <a href="{% url 'hdbynight' %}">
+                        <img class="card-img-top" src={% static 'media/card_bynight.jpg' %} alt="Hidden Dimsum By Night an Asian bar in Copenhagen city center">
+                    </a>
+                    <div class="card-body">
+                        <a href= "{% url 'hdbynight' %}">
+                            <h5 class="card-title">ASIAN BAR</h5>
+                        </a>
+                        <p class="card-text">Late night dimsum and Hongkong street food with Asian beers.</p>
+                        </div>
+                </div>
+            
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">HIDDEN DIMSUM 2900</h5>
+                    </div>
                     <a href="{% url 'hd2900' %}">
-                        <h5 class="card-title">TAKEAWAY</h5>
+                        <img class="card-img-top" src={% static 'media/card_hiddendimsum2900.jpg' %} alt="Hidden Dimsum 2900 takeaway restaurant in Hellerup">
                     </a>
-                    <p class="card-text">Dimsum takeaway. Order your dimsum dinner and pick it up at Hidden Dimsum 2900, Strandvejen 163, 2900 Hellerup.</p>
+                    <div class="card-body">
+                        <a href="{% url 'hd2900' %}">
+                            <h5 class="card-title">TAKEAWAY</h5>
+                        </a>
+                        <p class="card-text">Dimsum takeaway. Order your dimsum dinner and pick it up at Hidden Dimsum 2900, Strandvejen 163, 2900 Hellerup.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">DIMSUM BOX</h5>
+                    </div>
+                    <a href="http://www.dimsumbox.dk">
+                        <img class="card-img-top" src={% static 'media/card_dimsumbox.jpg' %} alt="Dimsum Box delivery of mealbox in Copenhagen">
+                    </a>
+                    <div class="card-body">
+                        <a href="http://www.dimsumbox.dk}">
+                            <h5 class="card-title">ORDER YOUR DIMSUM BOX</h5>
+                        </a>
+                        <p class="card-text">Dimsum mealbox delivery</p>
+                        
+                    </div>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">DIMSUM BOX</h5>
-                </div>
-                <a href="http://www.dimsumbox.dk">
-                    <img class="card-img-top" src={% static 'media/card_dimsumbox.jpg' %} alt="Dimsum Box delivery of mealbox in Copenhagen">
-                </a>
-                <div class="card-body">
-                    <a href="http://www.dimsumbox.dk}">
-                        <h5 class="card-title">ORDER YOUR DIMSUM BOX</h5>
-                    </a>
-                    <p class="card-text">Dimsum mealbox delivery</p>
-                    
-                </div>
-            </div>
-
         </div>        
     </div>
 </section>

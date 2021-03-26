@@ -3,12 +3,19 @@
 <section id = "anchor-aboutUs">
     <div class="container-fluid" id = "aboutUsContainer">
         <div class="row" id="firstRow">
+            
+            <div class="col-lg" id="leftContainer">
                 <img src ="{{ aboutUsImagePath }}" class="col-md" alt = 'About us' id ="aboutUsLeftImage" alt="{{ aboutUsImageAlt }}">
+            </div>
 
-            <div class="col-md" id="right"> 
-                <img src={% static 'media/baoIcon.png' %} alt="Hidden Dimsum page logo" id = "aboutUsLogo">
+            <div class="col-lg" id="right">
+                <p id="aboutUsLogoCentering"> 
+                    <img src={% static 'media/baoIcon.png' %} alt="Hidden Dimsum page logo" id = "aboutUsLogo">
+                </p>
                 <br>
+                    
                     <h1 id = "aboutUsRightHeader">OUR STORY</h1>
+                    
                     <hr class = "cardDeckHorisontalLine">
                     <h3 id= "aboutUsContent">
                         {{ aboutUsText|linebreaks }}
