@@ -248,10 +248,13 @@ class hd2900(View):
         #import about us text
 
         form = contactForm(request.POST)
-        context = {'form' : contactForm(),
+        context = {'navbarLogoAlt' : "Hidden Dimsum 2900",
+        'form' : contactForm(),
         'emailSignUpForm' : newsLetterForm(),
         'menuImgPath' : 'static/media/hd2900Menu.jpg',
+        'menuAltText' : 'Hidden Dimsum 2900 menu',
         'aboutUsImagePath' : 'static/media/aboutus2900.jpg',
+        'aboutUsImageAlt' : 'Owner of Hidden Dimsum 2900 Hellerup Mak and Mai',
         'aboutUsText' : self.ContextObject.textString,
         'dayRange1' : 'Everyday',
         'timeRange1': '16:00 - 20:30',
