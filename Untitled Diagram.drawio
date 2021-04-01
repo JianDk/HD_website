@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-04-01T05:56:38.269Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="htN1YhQtfx6hPCb-MBYy" version="14.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-01T08:47:02.934Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="_MDQ-1WyHOb4Dtr-X9I-" version="14.5.3" type="github">
   <diagram id="TAdNYwg-UMwRdQJhOWO_" name="Page-1">
     <mxGraphModel dx="988" dy="1806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -163,14 +163,8 @@
         <mxCell id="cqt7cs0M-7gVonUMgwuZ-55" value="Update date, null = false" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="140" y="-590" width="80" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="cqt7cs0M-7gVonUMgwuZ-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cqt7cs0M-7gVonUMgwuZ-58">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="110" y="-990" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="120" y="-495" />
-              <mxPoint x="120" y="-990" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cqt7cs0M-7gVonUMgwuZ-58" target="cqt7cs0M-7gVonUMgwuZ-1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="cqt7cs0M-7gVonUMgwuZ-58" value="Available restaurant dropdown list&amp;nbsp;&lt;br&gt;null = False" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="140" y="-530" width="80" height="70" as="geometry" />
@@ -185,6 +179,30 @@
         </mxCell>
         <mxCell id="cqt7cs0M-7gVonUMgwuZ-61" value="Available restaurant dropdown list&amp;nbsp;&lt;br&gt;null = False" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="400" y="-640" width="80" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cqt7cs0M-7gVonUMgwuZ-63">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="-990" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="120" y="-420" />
+              <mxPoint x="120" y="-990" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-63" value="Is featured&lt;br&gt;bool" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="-440" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cqt7cs0M-7gVonUMgwuZ-64">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="-990" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="120" y="-360" />
+              <mxPoint x="120" y="-990" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-64" value="Is bestseller&lt;br&gt;bool" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="-380" width="80" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
