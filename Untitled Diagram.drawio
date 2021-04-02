@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-04-02T05:29:02.986Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="0ILT9VFjETBnAyarTWaS" version="14.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-02T05:58:25.230Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="Npr84idczkWMgBLDuynU" version="14.5.3" type="github">
   <diagram id="TAdNYwg-UMwRdQJhOWO_" name="Page-1">
     <mxGraphModel dx="988" dy="1806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -215,6 +215,21 @@
         </mxCell>
         <mxCell id="cqt7cs0M-7gVonUMgwuZ-70" value="Product Id, auto generated hash value" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="140" y="-320" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-72" value="Cart" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="-1010" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-73" value="Cart unique id, string" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-1120" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-74" value="Product ID" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-1060" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-75" value="Product quanitty" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-1000" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cqt7cs0M-7gVonUMgwuZ-76" value="Date product was added to cart" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-940" width="80" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
