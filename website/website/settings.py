@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'website.webshopCatalog',
 ]
 
 MIDDLEWARE = [
@@ -90,6 +91,17 @@ DATABASES = {
     }
 }
 
+#The default data base will be overwrite to point to mysql data base
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'takeawaywebshop', 
+        'USER': data['mysql']['username'],
+        'PASSWORD': data['mysql']['password'],
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

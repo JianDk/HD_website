@@ -18,6 +18,8 @@ from django.urls import path
 from index import views
 from index.views import indexPage, hdnytorv
 
+admin.autodiscover()
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', indexPage.as_view(), name = 'index'),
