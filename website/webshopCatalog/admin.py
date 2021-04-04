@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from django.contrib import admin
 from webshopCatalog.models import Category, Product
 from webshopCatalog.forms import ProductAdminForm
 
@@ -23,10 +22,16 @@ admin.site.register(Product, ProductAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
     #sets up values for how admin site lists category
-    list_display = ('name', 'created_at', 'updatd_at',)
+    list_display = ('name', 'created_at', 'updated_at',)
     list_display_links = ('name',)
     list_per_page = 50
     ordering = ['name']
     search_fields = ['name', 'description', 'meta_keywords', 'meta_description']
     exclude = ('created_at', 'updated_at',)
+
+    #Set up slug to be generated from category name
+    prepopulated_fields = {'slug' : ('name',)}
+
+admin.site.register(Category, CategoryAdmin)
+
 

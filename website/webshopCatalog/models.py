@@ -1,15 +1,16 @@
 from django.db import models
 from django.db.models.fields.related import create_many_to_many_intermediary_model
+from django.urls import reverse
 
 class Product(models.Model):
     name = models.CharField(max_length = 50, unique=True)
     description = models.TextField()
-    allergic_note = models.CharField(max_length = 255)
+    allergic_note = models.CharField(max_length = 255, blank = True, null=True)
     quantity = models.IntegerField(null = True, blank = True) #Used for campaign products to show how many items there is left
     price = models.DecimalField(max_digits=9, decimal_places=0, default=0.00)
     is_active = models.BooleanField(default = True)
     is_deliverable = models.BooleanField(default = True) 
-    image_path = models.CharField(max_lenght = 255)
+    image_path = models.ImageField(upload_to = 'productImages')
     meta_keywords = models.CharField(max_length=255, help_text="comma delimited keywords text for SEO")
     meta_description = models.CharField(max_length=255, help_text="SEO description content")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -26,11 +27,9 @@ class Product(models.Model):
     def __unicode__(self):
         return self.name
     
-    @models.permalink
     def get_absolute_url(self):
-        return ("catalog_product", (), {'product_slug' : self.slug})
+        return reverse("webshopCatalog-product", args=(self.slug,))
     
-
 class Category(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=255, unique=True)
@@ -53,10 +52,9 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
     
-    @models.permalink
     def get_absolute_url(self):
-        return ("catalog_category", (), {'category_slug' : self.slug})
+        return reverse("webshopCatalog-category", args = (self.slug,))
     
-    
+
 
         
