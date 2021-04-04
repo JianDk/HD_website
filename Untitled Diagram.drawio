@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-04-04T18:40:20.918Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36" etag="oJ4GMXDFM1RjP5xMN8IG" version="14.5.6" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-04T18:52:13.183Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36" etag="_d3t-5aMncBCokS6IEON" version="14.5.6" type="github">
   <diagram id="TAdNYwg-UMwRdQJhOWO_" name="Page-1">
     <mxGraphModel dx="1646" dy="1932" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -228,111 +228,123 @@
           <mxGeometry x="140" y="-480" width="80" height="100" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-1" value="Restaurant site" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="520" y="-620" width="80" height="40" as="geometry" />
+          <mxGeometry x="520" y="-590" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-2" target="KT6eWc6hyQDaZcABTfjv-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-2" value="Address, charfield" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-757" width="80" height="40" as="geometry" />
+          <mxGeometry x="640" y="-727" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-3" target="KT6eWc6hyQDaZcABTfjv-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-3" value="Phone number, digitfield" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-697" width="80" height="40" as="geometry" />
+          <mxGeometry x="640" y="-667" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-4">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="-600" as="targetPoint" />
+            <mxPoint x="600" y="-570" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-4" value="email, email field" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-637" width="80" height="40" as="geometry" />
+          <mxGeometry x="640" y="-607" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-5" target="KT6eWc6hyQDaZcABTfjv-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-5" value="Offer delivery&lt;br&gt;bool" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-587" width="80" height="40" as="geometry" />
+          <mxGeometry x="640" y="-557" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-6" target="KT6eWc6hyQDaZcABTfjv-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-6" value="Pick up service time start - time end" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-467" width="80" height="60" as="geometry" />
+          <mxGeometry x="640" y="-437" width="80" height="60" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-8">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="-600" as="targetPoint" />
+            <mxPoint x="600" y="-570" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="620" y="-367" />
-              <mxPoint x="620" y="-600" />
+              <mxPoint x="620" y="-337" />
+              <mxPoint x="620" y="-570" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-8" value="Available delivery week days" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-387" width="80" height="40" as="geometry" />
+          <mxGeometry x="640" y="-357" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-9">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="-600" as="targetPoint" />
+            <mxPoint x="600" y="-570" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="620" y="-507" />
-              <mxPoint x="620" y="-600" />
+              <mxPoint x="620" y="-477" />
+              <mxPoint x="620" y="-570" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-9" value="Available pickup weekdays" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-527" width="80" height="40" as="geometry" />
+          <mxGeometry x="640" y="-497" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-12">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="-600" as="targetPoint" />
+            <mxPoint x="600" y="-570" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="620" y="-297" />
-              <mxPoint x="620" y="-600" />
+              <mxPoint x="620" y="-267" />
+              <mxPoint x="620" y="-570" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-12" value="Delivery service time start - time end" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-327" width="80" height="60" as="geometry" />
+          <mxGeometry x="640" y="-297" width="80" height="60" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-13" target="KT6eWc6hyQDaZcABTfjv-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-13" value="Restaurant longitude&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-860" width="80" height="40" as="geometry" />
+          <mxGeometry x="640" y="-830" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-14">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="-600" as="targetPoint" />
+            <mxPoint x="600" y="-570" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="620" y="-790" />
-              <mxPoint x="620" y="-600" />
+              <mxPoint x="620" y="-760" />
+              <mxPoint x="620" y="-570" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-14" value="Restaurant latitude&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-810" width="80" height="40" as="geometry" />
+          <mxGeometry x="640" y="-780" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-15" target="KT6eWc6hyQDaZcABTfjv-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-15" value="Delivery radius" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-250" width="80" height="60" as="geometry" />
+          <mxGeometry x="640" y="-220" width="80" height="60" as="geometry" />
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-16">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="600" y="-600" as="targetPoint" />
+            <mxPoint x="600" y="-570" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="620" y="-140" />
-              <mxPoint x="620" y="-600" />
+              <mxPoint x="620" y="-110" />
+              <mxPoint x="620" y="-570" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="KT6eWc6hyQDaZcABTfjv-16" value="Delivery country" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="640" y="-170" width="80" height="60" as="geometry" />
+          <mxGeometry x="640" y="-140" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KT6eWc6hyQDaZcABTfjv-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KT6eWc6hyQDaZcABTfjv-34">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="-560" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="620" y="-860" />
+              <mxPoint x="620" y="-560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KT6eWc6hyQDaZcABTfjv-34" value="Restaurant name" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-880" width="80" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
