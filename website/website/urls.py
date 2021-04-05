@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from index import views
 from index.views import indexPage, hdnytorv
-from webshopCatalog.views import hd2900_Main
+from webshopRestaurant.views import hd2900_Main
 
 admin.autodiscover()
 

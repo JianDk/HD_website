@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .forms import RestaurantAdminForm
-from .models import Restaurant
+from webshopRestaurant.forms import RestaurantAdminForm
+from webshopRestaurant.models import Restaurant
 
 # Register your models here.
 class RestaurantAdmin(admin.ModelAdmin):

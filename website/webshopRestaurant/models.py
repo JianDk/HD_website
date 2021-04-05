@@ -1,4 +1,5 @@
 from django.db import models
+from webshopCatalog.models import Product, Category
 
 # Create your models here.
 class Restaurant(models.Model):
@@ -69,6 +70,11 @@ class Restaurant(models.Model):
     pickup_sunday_active = models.BooleanField(default=True, help_text="If active, pickup is possible on Sunday")
     pickup_sunday_timestart = models.TimeField()
     pickup_sunday_timeend = models.TimeField()
+
+    #Define many to many relationships to Products and Category. One restaurant can have many products from 
+    #Product table and Category from category table
+    products = models.ManyToManyField(Product)
+    category = models.ManyToManyField(Category)
 
     class Meta:
         db_table = "restaurant"
