@@ -7,13 +7,15 @@ class Restaurant(models.Model):
     address = models.CharField(max_length = 255)
     phone = models.CharField(max_length = 20)
     email = models.EmailField()
-    latitude = models.DecimalField(max_digits=15, decimal_places=5)
-    longitude = models.DecimalField(max_digits=15, decimal_places=5)
+    latitude = models.DecimalField(max_digits=20, decimal_places=15)
+    longitude = models.DecimalField(max_digits=20, decimal_places=15)
 
     is_active = models.BooleanField(default=True, help_text='If active it is possible to order takeaway both for delivery and pickup')
     has_delivery = models.BooleanField(default=True, help_text='If active it is possible to order delivery. If not on, it is only possible to order pickup')
-    
+    delivery_fee = models.PositiveSmallIntegerField(default = 60, help_text = "delivery cost in dkk")
+
     delivery_radius = models.IntegerField(help_text="Delivery radius in km")
+    delivery_preparationtime = models.PositiveSmallIntegerField(default = 60, help_text="Time it takes to prepare the order. The client cannot pickup on a time earlier than the defined minutes")
     
     delivery_monday_active = models.BooleanField(default=True, help_text="If active, delivery can be performed on Monday")
     delivery_monday_timestart = models.TimeField()
@@ -43,6 +45,7 @@ class Restaurant(models.Model):
     delivery_sunday_timestart = models.TimeField()
     delivery_sunday_timeend = models.TimeField()
 
+    pickup_preparationtime = models.SmallIntegerField(default = 30, help_text="The time needed to prepare pickup order. Client cannot pickup before this time. Defined in minutes.")
     pickup_monday_active = models.BooleanField(default=True, help_text="If active, pickup is possible on Monday")
     pickup_monday_timestart = models.TimeField()
     pickup_monday_timeend = models.TimeField()
@@ -70,6 +73,8 @@ class Restaurant(models.Model):
     pickup_sunday_active = models.BooleanField(default=True, help_text="If active, pickup is possible on Sunday")
     pickup_sunday_timestart = models.TimeField()
     pickup_sunday_timeend = models.TimeField()
+
+    bagFee = models.PositiveSmallIntegerField(default = 4, help_text = "pose afgift in dkk")
 
     #Define many to many relationships to Products and Category. One restaurant can have many products from 
     #Product table and Category from category table

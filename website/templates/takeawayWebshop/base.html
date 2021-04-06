@@ -6,31 +6,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-
-    <link rel="stylesheet" type="text/css" href={% static 'landingPage.css'%}>
-    <link rel="stylesheet" type="text/css" href={% static 'hd2900.css'%}>
-    <title>Hidden Dimsum - Dimsum in Copenhagen</title>
+    <!--social media icons-->
+    <link rel="stylesheet" type="text/css" href={% static 'takeawayWebshop.css'%}>
+    <title>{% block title %}{% endblock %}</title>
 
     <!--SEO-->
-    <meta name="description" content="Dimsum Chinese restaurant in Copenpagen specializing in handmade dimsum, dimsum takeaway, homemade chili and Dimsum Box delivery">
-    <meta name="keywords" content="Dimsum, Chinese restaurant, kinesisk restaurant, dimsum restaurant, dumplings, Nytorv, Magasasa dimsum, Royal Garden, asian food, asiatisk">
-    <meta name="author" content="Hidden Dimsum"> 
+    <meta name="description" content="Hidden Dimsum 2900, Strandvejen 163, Hellerup online dimsum takeaway and local delivery webshop">
+    <meta name="keywords" content="Hidden Dimsum 2900, dimsum takeaway webshop, dimsum local delivery, dumplings takeaway, online ordering">
+    <meta name="author" content="Hidden Dimsum 2900"> 
     <link rel="shortcut icon" type="image/png" href="{% static 'media/favicon_hd32x32.png' %}"/>
-    <!--recaptcha-->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <!--Google confirming ownership of the site-->
-    <meta name="google-site-verification" content="2rI_3MTsrpGdVFqAlDxInaAiewyFGn6WxqTgHvFT6Tk" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
-    {% include 'mainCoverContent.html' %}
+    <a href="#">
+      <i class="fa" style="font-size:24px">&#xf07a;</i>
+      <span class='badge badge-warning' id='lblCartCount'> 10 </span>
+    </a>
 
-    {% include 'mainCardContent.html' %}
+    {% block webshop_navbar %}
+    {% endblock %}
 
-    {% include 'aboutUs.html' %} 
+    {% block content %} 
+    {% endblock %}
 
-    {% include 'mainFooter.html' %}
-    
   <script href="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
