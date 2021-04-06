@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-04-06T20:05:54.691Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36" etag="S81niqJ8VqQCQkaiyr8L" version="14.5.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-06T20:10:29.123Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36" etag="6K8XTCXqjDQxOI7FQyuC" version="14.5.8" type="github">
   <diagram id="TAdNYwg-UMwRdQJhOWO_" name="Page-1">
-    <mxGraphModel dx="678" dy="1508" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="988" dy="1663" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -349,13 +349,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="1YyKxcDy5vK01rjZgQ8i-1" value="Delivery cost, integer field" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="1YyKxcDy5vK01rjZgQ8i-1" value="&lt;font color=&quot;#00cc00&quot;&gt;Delivery cost, integer field&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="640" y="140" width="80" height="60" as="geometry" />
         </mxCell>
         <mxCell id="1YyKxcDy5vK01rjZgQ8i-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="1YyKxcDy5vK01rjZgQ8i-2" target="KT6eWc6hyQDaZcABTfjv-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="1YyKxcDy5vK01rjZgQ8i-2" value="Bag cost, integer field" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="1YyKxcDy5vK01rjZgQ8i-2" value="&lt;font color=&quot;#00cc00&quot;&gt;Bag cost, integer field&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="640" y="220" width="80" height="60" as="geometry" />
         </mxCell>
       </root>
