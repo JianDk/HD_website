@@ -6,6 +6,7 @@ from webshopCatalog.forms import ProductAdminForm
 
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
+    
     #How the admin site will list products
     list_display = ('name', 'price', 'created_at', 'updated_at',)
     list_display_links = ('name',)
@@ -21,6 +22,8 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
+    filter_horizontal = ('products',)
+    
     #sets up values for how admin site lists category
     list_display = ('name', 'created_at', 'updated_at',)
     list_display_links = ('name',)

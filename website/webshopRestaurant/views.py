@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from webshopRestaurant.forms import DeliveryPossible
 # Create your views here.
 from django.views import View
 from django.http import HttpResponse
@@ -7,5 +7,13 @@ from django.http import HttpResponse
 # Create your views here.
 class hd2900_Main(View):
     def get(self, request, *args, **kwargs):
-        return render(request, template_name="takeawayWebshop/hd2900_webshop_index.html")
+        #form for checking if customer address is within delivery range
+        addressFieldForm = DeliveryPossible(request.GET)
+        context = {
+            'addressField' : addressFieldForm,
+        }
+        return render(request, template_name="takeawayWebshop/base.html", context = context)
+    
+    def post(self, request, *args, **kwargs):
+        print('called here')
 

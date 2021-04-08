@@ -85,5 +85,5 @@ class Restaurant(models.Model):
         db_table = "restaurant"
         ordering = ['-name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name    

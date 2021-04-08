@@ -1,3 +1,8 @@
+/*Navbar for webshop*/
+.navbar {
+	border: black 3px solid;
+}
+
 #lblCartCount {
     font-size: 12px;
     background: #ff0000;

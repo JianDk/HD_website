@@ -24,7 +24,7 @@ class Product(models.Model):
         db_table = 'products'
         ordering = ['-created_at']
     
-    def __unicode__(self):
+    def __str__(self):
         return self.name
     
     def get_absolute_url(self):
@@ -49,7 +49,7 @@ class Category(models.Model):
         ordering = ['-created_at']
         verbose_name_plural = 'Categories'
     
-    def __unicode__(self):
+    def __str__(self):
         return self.name
     
     def get_absolute_url(self):
