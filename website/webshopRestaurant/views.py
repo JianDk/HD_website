@@ -15,5 +15,9 @@ class hd2900_Main(View):
         return render(request, template_name="takeawayWebshop/base.html", context = context)
     
     def post(self, request, *args, **kwargs):
-        print('called here')
+        form = DeliveryPossible(request.POST)
+        if form.is_valid():
+            address = form.cleaned_data['address']
+            print(address)
+        return HttpResponse('<h1>hello world</h1>')
 
