@@ -25,38 +25,6 @@
   margin-bottom: 0px;
 }
 
-
-/*
-.navbar-toggler {
-  border-color: black;
-} 
-
-#mainNavlink {
-    color: white;
-    font-size: 22px;
-    font-family: hdFont;
-}
-
-.nav-item {
-    margin-right: 60px;
-    font-weight: bold;
-}
-
-.headerTitle {
-  font-size: 60px;
-  font-weight: normal;
-  color: white;
-  font-family: hdFont;
-  font-weight: bold;
-}
-
-.lead {
-  font-size: 60px;
-  font-weight: normal;
-  color: white;
-  font-family: hdFont;
-}
-*/
 /* Card deck section */
 #mainContainer {
     background: url("media/backgroundCardDeck.jpg") no-repeat center center;
@@ -93,7 +61,6 @@
 }
 
 /*About us */
-
 .row {
     display: flex;
 }
