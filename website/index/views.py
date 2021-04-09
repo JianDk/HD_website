@@ -253,6 +253,7 @@ class hd2900(View):
         'emailSignUpForm' : newsLetterForm(),
         'menuImgPath' : 'static/media/hd2900Menu.jpg',
         'menuAltText' : 'Hidden Dimsum 2900 menu',
+        'contactSubMessage' : 'NOT for takeaway ordering, we check messages once daily',
         'aboutUsImagePath' : 'static/media/aboutus2900.jpg',
         'aboutUsImageAlt' : 'Owner of Hidden Dimsum 2900 Hellerup Mak and Mai',
         'aboutUsText' : self.ContextObject.textString,
