@@ -31,6 +31,9 @@ SECRET_KEY = data['SECRET_KEY']
 #Google recaptcha secret key
 GOOGLE_RECAPTCHA_SECRET_KEY = data['GOOGLE_RECAPTCHA_SECRET_KEY']
 
+#Google geocoding API key
+GOOGLE_GEOCODING_API_KEY = data['GOOGLE_GEOCODING_API_KEY']
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
