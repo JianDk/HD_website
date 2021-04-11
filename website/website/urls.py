@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from index import views
 from index.views import indexPage, hdnytorv
-from webshopRestaurant.views import hd2900_Main
+from webshopRestaurant.views import hd2900_webshop_Main
 
 admin.autodiscover()
 
@@ -26,6 +26,6 @@ urlpatterns = [
     path('', indexPage.as_view(), name = 'index'),
     path('hdnytorv', hdnytorv.as_view(), name='hdnytorv'),
     path('hd2900', views.hd2900.as_view(), name='hd2900'),
-    path('hd2900_takeaway_webshop', hd2900_Main.as_view()),
+    path('hd2900_takeaway_webshop', hd2900_webshop_Main.as_view()),
     path('hdbynight', views.hdbynight.as_view(), name='hdbynight'),
 ]
