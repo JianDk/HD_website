@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from webshopRestaurant.forms import DeliveryPossible
 # Create your views here.
 from django.views import View
@@ -51,4 +52,8 @@ class hd2900_webshop_Main(View):
 class AddressCheckForDeliverability(View):
     def post(self, request, *args, **kwargs):
         print('ajax called here')
-        return HttpResponse("<h1>This is the respose from DeliveryPossible</h1>")
+        print(dir(request.POST))
+        print('\n')
+        print(request.body)
+        
+        return JsonResponse({"message" : "message returned from server"}, status = 200)
