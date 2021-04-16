@@ -28,8 +28,14 @@
 
 <div class="jumbotron jumbotron-fluid" id ="coverNytorv" style="background-image: url({{imagePath}});" alt="{{ backgroundImageAlt }}">      
     <h1 id="coverTitle">
-        {{ coverTitle1 }}<br>
-        {{ coverTitle2 }}<br>
+        {% autoescape off %}
+            {{ coverTitle1 }}
+        {% endautoescape %}
+        <br>
+        {% autoescape off %}
+            {{ coverTitle2 }}
+        {% endautoescape %}
+        <br>
         {{ coverTitle3 }}
     </h1>
 </div>

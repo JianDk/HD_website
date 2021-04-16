@@ -124,6 +124,8 @@ class hdnytorv(View):
         #get the contact form fields and news letter form fields
         self.ContextObject.importTextFile(str(settings.BASE_DIR) + '/static/aboutUsNytorv.txt')
         self.ContextObject.Set_context(imagePath ='static/media/coverNytorv.jpg',
+            coverTitle1 = '''<span style="background-color:black">WE OPEN ON 06.05.2021 </span>''',
+            coverTitle2 = '''<span style="background-color:black">TABLE BOOKING WILL OPEN ON 29.04.2021</span>''',
             navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
             links = self.ContextObject.links,
             menuImgPath = 'static/media/hdNytorvMenu.jpg',
