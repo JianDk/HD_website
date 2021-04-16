@@ -35,8 +35,16 @@ button_check_delivery_possible.addEventListener("click", function(event){
     const xmlhttprequest = new XMLHttpRequest();
 
     xmlhttprequest.onload = function () {
-        alert("something received by server response");
-    };
+        var jsonResponse = xmlhttprequest.responseText;
+        jsonResponse = JSON.parse(jsonResponse);
+        if (jsonResponse.message) {
+            document.getElementById("deliveryPossibleServerResponse").innerHTML = ""
+            document.getElementById("deliveryPossibleServerResponse").innerHTML = "Takeaway can be delivered";
+        } else {
+            document.getElementById("deliveryPossibleServerResponse").innerHTML = ""
+            document.getElementById("deliveryPossibleServerResponse").innerHTML = "Takeaway cannot be delivered"
+        }
+    }
 
     xmlhttprequest.open("POST", "check-address-for-deliverable");
 

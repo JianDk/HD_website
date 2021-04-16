@@ -8,6 +8,7 @@ from website.Modules.geoLocation import GeoLocationUtils
 from website.Modules.restaurantUtils import RestaurantUtils
 from django.conf import settings
 from webshopRestaurant.models import Restaurant
+import json
 
 # Create your views here.
 class hd2900_webshop_Main(View):
@@ -50,10 +51,31 @@ class hd2900_webshop_Main(View):
         return HttpResponse('<h1>hello world</h1>')
         
 class AddressCheckForDeliverability(View):
-    def post(self, request, *args, **kwargs):
-        print('ajax called here')
-        print(dir(request.POST))
-        print('\n')
-        print(request.body)
+    def __init__(self):
+        #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
+        self.hd2900RestaurantObject = RestaurantUtils(restaurantName = "Hidden Dimsum 2900")
         
-        return JsonResponse({"message" : "message returned from server"}, status = 200)
+    def post(self, request, *args, **kwargs):
+        deliveryAddress = request.body
+        deliveryAddress = json.loads(deliveryAddress)['deliveryAddress']
+        #If address is empty Google geocode service will not be called
+        if not deliveryAddress:
+            return JsonResponse({"message" : False}, staus = 200)
+                
+        location = GeoLocationUtils(settings.GOOGLE_GEOCODING_API_KEY)
+        location.addressToGeoCoordinates(address = deliveryAddress)
+
+        #Calculate distance to customer address
+        distance_km = location.distanceBetweenCoordinates(coordinate1=(self.hd2900RestaurantObject.restaurantModelData.longitude,
+        self.hd2900RestaurantObject.restaurantModelData.latitude),
+        coordinate2=(location.geoDict['longitude'], location.geoDict['latitude']))
+            
+        if distance_km <= self.hd2900RestaurantObject.restaurantModelData.delivery_radius:
+            offerDelivery = True
+        else:
+            offerDelivery = False
+            
+
+        print('here is the distance from HD 2900 to customer ', str(distance_km), ' km')
+        
+        return JsonResponse({"message" : offerDelivery}, status = 200)
