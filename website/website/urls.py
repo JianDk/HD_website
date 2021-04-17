@@ -18,6 +18,8 @@ from django.urls import path
 from index import views
 from index.views import indexPage, hdnytorv
 from webshopRestaurant.views import hd2900_webshop_Main, AddressCheckForDeliverability
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.autodiscover()
 
@@ -29,4 +31,7 @@ urlpatterns = [
     path('hd2900_takeaway_webshop', hd2900_webshop_Main.as_view()),
     path('check-address-for-deliverable', AddressCheckForDeliverability.as_view()),
     path('hdbynight', views.hdbynight.as_view(), name='hdbynight'),
-]
+] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

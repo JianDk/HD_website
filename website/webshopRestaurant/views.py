@@ -20,33 +20,17 @@ class hd2900_webshop_Main(View):
     def get(self, request, *args, **kwargs):
         #form for checking if customer address is within delivery range
         addressFieldForm = DeliveryPossible(request.GET)
+
+        #Get a list of products to be displayed for restaurant Hidden Dimsum 2900
+        products = self.hd2900RestaurantObject.get_all_products()
+        print(products[0].image_path)
         context = {
             'addressField' : addressFieldForm,
+            'products' : products
         }
         return render(request, template_name="takeawayWebshop/base.html", context = context)
     
     def post(self, request, *args, **kwargs):
-        print('push button clicked triggered from post')
-        # AddressInputForm = DeliveryPossible(request.POST)
-        # if AddressInputForm.is_valid():
-        #     address = AddressInputForm.cleaned_data['address']
-        #     location = GeoLocationUtils(settings.GOOGLE_GEOCODING_API_KEY)
-        #     location.addressToGeoCoordinates(address = address)
-
-        #     #Calculate distance to customer address
-        #     distance_km = location.distanceBetweenCoordinates(coordinate1=(self.hd2900RestaurantObject.restaurantModelData.longitude,
-        #     self.hd2900RestaurantObject.restaurantModelData.latitude),
-        #     coordinate2=(location.geoDict['longitude'], location.geoDict['latitude']))
-            
-        #     if distance_km <= self.hd2900RestaurantObject.restaurantModelData.delivery_radius:
-        #         print('Delivery possible')
-        #         offerDelivery = True
-        #     else:
-        #         print('Delivery not possible')
-        #         offerDelivery = False
-            
-
-        #     print('here is the distance from HD 2900 to customer ', str(distance_km), ' km')
 
         return HttpResponse('<h1>hello world</h1>')
         
@@ -74,8 +58,5 @@ class AddressCheckForDeliverability(View):
             offerDelivery = True
         else:
             offerDelivery = False
-            
-
-        print('here is the distance from HD 2900 to customer ', str(distance_km), ' km')
         
         return JsonResponse({"message" : offerDelivery}, status = 200)

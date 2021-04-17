@@ -7,7 +7,11 @@ class RestaurantUtils:
         #once the restaurant is found we will change the restaurant latitude and longitude data format to float
         self.restaurantModelData.latitude = float(self.restaurantModelData.latitude)
         self.restaurantModelData.longitude = float(self.restaurantModelData.longitude)
-    
+
+    def get_all_products(self):
+        products = self.restaurantModelData.products.all()
+        return products
+
     def isDeliveryOpenToday(self):
         '''
         Checks if the restaurant actually offers delivery today. Returns either True or False 
