@@ -31,9 +31,29 @@ class hd2900_webshop_Main(View):
         return render(request, template_name="takeawayWebshop/base.html", context = context)
     
     def post(self, request, *args, **kwargs):
-
         return HttpResponse('<h1>hello world</h1>')
+
+class AddItemToBasket(View):
+    def post(self, request, *args, **kwargs):
+        return JsonResponse({"message" : "item received by server"}, status = 200)
+
+    def get(self, request, *args, **kwargs):
+        print('called here at get')
+        print(request.GET.get('itemToAdd'))
+        print('\n')
+        print(request.session)
+
+        #First check if a cart id exists
+        if 'hd2900TakeAwayCartId' in request.session:
+            print('cart id exists and is this value')
+            print(request.session['hd2900TakeAwayCartId'])
+        else:
+            print('cart id cannot be found')
         
+        request.session['hd2900TakeAwayCartId'] = '12345678910'
+        return JsonResponse({"message" : "item received by server", "sessionid": request.session['hd2900TakeAwayCartId']}, status = 200)
+
+         
 class AddressCheckForDeliverability(View):
     def __init__(self):
         #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant

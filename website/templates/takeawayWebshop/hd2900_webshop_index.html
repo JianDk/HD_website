@@ -22,8 +22,21 @@
     <!--Price-->
     <h5 class="mt-4">{{item.price}},- </h5>
 
-    <!--Add to cart button -->
-    <a href="#" class="btn btn-danger mt-3">Add to Cart</a>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary" type="button">
+          -
+        </button>
+      </div>
+
+      <input type="text" class="form-control" id="text_{{ item.slug }}" placeholder="" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
+      
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.slug}}" onclick="addItemBtnClicked(this)">
+          +
+        </button>
+      </div>
+    </div>
 
   </div>
 </div>

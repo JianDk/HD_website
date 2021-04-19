@@ -15,6 +15,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
+//Determine if address is within delivery range
 var csrftoken = getCookie('csrftoken');
 
 var button_check_delivery_possible = document.getElementById("addressSubmitButton");
@@ -53,6 +54,3 @@ button_check_delivery_possible.addEventListener("click", function(event){
 
     xmlhttprequest.send(JSON.stringify(input_address));
 });
-
-
-
