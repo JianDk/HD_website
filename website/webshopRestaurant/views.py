@@ -23,7 +23,7 @@ class hd2900_webshop_Main(View):
 
         #Get a list of products to be displayed for restaurant Hidden Dimsum 2900
         products = self.hd2900RestaurantObject.get_all_products()
-        print(products[0].image_path)
+    
         context = {
             'addressField' : addressFieldForm,
             'products' : products
@@ -53,7 +53,6 @@ class AddItemToBasket(View):
         request.session['hd2900TakeAwayCartId'] = '12345678910'
         return JsonResponse({"message" : "item received by server", "sessionid": request.session['hd2900TakeAwayCartId']}, status = 200)
 
-         
 class AddressCheckForDeliverability(View):
     def __init__(self):
         #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
