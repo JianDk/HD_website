@@ -29,8 +29,11 @@
         </button>
       </div>
 
-      <input type="text" class="form-control" id="text_{{ item.slug }}" placeholder="" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
-      
+      {% if viewType == "ResetView" %}
+        <input type="text" class="form-control" id="text_{{ item.slug }}" placeholder="{{0}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
+      {% else %}
+        <input type="text" class="form-control" id="text_{{ item.slug }}" placeholder="{{100}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
+      {% endif %}
       <div class="input-group-append">
         <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.slug}}" onclick="addItemBtnClicked(this)">
           +
