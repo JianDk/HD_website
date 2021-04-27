@@ -1,6 +1,7 @@
 import datetime
 from random import choice
 from string import ascii_uppercase
+from webshopCart.models import CartItem
 
 def createNewSessionId():
     '''
@@ -13,3 +14,20 @@ def createNewSessionId():
     session_id = firstPart + lastPart
 
     return session_id
+
+def checkSessionIdValidity(request, session_id_key, validPeriodInDays):
+    if session_id_key in request.session:
+        #Do a check in the data base to see if we can find it
+        sessionData = CartItem.objects.filter(cart_id = request.session[session_id_key])
+        if not sessionData:
+            return False
+        
+        #check all entries for the cart id. If all date added is below validPeriodInDays, the test has passed
+        now = datetime.datetime.now()
+        for item in sessionData:
+            timeDelta = now - item.date_added
+            timeDelta = timeDelta.seconds
+            if (timeDelta / (60 * 60 * 24)) <= validPeriodInDays:
+                return True
+        return False
+

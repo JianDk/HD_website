@@ -1,9 +1,9 @@
-function addItemBtnClicked(element) {
+function itemQuantityChangeButton(element) {
     $.ajax({
-        url: "addItemToBasket",
+        url: "changeItemQuantityInBasket",
         type: "get",
         data: {
-            itemToAdd: element.id,
+            itemToChange: element.id,
         },
         success: function(response) {
             console.log(response);

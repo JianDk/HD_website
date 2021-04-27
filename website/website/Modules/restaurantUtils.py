@@ -11,6 +11,33 @@ class RestaurantUtils:
     def get_all_products(self):
         products = self.restaurantModelData.products.all()
         return products
+    
+    def get_all_active_products(self):
+        '''
+            Filter all the products belonging to the restaurant and only return the active products
+        '''
+        products = self.get_all_products()
+        products = list(products)
+        activeproducts = list()
+        for item in products:
+            if item.is_active:
+                activeproducts.append(item)
+        return activeproducts
+    
+    def validateSessionOrderedProducts(self, allActiveProducts, sessionItems):
+        '''
+        given the products ordered in a given cart and the current restaurant products which is obtained from
+        get_all_active_products, this method removes any products in the session cart which is not in the return 
+        from get_all_active_products
+        '''
+        #Obtain a list of product id in currentRestaurantProducts
+        allActiveProductIds = [item.id for item in allActiveProducts]
+        sessionItemIndexToRemove = list()
+        for item in enumerate(sessionItems):
+            if item[1].product_id not in allActiveProductIds:
+                sessionItemIndexToRemove.append(item[0])
+        
+        print(sessionItemIndexToRemove)
 
     def isDeliveryOpenToday(self):
         '''

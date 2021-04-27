@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from index import views
 from index.views import indexPage, hdnytorv
-from webshopRestaurant.views import hd2900_webshop_Main, AddressCheckForDeliverability, AddItemToBasket
+from webshopRestaurant.views import hd2900_webshop_Main, AddressCheckForDeliverability, ChangeItemQuantity
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -30,7 +30,7 @@ urlpatterns = [
     path('hd2900', views.hd2900.as_view(), name='hd2900'),
     path('hd2900_takeaway_webshop', hd2900_webshop_Main.as_view()),
     path('check-address-for-deliverable', AddressCheckForDeliverability.as_view()),
-    path('addItemToBasket', AddItemToBasket.as_view()),
+    path('changeItemQuantityInBasket', ChangeItemQuantity.as_view()),
     path('hdbynight', views.hdbynight.as_view(), name='hdbynight'),
 ] 
 
