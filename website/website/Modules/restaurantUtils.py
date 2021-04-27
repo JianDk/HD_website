@@ -52,18 +52,24 @@ class RestaurantUtils:
         productListToDisplay = list()
         #Get a list of unique product_id in sessionItems
         productIdInSessionItems = [item.product_id for item in sessionItems]
-        for product in allActiveProducts:
-            productDict = dict()
-            productDict['product'] = product
-            
-            if product.id in productIdInSessionItems:
-                print(sessionItems.filter(product_id = product.id)[0].quantity)
-                print(type(sessionItems.filter(product_id = product.id)))
-            else:
-                productDict['sessionQuantity'] = 0
-            
-            productListToDisplay.append(productDict)
-        
+        if sessionItems:
+            for product in allActiveProducts:
+                productDict = dict()
+                productDict['product'] = product
+                
+                if product.id in productIdInSessionItems:
+                    productDict['quantity'] = sessionItems.filter(product_id = product.id)[0].quantity
+                else:
+                    productDict['quantity'] = 0
+                
+                productListToDisplay.append(productDict)
+        else:
+            for product in allActiveProducts:
+                productDict = dict()
+                productDict['product'] = product
+                productDict['quantity'] = 0
+                productListToDisplay.append(productDict)
+                        
         return productListToDisplay
 
     def isDeliveryOpenToday(self):

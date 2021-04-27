@@ -4,38 +4,36 @@
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <!--Title -->
-    <h5 class="card-title">{{ item.name }}</h5>
+    <h5 class="card-title">{{ item.product.name }}</h5>
 
     <!--Product image with link -->
     <a href="#">
-      <img class="card-img" src="{% get_media_prefix %}{{ item.image_path }}" alt="{{item.meta_description}}">
+      <img class="card-img" src="{% get_media_prefix %}{{ item.product.image_path }}" alt="{{item.meta_description}}">
     </a>
     
     <!--Product description-->
-    <p class="card-text">{{item.description}}</p>
+    <p class="card-text">{{item.product.description}}</p>
     
     <!--Allergic note -->
     {% if item.allergic_note %}
-      <p class="card-text">{{ item.allergic_note }}</p>
+      <p class="card-text">{{ item.product.allergic_note }}</p>
     {% endif %}
 
     <!--Price-->
-    <h5 class="mt-4">{{item.price}},- </h5>
+    <h5 class="mt-4">{{item.product.price}},- </h5>
 
     <div class="input-group">
+      
       <div class="input-group-prepend">
-        <button class="btn btn-outline-secondary subtractItem" type="button" id="btn_subtract_{{item.slug}}" onclick="itemQuantityChangeButton(this)">
+        <button class="btn btn-outline-secondary subtractItem" type="button" id="btn_subtract_{{item.product.slug}}" onclick="itemQuantityChangeButton(this)">
           -
         </button>
       </div>
 
-      {% if viewType == "ResetView" %}
-        <input type="text" class="form-control" id="text_{{ item.slug }}" placeholder="{{0}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
-      {% else %}
-        <input type="text" class="form-control" id="text_{{ item.slug }}" placeholder="{{100}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
-      {% endif %}
+      <input type="text" class="form-control" id="text_{{ item.product.slug }}" placeholder="{{item.quantity}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
+
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.slug}}" onclick="itemQuantityChangeButton(this)">
+        <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.product.slug}}" onclick="itemQuantityChangeButton(this)">
           +
         </button>
       </div>

@@ -24,29 +24,24 @@ class hd2900_webshop_Main(View):
         #Check if visitor has a cookie
         sessionValid = sessionUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays=7)
         
+        allActiveProducts = self.hd2900RestaurantObject.get_all_active_products()
         if sessionValid:
-            print('session is valid and extract the ordered items')
             sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
-            #Make sure that the ordered products are all still valid and the restaurant still has them
-            allActiveProducts = self.hd2900RestaurantObject.get_all_active_products()
             #Assure that the products in the session cart is still valid otherwise they should be removed. This
             #validation is made to assure that the products in the cart is still offered by the restaurant
             sessionItems = self.hd2900RestaurantObject.validateSessionOrderedProducts(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
             #Merge sessionItems with all active products and add the quantity 
-            self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
+            productToDisplay = self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
 
         else:
-            print('session do not exist')
-            #Get a list of products to be displayed for restaurant Hidden Dimsum 2900
-        
-        products = self.hd2900RestaurantObject.get_all_products()
+            productToDisplay = self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = [])
 
         #form for checking if customer address is within delivery range
         addressFieldForm = DeliveryPossible(request.GET)
     
         context = {
             'addressField' : addressFieldForm,
-            'products' : products,
+            'products' : productToDisplay,
         }
         return render(request, template_name="takeawayWebshop/base.html", context = context)
     
