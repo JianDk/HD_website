@@ -32,12 +32,27 @@ class RestaurantUtils:
         '''
         #Obtain a list of product id in currentRestaurantProducts
         allActiveProductIds = [item.id for item in allActiveProducts]
-        sessionItemIndexToRemove = list()
-        for item in enumerate(sessionItems):
-            if item[1].product_id not in allActiveProductIds:
-                sessionItemIndexToRemove.append(item[0])
+        productIdsToRemove = list()
         
-        print(sessionItemIndexToRemove)
+        for item in sessionItems:
+            if item.product_id not in allActiveProductIds:
+                productIdsToRemove.append(item.product_id)
+        productIdsToRemove = list(set(productIdsToRemove))
+        
+        for productId in productIdsToRemove:
+            sessionItems.filter(product_id = productId).delete()
+
+        return sessionItems
+    
+    def generateProductsForView(self, allActiveProducts, sessionItems):
+        '''
+        After sessionItems has been validated and any products in sessionItems no longer active has been removed from
+        validateSessionOrderedProducts, a list of products to be presented to the viewer is generated
+        '''
+        productListToDisplay = list()
+        #Get a list of unique product_id in sessionItems
+        productIdInSessionItems = [item.product_id for item in sessionItems]
+        print(productIdInSessionItems)
 
     def isDeliveryOpenToday(self):
         '''

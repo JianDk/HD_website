@@ -31,7 +31,9 @@ class hd2900_webshop_Main(View):
             allActiveProducts = self.hd2900RestaurantObject.get_all_active_products()
             #Assure that the products in the session cart is still valid otherwise they should be removed. This
             #validation is made to assure that the products in the cart is still offered by the restaurant
-            self.hd2900RestaurantObject.validateSessionOrderedProducts(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
+            sessionItems = self.hd2900RestaurantObject.validateSessionOrderedProducts(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
+            #Merge sessionItems with all active products and add the quantity 
+            self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
 
         else:
             print('session do not exist')
