@@ -53,6 +53,7 @@ class ChangeItemQuantity(View):
         #First check if a session already exists
         sessionValid = webshopUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays=7)
         restaurant = Restaurant.objects.get(name = restaurantName)
+        print(sessionValid)
 
         if sessionValid is False: #The user has not a session and it is first time that the user puts a product in basket. A new session will be assigned to the user
             #Assign a new session id
@@ -73,44 +74,27 @@ class ChangeItemQuantity(View):
             
             if success:
                 context = {"update_field" : True, 
-                "product_to_update" : productToChange, 
+                "product_to_update_slug" : productToChange[0].slug, 
                 "updatedQuantity" : updatedQuantity, 
-                "sessionid" : request.session[session_id_key]}
+                "sessionIdKey" : session_id_key,
+                "sessionId" : request.session[session_id_key]}
                 return JsonResponse(context, status = 200)
 
         if sessionValid:
-            self.productToChange(request)
-        context = {"message":"here is return message from the server"}
-        return JsonResponse(context, status = 200)
+            #Extract which product element the suer has selected
+            productToChange = webshopUtils.productToChange(request)
 
-            # print('called here at get')
-            # print(request.GET.get('itemToChange'))
-            # print('\n')
-            # print(request.session)
-            # #First check if a cart id exists and if it exists check if it is valid
-            # if session_id_key in request.session:
-            #     print('cart id exists and is this value')
-            #     print(request.session[session_id_key])
-            # else:
-            #     #In which case a new session id is assigned
-            #     request.session[session_id_key] = sessionUtils.createNewSessionId()                
-            #     #Detect if it is add og subtract button that has been pressed
-            #     if 'btn_add_' in request.GET.get("itemToChange"):                
-            #         #The item to add is saved to the cart model
-            #         itemSlug = request.GET.get('itemToChange').replace('btn_add_','')
-            #         product = Product.objects.filter(slug=itemSlug)[0]
-            #         restaurant = RestaurantUtils(restaurantName = restaurantName)
-            #         cart = CartItem.objects.create(cart_id = request.session[session_id_key], 
-            #         product = product,
-            #         quantity = 1,
-            #         restaurant = restaurant.restaurantModelData)
-            #         cart.save()
+            #Update the product in the backend 
+            success, updatedQuantity = webshopUtils.addRemoveProductInBasket(productToChange = productToChange, 
+            session_id = request.session[session_id_key], 
+            restaurant = restaurant)
 
-            #     if 'btn_subtract_' in request.GET.get("itemToChange"):
-            #         #Get all the products
-            #         pass
-
-#        return JsonResponse({"message" : "item received by server", "sessionid": request.session['hd2900TakeAwayCartId']}, status = 200)
+            context = {"update_field": True,
+            "product_to_update_slug" : productToChange[0].slug,
+            "updatedQuantity" : updatedQuantity,
+            "sessionIdKey" : session_id_key,
+            "sessionId" : request.session[session_id_key]}
+            return JsonResponse(context, status = 200)
 
 class AddressCheckForDeliverability(View):
     def __init__(self):

@@ -6,12 +6,19 @@ function itemQuantityChangeButton(element) {
             itemToChange: element.id,
         },
         success: function(response) {
-            console.log(response);
             if (response["update_field"] == 1) {
-                alert("update_field is true")
+                //Update the product quantity to the text field
+                var quantityFieldElement = document.getElementById("text_" + response["product_to_update_slug"]);
+            
+                //If updated quantity is 0, then the quantity textfield placeholder should be blank
+                if (response["updatedQuantity"] <= 0) {
+                    quantityFieldElement.placeholder = "";
+                } else {
+                    quantityFieldElement.placeholder = response["updatedQuantity"].toString();
+                }
+                //Store session id to the browser
+                localStorage.setItem(response["sessionIdKey"], response["sessionId"]);
             }
-            //store the session id in local session
-            //localStorage.setItem("hd2900TakeAwayCartId", response["sessionid"]);
         }
     })
 }

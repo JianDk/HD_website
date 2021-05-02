@@ -28,21 +28,47 @@ def addRemoveProductInBasket(productToChange, session_id, restaurant):
     the product and the session already exists. If it already exists the data base entry will be updated, otherwise the
     entry will be created or deleted
     '''
+    #check if the cartItem exists in the first place
+    cartItem = CartItem.objects.filter(cart_id = session_id, product = productToChange[0], restaurant = restaurant)
+
     if productToChange[1] == 'subtract':
-        #check if the cartItem exists in the first place
-        cartItem = CartItem.objects.filter(cart_id = session_id, product = productToChange[0], restaurant = restaurant)
-        
         if not cartItem:
             success = False
             updatedQuantity = None
             return success, updatedQuantity
         
         if cartItem:
-            print('cartitems exists. Update cart items quantity')
+            #get the current quantity for this specific cartItem
+            if cartItem[0].quantity - 1 <= 0:
+                cartItem[0].delete()
+                updatedQuantity = 0
+            else:
+                cartItem[0].quantity = cartItem[0].quantity - 1
+                cartItem[0].save()
+                updatedQuantity = cartItem[0].quantity
+            success = True
+            return success, updatedQuantity
     
     if productToChange[1] == 'add':
-        
+        if not cartItem:
+            #then the cart item will be created
+            CartItem.objects.create(cart_id = session_id,
+            product = productToChange[0], 
+            quantity = 1,
+            restaurant = restaurant)
 
+            success = True
+            updatedQuantity = 1
+            return success, updatedQuantity
+
+        if cartItem:
+            #Update the product quantity for cartItem
+            cartItem[0].quantity += 1
+            cartItem[0].save()
+            updatedQuantity = cartItem[0].quantity
+            success = True
+            return success, updatedQuantity
+            
 def createNewSessionId():
     '''
     Generates a session id which is a random string of 50 characters. The first 20 characters in the string is the 
