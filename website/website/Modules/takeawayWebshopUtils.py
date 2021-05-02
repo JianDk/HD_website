@@ -68,6 +68,21 @@ def addRemoveProductInBasket(productToChange, session_id, restaurant):
             updatedQuantity = cartItem[0].quantity
             success = True
             return success, updatedQuantity
+
+def get_totalBasketItemQuantity(session_id):
+    '''
+    Given the session_id string, a query will be made to the data base. All sessions belonging to this id will be obtained
+    and the total item counted up and returned
+    '''
+    cartItems = CartItem.objects.filter(cart_id = session_id)
+    if not cartItems:
+        totalQuantity = 0
+        return totalQuantity 
+    else:
+        totalQuantity = 0
+        for item in cartItems:
+            totalQuantity += item.quantity
+        return totalQuantity
             
 def createNewSessionId():
     '''

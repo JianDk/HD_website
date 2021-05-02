@@ -32,9 +32,10 @@ class hd2900_webshop_Main(View):
             sessionItems = self.hd2900RestaurantObject.validateSessionOrderedProducts(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
             #Merge sessionItems with all active products and add the quantity 
             productToDisplay = self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
-
+            totalItemsInBasket = webshopUtils.get_totalBasketItemQuantity(request.session[session_id_key])
         else:
             productToDisplay = self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = [])
+            totalItemsInBasket = 0
 
         #form for checking if customer address is within delivery range
         addressFieldForm = DeliveryPossible(request.GET)
@@ -42,6 +43,7 @@ class hd2900_webshop_Main(View):
         context = {
             'addressField' : addressFieldForm,
             'products' : productToDisplay,
+            'totalItemsInBasket' : totalItemsInBasket,
         }
         return render(request, template_name="takeawayWebshop/base.html", context = context)
     
@@ -53,7 +55,6 @@ class ChangeItemQuantity(View):
         #First check if a session already exists
         sessionValid = webshopUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays=7)
         restaurant = Restaurant.objects.get(name = restaurantName)
-        print(sessionValid)
 
         if sessionValid is False: #The user has not a session and it is first time that the user puts a product in basket. A new session will be assigned to the user
             #Assign a new session id
@@ -69,18 +70,22 @@ class ChangeItemQuantity(View):
             #If success evaluates to False, then user hitted a subtract button while sessionValid is False. In this case do nothing
             if success is False:
                 #Do nothing since the product does not exists in the data base
-                context = {"update_field" : False}
+                context = {"update_field" : False,
+                "totalItemsInBasket" : 0}
                 return JsonResponse(context, status = 200)
             
             if success:
+                totalItemsInCart = webshopUtils.get_totalBasketItemQuantity(session_id = request.session[session_id_key])
                 context = {"update_field" : True, 
                 "product_to_update_slug" : productToChange[0].slug, 
                 "updatedQuantity" : updatedQuantity, 
                 "sessionIdKey" : session_id_key,
-                "sessionId" : request.session[session_id_key]}
+                "sessionId" : request.session[session_id_key],
+                "totalItemsInBasket" : totalItemsInCart}
                 return JsonResponse(context, status = 200)
 
         if sessionValid:
+            print('we are here in session valid')
             #Extract which product element the suer has selected
             productToChange = webshopUtils.productToChange(request)
 
@@ -89,11 +94,14 @@ class ChangeItemQuantity(View):
             session_id = request.session[session_id_key], 
             restaurant = restaurant)
 
+            totalItemsInCart = webshopUtils.get_totalBasketItemQuantity(session_id=request.session[session_id_key])
+
             context = {"update_field": True,
             "product_to_update_slug" : productToChange[0].slug,
             "updatedQuantity" : updatedQuantity,
             "sessionIdKey" : session_id_key,
-            "sessionId" : request.session[session_id_key]}
+            "sessionId" : request.session[session_id_key],
+            "totalItemsInBasket" : totalItemsInCart}
             return JsonResponse(context, status = 200)
 
 class AddressCheckForDeliverability(View):
