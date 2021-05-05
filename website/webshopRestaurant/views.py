@@ -21,6 +21,13 @@ class hd2900_webshop_Main(View):
         self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
 
     def get(self, request, *args, **kwargs):
+        #Inform visitor the delivery status today
+        deliveryStatus = self.hd2900RestaurantObject.isDeliveryOpenToday()
+        if deliveryStatus:
+            takeawayStatusMsg = "Local delivery is available today"
+        else:
+            takeawayStatusMsg = "Order online and pickup at Hidden Dimsum 2900. Local delivery not available today"
+
         #Check if visitor has a cookie
         sessionValid = webshopUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays=7)
         
@@ -41,6 +48,8 @@ class hd2900_webshop_Main(View):
         addressFieldForm = DeliveryPossible(request.GET)
     
         context = {
+            'takeawayStatusToday' : takeawayStatusMsg,
+            'deliveryStatus' : deliveryStatus,
             'addressField' : addressFieldForm,
             'products' : productToDisplay,
             'totalItemsInBasket' : totalItemsInBasket,

@@ -1,3 +1,4 @@
+{% if deliveryStatus %}
 <h1>Check if your address is within our delivery range</h1>
 
 <form method="post" id="buttonCheckDeliveryPossible">
@@ -6,3 +7,4 @@
     <button class="btn btn-success" value ="Check" id="addressSubmitButton">Submit</button>
 </form>
 <div id="deliveryPossibleServerResponse"></div>
+{% endif %}

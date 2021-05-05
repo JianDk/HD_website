@@ -1,4 +1,25 @@
+/*font to be used*/
+@font-face {
+  font-family: hdFont;
+  src: url("media/font/Gotham-Light.otf");
+}
+
+@font-face {
+  font-family: hdFont;
+  src: url("media/font/Gotham-Medium.otf");
+  font-weight: bold;
+}
+
 /*Navbar for webshop*/
+#takeawayStatusInfoBox {
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-family: hdFont;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
 .navbar {
 	border: black 3px solid;
 }

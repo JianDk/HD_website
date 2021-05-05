@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'webshopCatalog',
     'webshopRestaurant',
     'webshopCart',
+    'webshopCustomer',
 ]
 
 MIDDLEWARE = [
