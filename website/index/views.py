@@ -117,15 +117,15 @@ class hdnytorv(View):
             ('MENU', '/hdnytorv#menuHeader',),
             ('ABOUT US', '/hdnytorv#aboutUsLogo',),
             ('CONTACT', '/hdnytorv#contactForm',),
-            ('BOOK TABLE', 'https://book.easytablebooking.com/book/?id=bb7ae&lang=da',)
+            ('BOOK TABLE', 'https://book.easytablebooking.com/book/?id=bb7ae&lang=en',)
         ])
     
     def get(self, request, *args, **kwargs):
         #get the contact form fields and news letter form fields
         self.ContextObject.importTextFile(str(settings.BASE_DIR) + '/static/aboutUsNytorv.txt')
         self.ContextObject.Set_context(imagePath ='static/media/coverNytorv.jpg',
-            coverTitle1 = '''<span style="background-color:black">WE OPEN ON 03.05.2021 </span>''',
-            coverTitle2 = '''<span style="background-color:black">TABLE BOOKING WILL OPEN ON 29.04.2021</span>''',
+            coverTitle1 = '',
+            coverTitle2 = '',
             navbarLogoPath = 'static/media/hiddendimsum_maincoverLogo.png',
             links = self.ContextObject.links,
             menuImgPath = 'static/media/hdNytorvMenu.jpg',
@@ -260,7 +260,7 @@ class hd2900(View):
         'aboutUsImageAlt' : 'Owner of Hidden Dimsum 2900 Hellerup Mak and Mai',
         'aboutUsText' : self.ContextObject.textString,
         'dayRange1' : 'Everyday',
-        'timeRange1': '16:00 - 20:30',
+        'timeRange1': '14:00 - 20:30',
         'dayRange2' : 'Takeaway order: 40388884',
         'shopTitle' : 'Hidden Dimsum 2900',
         'addressStreet' : 'Strandvejen 163, 2900 Hellerup',
