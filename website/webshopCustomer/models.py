@@ -8,6 +8,10 @@ class Customer(models.Model):
     pickup = models.BooleanField(default=False)
     newsletter = models.BooleanField(default=False)
     session_id = models.CharField(max_length = 100)
+    deliveryAddressStreet = models.CharField(max_length = 100, blank = True)
+    deliveryAddressHouseNumber = models.CharField(max_length = 20, blank = True)
+    deliveryAddressPostCode = models.IntegerField(blank = True)
+
 
     class Meta:
         db_table = 'customer'
