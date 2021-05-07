@@ -94,7 +94,6 @@ class ChangeItemQuantity(View):
                 return JsonResponse(context, status = 200)
 
         if sessionValid:
-            print('we are here in session valid')
             #Extract which product element the suer has selected
             productToChange = webshopUtils.productToChange(request)
 

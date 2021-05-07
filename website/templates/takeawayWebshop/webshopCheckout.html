@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="dk">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!--social media icons-->
+    <link rel="stylesheet" type="text/css" href={% static 'takeawayWebshop.css'%}>
+    <title>{% block title %}{% endblock %}</title>
+
+    <!--SEO-->
+    <meta name="description" content="Hidden Dimsum 2900, Strandvejen 163, Hellerup online dimsum takeaway and local delivery webshop">
+    <meta name="keywords" content="Hidden Dimsum 2900, dimsum takeaway webshop, dimsum local delivery, dumplings takeaway, online ordering">
+    <meta name="author" content="Hidden Dimsum 2900"> 
+    <link rel="shortcut icon" type="image/png" href="{% static 'media/favicon_hd32x32.png' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+        hello world from checkout
+
+  <script href="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="{% static 'scripts/deliveryPossibleCheck.js' %}">window.CSRF_TOKEN={{ csrf_token }}</script>
+  <script src="{% static 'scripts/product_add_subtract_btn_clicked.js' %}">window.CSRF_TOKEN={{ csrf_token }}</script>
+  </body>
+</html>
+
