@@ -12,7 +12,6 @@ class Customer(models.Model):
     deliveryAddressHouseNumber = models.CharField(max_length = 20, blank = True)
     deliveryAddressPostCode = models.IntegerField(blank = True)
 
-
     class Meta:
         db_table = 'customer'
         ordering = ['lastname']
