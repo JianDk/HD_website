@@ -26,22 +26,10 @@ class TakeawayCheckout(View):
         #Check if the shopping cart items are still offered by the restaurant
         sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
         sessionItems = self.hd2900RestaurantObject.validateSessionOrderedProducts(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
-
-        for item in sessionItems:
-            print(dir(item))
-            print(item.product)
-            print(item.quantity)
-            print('\n')
         
         #Check delivery status
-        if self.deliveryStatus:
-            #check if a session exist
-            
-            
-
-            print(sessionValid)
-            context = {}
-            return render(request, template_name = 'takeawayWebshop/webshopCheckout.html', context = context)
-            #For address verification
+        
+        return render(request, template_name = 'takeawayWebshop/webshopCheckout.html', context = context)
+        #For address verification
             #return render(request, template_name = 'takeawayWebshop/webshopAddressTest.html', context = context)
         
