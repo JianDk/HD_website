@@ -83,7 +83,21 @@ def get_totalBasketItemQuantity(session_id):
         for item in cartItems:
             totalQuantity += item.quantity
         return totalQuantity
-            
+
+def get_BasketTotalPrice(session_id):
+    '''
+    Given the session_id string a query will be made to the data base. All ordered products related to this session will be
+    extracted and a total price calculated and returned
+    '''
+    cartItems = CartItem.objects.filter(cart_id = session_id)
+    totalPrice =0
+    if not cartItems:
+        return totalPrice
+    else:
+        for item in cartItems:
+            totalPrice += (item.quantity * item.product.price)
+        return totalPrice
+
 def createNewSessionId():
     '''
     Generates a session id which is a random string of 50 characters. The first 20 characters in the string is the 

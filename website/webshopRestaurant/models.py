@@ -13,7 +13,7 @@ class Restaurant(models.Model):
     is_active = models.BooleanField(default=True, help_text='If active it is possible to order takeaway both for delivery and pickup')
     has_delivery = models.BooleanField(default=True, help_text='If active it is possible to order delivery. If not on, it is only possible to order pickup')
     delivery_fee = models.PositiveSmallIntegerField(default = 60, help_text = "delivery cost in dkk")
-
+    minimum_order_total_for_delivery = models.PositiveSmallIntegerField(default  = 400, help_text= "How much kr should customer order before local delivery will be offered")
     delivery_radius = models.IntegerField(help_text="Delivery radius in km")
     delivery_preparationtime = models.PositiveSmallIntegerField(default = 60, help_text="Time it takes to prepare the order. The client cannot pickup on a time earlier than the defined minutes")
     

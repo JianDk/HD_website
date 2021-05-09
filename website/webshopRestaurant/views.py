@@ -48,6 +48,7 @@ class hd2900_webshop_Main(View):
         addressFieldForm = DeliveryPossible(request.GET)
     
         context = {
+            'title' : restaurantName + ' online takeaway',
             'takeawayStatusToday' : takeawayStatusMsg,
             'deliveryStatus' : deliveryStatus,
             'addressField' : addressFieldForm,

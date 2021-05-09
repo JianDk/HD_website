@@ -18,7 +18,7 @@ from django.urls import path
 from index import views
 from index.views import indexPage, hdnytorv
 from webshopRestaurant.views import hd2900_webshop_Main, AddressCheckForDeliverability, ChangeItemQuantity
-from webshopCustomer.views import TakeawayCheckout
+from webshopCustomer.views import TakeawayCheckout, totalPriceDeliveryPossible
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -32,6 +32,7 @@ urlpatterns = [
     path('hd2900_takeaway_webshop', hd2900_webshop_Main.as_view()),
     path('check-address-for-deliverable', AddressCheckForDeliverability.as_view()),
     path('changeItemQuantityInBasket', ChangeItemQuantity.as_view()),
+    path('isPriceAboveDeliveryLimit', totalPriceDeliveryPossible.as_view()),
     path('hdbynight', views.hdbynight.as_view(), name='hdbynight'),
     path('takeawayCheckout', TakeawayCheckout.as_view()),
 ] 
