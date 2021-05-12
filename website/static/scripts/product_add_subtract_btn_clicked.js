@@ -41,6 +41,11 @@ function checkoutPlusMinusPressed(element) {
             if (response["pageRefresh"] == true) {
                 alert("session is outdated, you will be sent back");
                 window.location.href = "/takeawayCheckout";
+            } else {
+                //Update the total price
+                var totalPriceElement = document.getElementById("totalPrice");
+                console.log(response);
+                totalPriceElement.innerHTML = response["totalPrice"];
             }
         }
     })

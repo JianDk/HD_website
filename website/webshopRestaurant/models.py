@@ -11,6 +11,7 @@ class Restaurant(models.Model):
     longitude = models.DecimalField(max_digits=20, decimal_places=15)
 
     is_active = models.BooleanField(default=True, help_text='If active it is possible to order takeaway both for delivery and pickup')
+    session_valid_time = models.FloatField(default=0.25, help_text = "Time length in day that the users session is active")
     has_delivery = models.BooleanField(default=True, help_text='If active it is possible to order delivery. If not on, it is only possible to order pickup')
     delivery_fee = models.PositiveSmallIntegerField(default = 60, help_text = "delivery cost in dkk")
     minimum_order_total_for_delivery = models.PositiveSmallIntegerField(default  = 400, help_text= "How much kr should customer order before local delivery will be offered")

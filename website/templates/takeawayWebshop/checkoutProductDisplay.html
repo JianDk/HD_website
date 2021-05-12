@@ -17,7 +17,7 @@
     </div>
 
     <div class="input-group-append">
-        <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.product.slug}}" onclick="itemQuantityChangeButton(this)">
+        <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.product.slug}}" onclick="checkoutPlusMinusPressed(this)">
             +
         </button>
     </div>
@@ -34,6 +34,10 @@
 
 <a href="/hd2900_takeaway_webshop" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Order more</a>
 <button type="button" class="btn btn-primary btn-lg">Pick up</button>
-{% if deliveryActive is True %}
-<button type="button" class="btn btn-primary btn-lg">Deliver to me</button>
+{% if deliveryActive is True and deliveryPossible is True %}
+    <button type="button" class="btn btn-primary btn-lg">Deliver to me</button>
+{% endif %}
+
+{% if deliveryActive is True and deliveryPossible is False %}
+    <button type="button" class="btn btn-primary btn-lg" disabled>Deliver to me</button>
 {% endif %}

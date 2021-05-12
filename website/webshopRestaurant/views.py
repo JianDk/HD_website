@@ -29,7 +29,7 @@ class hd2900_webshop_Main(View):
             takeawayStatusMsg = "Order online and pickup at Hidden Dimsum 2900. Local delivery not available today"
 
         #Check if visitor has a cookie
-        sessionValid = webshopUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays=7)
+        sessionValid = webshopUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
         
         allActiveProducts = self.hd2900RestaurantObject.get_all_active_products()
         if sessionValid:
@@ -61,9 +61,13 @@ class hd2900_webshop_Main(View):
         return HttpResponse('<h1>hello world</h1>')
 
 class ChangeItemQuantity(View):
+    def __init__(self):
+        #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
+        self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
+
     def get(self, request, *args, **kwargs):
         #First check if a session already exists
-        sessionValid = webshopUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays=7)
+        sessionValid = webshopUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
         restaurant = Restaurant.objects.get(name = restaurantName)
 
         if sessionValid is False: #The user has not a session and it is first time that the user puts a product in basket. A new session will be assigned to the user

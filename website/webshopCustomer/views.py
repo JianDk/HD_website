@@ -17,7 +17,7 @@ class TakeawayCheckout(View):
 
     def get(self, request, *args, **kwargs):
         #Check if session is still valid
-        sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays= 7)
+        sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key,  validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
         if sessionValid is False: #the session has expired and the user needs to start over
             return redirect('/hd2900_takeaway_webshop')
 
@@ -40,7 +40,9 @@ class TakeawayCheckout(View):
         'checkoutProducts' : sessionItems,
         'totalPrice' : totalPrice,
         'deliveryActive' : self.deliveryStatus, #This is the restaurant delivery status for today 
-        'deliveryPossible' : deliveryPossible}  #Relates to the total amount of order by the customer
+        'deliveryPossible' : deliveryPossible,  #Relates to the total amount of order by the customer
+        'minimum_totalPrice_for_delivery' : self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery}
+        
         return render(request, template_name = 'takeawayWebshop/webshopCheckout.html', context = context)
         #For address verification
             #return render(request, template_name = 'takeawayWebshop/webshopAddressTest.html', context = context)
@@ -56,7 +58,7 @@ class totalPriceDeliveryPossible(View):
         context['response'] = "here is some response" #MUST BE DELETED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         #Check if session is valid
-        sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays=7)
+        sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
 
         if sessionValid is False:
             context["pageRefresh"] = True
@@ -74,7 +76,10 @@ class totalPriceDeliveryPossible(View):
             context["pageRefresh"] = True
             return JsonResponse(context, status = 200)
         
-        #Check if restaurant still offers delivery 
+        #Check if restaurant still offers delivery
+        context['deliveryPossible'] = self.hd2900RestaurantObject.restaurantModelData.has_delivery
 
+        #Get the total price
+        context['totalPrice'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key])
         return JsonResponse(context, status = 200)
     
