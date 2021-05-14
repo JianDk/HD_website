@@ -90,6 +90,12 @@ def get_BasketTotalPrice(session_id):
     extracted and a total price calculated and returned
     '''
     cartItems = CartItem.objects.filter(cart_id = session_id)
+    print('here is the cart items \n')
+    for item in cartItems:
+        print(item.product)
+        print(item.quantity)
+        print('\n')
+        
     totalPrice =0
     if not cartItems:
         return totalPrice

@@ -27,7 +27,7 @@ class TakeawayCheckout(View):
         #Check if the shopping cart items are still offered by the restaurant
         sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
         sessionItems = self.hd2900RestaurantObject.validateSessionOrderedProducts(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
-        
+
         #Check if total in sessionItems are above the limit for local delivery
         totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key])
         if totalPrice < self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery:
