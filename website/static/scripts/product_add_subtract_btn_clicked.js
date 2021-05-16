@@ -78,12 +78,23 @@ function updateTotalPrice(){
         success: function(response){
             //check if for some reasons, e.g. session has expired, product no longer available...etc, then the checkout page will be updated
             if (response["pageRefresh"] == true) {
-                alert("session is outdated, you will be sent back");
                 window.location.href = "/takeawayCheckout";
             } else {
                 //Update the total price
                 var totalPriceElement = document.getElementById("totalPrice");
-                totalPriceElement.innerHTML = response["totalPrice"] + ' kr';
+                totalPriceElement.innerHTML = "Total : " + response["totalPrice"] + ' kr';
+
+                //Check if total price is above the minimum limit for delivery. If true, then the button is made active
+                var deliveryButton = document.getElementById("localDeliveryButton");
+                if (deliveryButton !== null) {
+                    console.log("here we are");
+                    console.log(response["deliveryPossible"]);
+                    if (response["deliveryPossible"] == 1) {
+                        deliveryButton.disabled= false;
+                    } else {
+                        deliveryButton.disabled = true;
+                    }
+                }
             }
         }
     })
@@ -91,5 +102,7 @@ function updateTotalPrice(){
 
 function checkoutPlusMinusPressed(element) {
     let promise = itemQuantityChanged(element)
-    promise.then(updateTotalPrice)
+    promise.then(updateTotalPrice);
+    promise.catch(function(){window.location.href = "/takeawayCheckout";});
+    
 }

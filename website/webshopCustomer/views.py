@@ -55,7 +55,6 @@ class totalPriceDeliveryPossible(View):
 
     def get(self, request, *args, **kwargs):
         context = dict()
-        context['response'] = "here is some response" #MUST BE DELETED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         #Check if session is valid
         sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
@@ -68,14 +67,8 @@ class totalPriceDeliveryPossible(View):
         #Get all active products offered by the restaurant
         allActiveProducts = self.hd2900RestaurantObject.get_all_active_products()
         sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
-        print('------------------sessionItems before validation -----------------------')
-        print(sessionItems)
-        print('---------------------------------------------------------------------------')
         number_of_products_ordered_beforeCheck = len(sessionItems)
         sessionItems = self.hd2900RestaurantObject.validateSessionOrderedProducts(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
-        print('--------------------sessionItems after validation--------------------------')
-        print(sessionItems)
-        print('-----------------------------------------------------------------')
         if not sessionItems:
             context["pageRefresh"] = True
             return JsonResponse(context, status = 200)
@@ -84,11 +77,15 @@ class totalPriceDeliveryPossible(View):
         if number_of_products_ordered_beforeCheck != number_of_products_ordered_afterCheck:
             context["pageRefresh"] = True
             return JsonResponse(context, status = 200)
-        
-        #Check if restaurant still offers delivery
-        context['deliveryPossible'] = self.hd2900RestaurantObject.restaurantModelData.has_delivery
 
         #Get the total price
         context['totalPrice'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key])
+
+        #If both restaurant offers delivery today and the total price is above the limit, the signal for delivery button is sent back
+        if self.hd2900RestaurantObject.restaurantModelData.has_delivery and context['totalPrice'] >= self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery:
+            context['deliveryPossible'] = True
+        else:
+            context['deliveryPossible'] = False
+
         return JsonResponse(context, status = 200)
     

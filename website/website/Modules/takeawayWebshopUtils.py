@@ -95,9 +95,6 @@ def get_BasketTotalPrice(session_id):
     '''
     cartItems = CartItem.objects.filter(cart_id = session_id)
     totalPrice =0
-    print('-------------------------------')
-    print('calculating total price')
-    print(cartItems)
     if not cartItems:
         return totalPrice
     else:
