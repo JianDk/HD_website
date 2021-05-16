@@ -30,6 +30,9 @@ class RestaurantUtils:
         get_all_active_products, this method removes any products in the session cart which is not in the return 
         from get_all_active_products
         '''
+        if not allActiveProducts or not sessionItems:
+            return None
+            
         #Obtain a list of product id in currentRestaurantProducts
         allActiveProductIds = [item.id for item in allActiveProducts]
         productIdsToRemove = list()

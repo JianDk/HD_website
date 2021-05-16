@@ -4,6 +4,7 @@ from random import choice
 from string import ascii_uppercase
 from webshopCart.models import CartItem
 
+
 #Product related 
 def productToChange(request):
     '''
@@ -42,6 +43,7 @@ def addRemoveProductInBasket(productToChange, session_id, restaurant):
             #get the current quantity for this specific cartItem
             if cartItem.quantity - 1 < 1:
                 cartItem = cartItem.delete()
+                
                 updatedQuantity = 0
             else:
                 cartItem.quantity = cartItem.quantity - 1
