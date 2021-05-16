@@ -44,7 +44,6 @@ function checkoutPlusMinusPressed(element) {
             } else {
                 //Update the total price
                 var totalPriceElement = document.getElementById("totalPrice");
-                console.log(response);
                 totalPriceElement.innerHTML = response["totalPrice"];
             }
         }

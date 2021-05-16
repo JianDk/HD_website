@@ -68,7 +68,6 @@ class ChangeItemQuantity(View):
     def get(self, request, *args, **kwargs):
         #First check if a session already exists
         sessionValid = webshopUtils.checkSessionIdValidity(request=request,session_id_key=session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
-        restaurant = Restaurant.objects.get(name = restaurantName)
 
         if sessionValid is False: #The user has not a session and it is first time that the user puts a product in basket. A new session will be assigned to the user
             #Assign a new session id
@@ -79,7 +78,7 @@ class ChangeItemQuantity(View):
             #Check if the product exists in the first place. 
             success, updatedQuantity = webshopUtils.addRemoveProductInBasket(productToChange = productToChange, 
             session_id = request.session[session_id_key], 
-            restaurant = restaurant)
+            restaurant = self.hd2900RestaurantObject.restaurantModelData)
 
             #If success evaluates to False, then user hitted a subtract button while sessionValid is False. In this case do nothing
             if success is False:
@@ -105,7 +104,7 @@ class ChangeItemQuantity(View):
             #Update the product in the backend 
             success, updatedQuantity = webshopUtils.addRemoveProductInBasket(productToChange = productToChange, 
             session_id = request.session[session_id_key], 
-            restaurant = restaurant)
+            restaurant = self.hd2900RestaurantObject.restaurantModelData)
 
             totalItemsInCart = webshopUtils.get_totalBasketItemQuantity(session_id=request.session[session_id_key])
 

@@ -38,24 +38,26 @@ def addRemoveProductInBasket(productToChange, session_id, restaurant):
             return success, updatedQuantity
         
         if cartItem:
+            cartItem = cartItem[0]
             #get the current quantity for this specific cartItem
-            if cartItem[0].quantity - 1 <= 0:
-                cartItem[0].delete()
+            if cartItem.quantity - 1 < 1:
+                cartItem = cartItem.delete()
                 updatedQuantity = 0
             else:
-                cartItem[0].quantity = cartItem[0].quantity - 1
-                cartItem[0].save()
-                updatedQuantity = cartItem[0].quantity
+                cartItem.quantity = cartItem.quantity - 1
+                cartItem.save()
+                updatedQuantity = cartItem.quantity
             success = True
             return success, updatedQuantity
     
     if productToChange[1] == 'add':
         if not cartItem:
             #then the cart item will be created
-            CartItem.objects.create(cart_id = session_id,
+            cartitem = CartItem.objects.create(cart_id = session_id,
             product = productToChange[0], 
             quantity = 1,
             restaurant = restaurant)
+            cartitem.save()
 
             success = True
             updatedQuantity = 1
@@ -90,18 +92,20 @@ def get_BasketTotalPrice(session_id):
     extracted and a total price calculated and returned
     '''
     cartItems = CartItem.objects.filter(cart_id = session_id)
-    print('here is the cart items \n')
-    for item in cartItems:
-        print(item.product)
-        print(item.quantity)
-        print('\n')
-        
     totalPrice =0
+    print('-------------------------------')
+    print('calculating total price')
+    print(cartItems)
     if not cartItems:
         return totalPrice
     else:
         for item in cartItems:
+            print(item.product)
+            print(item.quantity)
+            print(item.product.price)
+            print('\n')
             totalPrice += (item.quantity * item.product.price)
+        print(totalPrice,' dkk')
         return totalPrice
 
 def createNewSessionId():
