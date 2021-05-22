@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'webshopCart',
     'webshopCustomer',
 ]
+#'mod_wsgi.server',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
