@@ -263,7 +263,7 @@ class hd2900(View):
         'aboutUsText' : self.ContextObject.textString,
         'dayRange1' : 'Everyday',
         'timeRange1': '14:00 - 20:30',
-        'dayRange2' : 'Takeaway order: 40388884',
+        'dayRange2' : 'Takeaway and delivery order: 40388884',
         'shopTitle' : 'Hidden Dimsum 2900',
         'addressStreet' : 'Strandvejen 163, 2900 Hellerup',
         'addressPhone' : '+45-40 38 88 84',
