@@ -32,8 +32,10 @@ class TakeawayCheckout(View):
         totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key])
         if totalPrice < self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery:
             deliveryPossible = False
+            totalPriceDeliveryMessage = "Minimum order for takeaway delivery : " + str(self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery) + ' kr'
         else:
             deliveryPossible = True
+            totalPriceDeliveryMessage = ''
 
         #Check delivery status
         context = {'title' : 'Hidden Dimsum takeaway checkout',
@@ -41,7 +43,7 @@ class TakeawayCheckout(View):
         'totalPrice' : totalPrice,
         'deliveryActive' : self.deliveryStatus, #This is the restaurant delivery status for today 
         'deliveryPossible' : deliveryPossible,  #Relates to the total amount of order by the customer
-        'minimum_totalPrice_for_delivery' : self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery}
+        'totalPriceDeliveryMessage' : totalPriceDeliveryMessage}
         
         return render(request, template_name = 'takeawayWebshop/webshopCheckout.html', context = context)
         #For address verification
@@ -86,6 +88,6 @@ class totalPriceDeliveryPossible(View):
             context['deliveryPossible'] = True
         else:
             context['deliveryPossible'] = False
-
+            context['minimum_totalPrice_for_delivery'] = self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery
         return JsonResponse(context, status = 200)
     

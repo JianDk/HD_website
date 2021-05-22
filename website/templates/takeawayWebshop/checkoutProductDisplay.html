@@ -30,14 +30,15 @@
     <div id="totalPrice">
         Total : {{totalPrice}} kr
     </div>
+    <div id="deliveryPossibleMessage">{{totalPriceDeliveryMessage}}</div>
 </h2>
 
 <a href="/hd2900_takeaway_webshop" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Order more</a>
 <button type="button" class="btn btn-primary btn-lg">Pick up</button>
 {% if deliveryActive is True and deliveryPossible is True %}
-    <button type="button" class="btn btn-primary btn-lg">Deliver to me</button>
+    <button type="button" class="btn btn-primary btn-lg">Takeaway delivery</button>
 {% endif %}
 
 {% if deliveryActive is True and deliveryPossible is False %}
-    <button type="button" class="btn btn-primary btn-lg" id="localDeliveryButton" disabled>Deliver to me</button>
+    <button type="button" class="btn btn-primary btn-lg" id="localDeliveryButton" disabled>Takeaway delivery</button>
 {% endif %}
