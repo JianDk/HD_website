@@ -82,6 +82,47 @@ class RestaurantUtils:
         '''
         self.today_weekday_string = self._convert_isoweekday_to_weekday(datetime.datetime.today().isoweekday())
         return self.restaurantModelData.__dict__['delivery_' + self.today_weekday_string + '_active']
+    
+    def isDeliveryPossible(self):
+        '''
+        Takes the date, time and the lead time to produce a delivery order into account. Then the method returns either 
+        true or false on if delivery can be offered for today. This method is the main method used to check if delivery is
+        possible.
+        '''
+        deliveryPossible = self.isDeliveryOpenToday()
+        
+        if deliveryPossible is False: #In this case the restaurant does not offere delivery for today
+            return deliveryPossible
+        
+        #Get the end time of today's delivery
+        deliveryEndTime = self.get_deliveryEndtime()
+        deliveryEndTime = deliveryEndTime.strftime('%H:%M:%S')       
+
+        #Get delivery end time with date and form it as a date time object to allow comparison
+        today = datetime.date.today().strftime('%d-%m-%Y')
+
+        deliveryEndTime = datetime.datetime.strptime(today + ' ' + deliveryEndTime, '%d-%m-%Y %H:%M:%S')
+
+        pickUpPreparationTime = self.restaurantModelData.pickup_preparationtime
+        deliveryPreparationTime = self.restaurantModelData.delivery_preparationtime
+
+        #Get current time and add on top of that the pickup preparation time (time it takes to cook food) and delivery time (time it takes to deliver)
+        currentTime = datetime.datetime.now()
+        estimatedDeliveryTime = currentTime + datetime.timedelta(minutes=pickUpPreparationTime + deliveryPreparationTime)
+
+        if estimatedDeliveryTime <= deliveryEndTime:
+            deliveryPossible = True
+        else:
+            deliveryPossible = False
+
+        return deliveryPossible
+
+    def get_deliveryEndtime(self):
+        '''
+        Get today's delivery end time and returns it as a string in format HH:MM:SS
+        '''
+        weekday = self._convert_isoweekday_to_weekday(isoweekday = datetime.datetime.today().isoweekday())
+        return self.restaurantModelData.__dict__['delivery_' + weekday + '_timeend']    
 
     def _convert_isoweekday_to_weekday(self, isoweekday):
         if isoweekday == 1:

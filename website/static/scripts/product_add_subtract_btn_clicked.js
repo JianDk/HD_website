@@ -53,9 +53,12 @@ function updateTotalPrice(){
                 //Check if total price is above the minimum limit for delivery. If true, then the button is made active
                 var deliveryButton = document.getElementById("localDeliveryButton");
                 var deliveryPossibleElement = document.getElementById("deliveryPossibleMessage");
+                console.log(response["deliveryButtonActive"]);
+                console.log(deliveryButton);
                 if (deliveryButton !== null) {
-                    if (response["deliveryPossible"] == 1) {
-                        deliveryButton.disabled= false;                    
+                    if (response["deliveryButtonActive"] == 1) {
+                        deliveryButton.disabled= false;
+                        deliveryPossibleElement.innerHTML = "";                    
                     } else {
                         deliveryButton.disabled = true;
                         deliveryPossibleElement.innerHTML = "Minimum order for takeaway delivery : " + response["minimum_totalPrice_for_delivery"] + ' kr';

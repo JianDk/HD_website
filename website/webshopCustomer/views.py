@@ -20,7 +20,10 @@ class TakeawayCheckout(View):
         sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key,  validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
         if sessionValid is False: #the session has expired and the user needs to start over
             return redirect('/hd2900_takeaway_webshop')
-
+        
+        #Check if delivery is still possible at this given date and time
+        deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
+        
         #Get all active products offered by the restaurant
         allActiveProducts = self.hd2900RestaurantObject.get_all_active_products()
 
@@ -30,19 +33,20 @@ class TakeawayCheckout(View):
 
         #Check if total in sessionItems are above the limit for local delivery
         totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key])
+
         if totalPrice < self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery:
-            deliveryPossible = False
+            deliveryButtonActive = False
             totalPriceDeliveryMessage = "Minimum order for takeaway delivery : " + str(self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery) + ' kr'
         else:
-            deliveryPossible = True
+            deliveryButtonActive = True
             totalPriceDeliveryMessage = ''
 
         #Check delivery status
         context = {'title' : 'Hidden Dimsum takeaway checkout',
         'checkoutProducts' : sessionItems,
         'totalPrice' : totalPrice,
-        'deliveryActive' : self.deliveryStatus, #This is the restaurant delivery status for today 
-        'deliveryPossible' : deliveryPossible,  #Relates to the total amount of order by the customer
+        'deliveryPossible' : deliveryPossible,  #Relates to if it at all is possible to order delivery for today at the given time
+        'deliveryButtonActive' : deliveryButtonActive, #checks if the total price is above the minimum limit for delivery
         'totalPriceDeliveryMessage' : totalPriceDeliveryMessage}
         
         return render(request, template_name = 'takeawayWebshop/webshopCheckout.html', context = context)
@@ -71,11 +75,13 @@ class totalPriceDeliveryPossible(View):
         sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
         number_of_products_ordered_beforeCheck = len(sessionItems)
         sessionItems = self.hd2900RestaurantObject.validateSessionOrderedProducts(allActiveProducts = allActiveProducts, sessionItems = sessionItems)
+        
         if not sessionItems:
             context["pageRefresh"] = True
             return JsonResponse(context, status = 200)
 
         number_of_products_ordered_afterCheck = len(sessionItems)
+        
         if number_of_products_ordered_beforeCheck != number_of_products_ordered_afterCheck:
             context["pageRefresh"] = True
             return JsonResponse(context, status = 200)
@@ -84,10 +90,15 @@ class totalPriceDeliveryPossible(View):
         context['totalPrice'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key])
 
         #If both restaurant offers delivery today and the total price is above the limit, the signal for delivery button is sent back
-        if self.hd2900RestaurantObject.restaurantModelData.has_delivery and context['totalPrice'] >= self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery:
-            context['deliveryPossible'] = True
+        deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
+        if deliveryPossible and context['totalPrice'] >= self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery:
+            context['deliveryButtonActive'] = True
         else:
-            context['deliveryPossible'] = False
+            context['deliveryButtonActive'] = False
             context['minimum_totalPrice_for_delivery'] = self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery
         return JsonResponse(context, status = 200)
     
+class DeliveryForm(View):
+    def get (self, request, *args, **kwargs):
+        return render(request, template_name = "takeawayWebshop/checkoutLocalDelivery.html")
+
