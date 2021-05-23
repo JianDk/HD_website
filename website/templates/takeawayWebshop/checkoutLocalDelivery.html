@@ -1,12 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Hello world!
-</body>
-</html>
+{% extends 'takeawayWebshop/baseTemplate.html' %}
+
+{% block content %}
+{% include 'takeawayWebshop/header.html' %} 
+<h1>Local Delivery</h1>
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+
+    {% for item in orderProducts %}
+    <tr>
+        <td>{{item.product}}</td>
+        <td>{{item.product.price}} kr</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.total}} kr</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td>Bag fee</td>
+        <td>{{bagFee}} kr</td>
+        <td>1</td>
+        <td>{{bagFee}} kr</td>
+    </tr>
+
+    <tr>
+        <td>Local delivery cost</td>
+        <td>{{deliveryCost}} kr</td>
+        <td>1</td>
+        <td>{{deliveryCost}}</td>
+    </tr>
+    
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td>{{grandTotal}}</td>
+    </tr>
+</table>
+
+{% include 'takeawayWebshop/webshopAddressVerification.html' %}
+{{ customerDeliveryForm.as_p }}
+{% endblock %}

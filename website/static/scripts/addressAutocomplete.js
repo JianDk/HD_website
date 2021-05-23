@@ -2,7 +2,8 @@
 
 dawaAutocomplete.dawaAutocomplete( document.getElementById("adresse"), {
   select: function(selected) {
-      document.getElementById("valgtadresse").innerHTML= selected.tekst;
+      document.getElementById("valgtadresse").innerHTML= selected.tekst
+      alert("selection done!!!")
       console.log(selected.data);
   }
 });

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import JsonResponse
 from webshopCart.models import CartItem
+from .forms import customerLocalDeliveryForm
 from website.Modules.restaurantUtils import RestaurantUtils
 import website.Modules.takeawayWebshopUtils as webshopUtils
 
@@ -99,6 +100,22 @@ class totalPriceDeliveryPossible(View):
         return JsonResponse(context, status = 200)
     
 class DeliveryForm(View):
+    def __init__(self):
+        #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
+        self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
+
     def get (self, request, *args, **kwargs):
-        return render(request, template_name = "takeawayWebshop/checkoutLocalDelivery.html")
+        #Display the total cost together with delivery fee and bag fee
+        sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
+        
+        context = dict()
+        #Get the total price and add on top of it the bag fee and delivery cost
+        context['title'] = 'Local delivery checkout'
+        context['orderProducts'] = sessionItems
+        context['deliveryCost'] = self.hd2900RestaurantObject.restaurantModelData.delivery_fee
+        context['bagFee'] = self.hd2900RestaurantObject.restaurantModelData.bagFee
+        context['grandTotal'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + context['deliveryCost'] + context['bagFee']
+        context['customerDeliveryForm'] = customerLocalDeliveryForm(deliveryTimeList = [('hello', 'hello'), ('world', 'world')])
+
+        return render(request, template_name = "takeawayWebshop/checkoutLocalDelivery.html", context = context)
 
