@@ -1,9 +1,8 @@
 from django.test import TestCase
-
+from website.Modules.restaurantUtils import RestaurantUtils
 # Create your tests here.
 import datetime
 from datetime import timedelta
-from website.Modules.restaurantUtils import RestaurantUtils
 restaurant = RestaurantUtils(restaurantName = "Hidden Dimsum 2900")
 
 now = datetime.datetime.now()

@@ -124,6 +124,38 @@ class RestaurantUtils:
         weekday = self._convert_isoweekday_to_weekday(isoweekday = datetime.datetime.today().isoweekday())
         return self.restaurantModelData.__dict__['delivery_' + weekday + '_timeend']    
 
+    def get_deliveryTimeList(self):
+        '''
+        Given the current time and a time resolution of 15 min this script creates a list of the fastest 
+        takeaway delivery time which is the time point from now + preparation time + delivery time and the time
+        point where the restaurant closes
+        '''
+        #Generate time list for receiving delivery package
+        deliveryEndTime = self.get_deliveryEndtime()
+        deliveryEndTime = deliveryEndTime.strftime('%H:%M:%S')    
+        today = datetime.date.today().strftime('%d-%m-%Y')
+        deliveryEndTime = datetime.datetime.strptime(today + ' ' + deliveryEndTime, '%d-%m-%Y %H:%M:%S')
+        deliveryStartTime = datetime.datetime.now() + datetime.timedelta(minutes=self.restaurantModelData.pickup_preparationtime + self.restaurantModelData.delivery_preparationtime)
+        
+        #Round up delivery start time to the closest 15 min
+        deliveryStartTime = self.roundTimeUp(currentTime=deliveryStartTime, timeresolution=15)
+        deliveryTimeList = list()
+        deliveryTimeList.append( (deliveryStartTime.strftime('%H:%M'), deliveryStartTime.strftime('%H:%M')) )
+
+        while deliveryStartTime < deliveryEndTime:
+            deliveryStartTime = deliveryStartTime + datetime.timedelta(minutes = 15)
+            deliveryTimeList.append( (deliveryStartTime.strftime('%H:%M'), deliveryStartTime.strftime('%H:%M')) )
+        
+        return deliveryTimeList
+    
+    def roundTimeUp(self, currentTime, timeresolution):
+        '''
+        Given the currentTime which is a datetime object and the timeresolution which is an integer, this method rounds up the 
+        time to the nearest time resolution. Say that the time right now is 18:05 and the timeresolution is 15, the rounded
+        up time will be 18:15. the rounded time returned is in the format of a date time object
+        '''
+        return currentTime + (datetime.datetime.min - currentTime) % datetime.timedelta(minutes = timeresolution)
+
     def _convert_isoweekday_to_weekday(self, isoweekday):
         if isoweekday == 1:
             return 'monday'

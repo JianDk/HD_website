@@ -6,6 +6,7 @@ from .forms import customerLocalDeliveryForm
 from website.Modules.restaurantUtils import RestaurantUtils
 import website.Modules.takeawayWebshopUtils as webshopUtils
 from website.Modules.geoLocation import GeoLocationTools
+import datetime
 
 # Create your views here.
 session_id_key = 'hd2900TakeAwayCartId'
@@ -110,7 +111,18 @@ class DeliveryForm(View):
         sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
         
         #Get the delivery time available for delivery
-
+        #--------------THE SCRIPT STARTS HERE------------------------
+        #Decide if delivery is still possible
+        deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
+        #deliveryPossible = False #<-------------------------------------------------DELETE THIS!!!!!!!!!!!!!!!!!!!!
+        if deliveryPossible is False:
+            #Redirect the user to pickup
+            context = dict()
+            context['message'] = "Sorry takeaway delivery is closed for today."
+            return render(request, template_name = "takeawayWebshop/takeawayClosed.html", context = context)
+        
+        #Generate time list for receiving delivery package
+        deliveryTimeList = self.hd2900RestaurantObject.get_deliveryTimeList()
         context = dict()
         #Get the total price and add on top of it the bag fee and delivery cost
         context['title'] = 'Local delivery checkout'
@@ -118,7 +130,7 @@ class DeliveryForm(View):
         context['deliveryCost'] = self.hd2900RestaurantObject.restaurantModelData.delivery_fee
         context['bagFee'] = self.hd2900RestaurantObject.restaurantModelData.bagFee
         context['grandTotal'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + context['deliveryCost'] + context['bagFee']
-        checkoutLocalDeliveryForm = customerLocalDeliveryForm(deliveryTimeList = [('hello', 'hello'), ('world', 'world')], auto_id = True)
+        checkoutLocalDeliveryForm = customerLocalDeliveryForm(deliveryTimeList = deliveryTimeList, auto_id = True)
         context['customerDeliveryForm'] = checkoutLocalDeliveryForm
 
         return render(request, template_name = "takeawayWebshop/checkoutLocalDelivery.html", context = context)
