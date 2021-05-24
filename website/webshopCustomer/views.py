@@ -5,6 +5,7 @@ from webshopCart.models import CartItem
 from .forms import customerLocalDeliveryForm
 from website.Modules.restaurantUtils import RestaurantUtils
 import website.Modules.takeawayWebshopUtils as webshopUtils
+from website.Modules.geoLocation import GeoLocationTools
 
 # Create your views here.
 session_id_key = 'hd2900TakeAwayCartId'
@@ -108,6 +109,8 @@ class DeliveryForm(View):
         #Display the total cost together with delivery fee and bag fee
         sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
         
+        #Get the delivery time available for delivery
+
         context = dict()
         #Get the total price and add on top of it the bag fee and delivery cost
         context['title'] = 'Local delivery checkout'
@@ -115,7 +118,29 @@ class DeliveryForm(View):
         context['deliveryCost'] = self.hd2900RestaurantObject.restaurantModelData.delivery_fee
         context['bagFee'] = self.hd2900RestaurantObject.restaurantModelData.bagFee
         context['grandTotal'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + context['deliveryCost'] + context['bagFee']
-        context['customerDeliveryForm'] = customerLocalDeliveryForm(deliveryTimeList = [('hello', 'hello'), ('world', 'world')])
+        checkoutLocalDeliveryForm = customerLocalDeliveryForm(deliveryTimeList = [('hello', 'hello'), ('world', 'world')], auto_id = True)
+        context['customerDeliveryForm'] = checkoutLocalDeliveryForm
 
         return render(request, template_name = "takeawayWebshop/checkoutLocalDelivery.html", context = context)
 
+class localDeliveryCheckoutAddressCheck(View):
+    def __init__(self):
+        #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
+        self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
+
+    def get(self, request, *args, **kwargs):
+        x = request.GET.get('x')
+        y = request.GET.get('y')
+        x = float(x)
+        y = float(y)
+        restaurant_latitude = self.hd2900RestaurantObject.restaurantModelData.latitude
+        restaurant_longitude = self.hd2900RestaurantObject.restaurantModelData.longitude
+        geoTools = GeoLocationTools()
+        distance_km = geoTools.distanceBetweenCoordinates(coordinate1=(restaurant_longitude,restaurant_latitude), 
+        coordinate2=(x,y))
+        context = dict()
+        if distance_km <= self.hd2900RestaurantObject.restaurantModelData.delivery_radius:
+            context['distance_within_delivery_range'] = True
+        else:
+            context['distance_within_delivery_range'] = False
+        return JsonResponse(context, status = 200)

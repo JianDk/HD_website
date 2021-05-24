@@ -1,5 +1,5 @@
 {% extends 'takeawayWebshop/baseTemplate.html' %}
-
+{% load static %}
 {% block content %}
 {% include 'takeawayWebshop/header.html' %} 
 <h1>Local Delivery</h1>
@@ -48,5 +48,10 @@
 </table>
 
 {% include 'takeawayWebshop/webshopAddressVerification.html' %}
-{{ customerDeliveryForm.as_p }}
+<button type="button" class="btn btn-success" id ="takeawayPickUp">Takeaway pickup</button>
+<div id="localDeliveryForm">
+    {{ customerDeliveryForm.as_p }}
+</div>
+{% include 'takeawayWebshop/standardScripts.html' %}
+<script src="{% static 'scripts/checkoutLocalDeliveryFormHandler.js' %}"></script>
 {% endblock %}
