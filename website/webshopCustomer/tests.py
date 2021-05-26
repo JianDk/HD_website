@@ -1,17 +1,35 @@
 from django.test import TestCase
-from website.Modules.restaurantUtils import RestaurantUtils
-# Create your tests here.
-import datetime
-from datetime import timedelta
-restaurant = RestaurantUtils(restaurantName = "Hidden Dimsum 2900")
+import requests
+testPaymentIdUrl = "https://test.api.dibspayment.eu/v1/payments/"
+test_secretyKey = "c8210f169b344cf58e3508f50fe02494"
 
-now = datetime.datetime.now()
-rounded = now + (datetime.datetime.min - now) % datetime.timedelta(minutes = 15)
-print(now)
-print(rounded)
+def create_order(**kwargs):
+    data = dict()
+    data['order'] = dict()
+    data['order']['items'] = list()
+
+    #Create item
+    item = dict()
+    item['reference'] = kwargs['reference']
+    item['name'] = kwargs['name']
+    item['unit'] = 'pcs'
+    item['unitPrice'] = kwargs['unitPrice']
+    item['taxRate'] = 0
+    item['grossTotalAmount'] = kwargs['unitPrice']
+    item['taxAmount'] = 0
+    item['grossTotalAmount'] = kwargs['unitPrice']
+    item['netTotalAmount'] = kwargs['unitPrice']
+
+    data['order']['items'].append(item)
+    
 
 
-def rounded_to_the_last_30th_minute_epoch():
-    now = datetime.now()
-    rounded = now - (now - datetime.min) % timedelta(minutes=30)
-    return rounded
+    print(item)
+
+create_order(reference = "reference no", 
+name = "product name", 
+quantity = 1,
+unitPrice = 10000)
+#with requests.Session() as session:
+ #   resp = session.post(url = testPaymentIdUrl)
+#print(resp.status_code)
