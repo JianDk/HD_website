@@ -4,6 +4,9 @@ import json
 
 class NETS:
     def __init__(self):
+        '''
+        Upon initiation the secret key is loaded
+        '''
         #Import the secret key
         with open('/etc/config.json','r') as fileId:
             secretKeys = json.load(fileId)
@@ -11,6 +14,16 @@ class NETS:
         self.secretKeys = secretKeys['NETS']
 
     def create_order(self, **kwargs):
+        ''''
+        create_order takes in the following kwargs:
+        reference : a string containing payment reference. E.g. order id.
+        name: a string containing the product name
+        unitPrice : integer. Total price to charge. Note the last two digits are interpreted as decimal after comma. E.g. 100.50 should be written as 10050
+        paymentReference: a string containing the reference of the payment
+
+        MUST BE IMPLEMENTED FURTHER 
+        url and terms url
+        '''
         data = dict()
         data['order'] = dict()
         data['order']['items'] = list()
@@ -72,12 +85,3 @@ class NETS:
             resp = session.post(url = url, headers = headers, data = data)
 
         return resp
- 
-platform = 'test'
-payment = NETS()
-payment.get_paymentId(platform = platform, 
-reference = 'here comes order id', 
-name = 'Hidden Dimsum 2900 Takeaway',
-paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
-unitPrice = 10000,
-)
