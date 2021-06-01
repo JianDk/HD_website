@@ -49,8 +49,8 @@ class NETS:
         data['checkout']['charge'] = True
         data['checkout']['publicDevice'] = False
         data['checkout']['integrationType'] = 'EmbeddedCheckout'
-        data['checkout']['url'] = 'http://127.0.0.1:8001/deliveryFormCheckout' #<-------------SHOULD BE CHANGED
-        data['checkout']['termsUrl'] = 'http://127.0.0.1:8001/deliveryFormCheckout' #<------------SHOULD BE CHANGED
+        data['checkout']['url'] = 'http://127.0.0.1:8002/deliveryFormCheckout' #<-------------SHOULD BE CHANGED
+        data['checkout']['termsUrl'] = 'http://127.0.0.1:8002/deliveryFormCheckout' #<------------SHOULD BE CHANGED
         data['checkout']['merchantHandlesConsumerData'] = True
 
         self.json_formatted_str = json.dumps(data, indent=4)

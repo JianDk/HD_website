@@ -11,6 +11,7 @@ class Customer(models.Model):
     deliveryAddressStreet = models.CharField(max_length = 100, blank = True)
     deliveryAddressHouseNumber = models.CharField(max_length = 20, blank = True)
     deliveryAddressPostCode = models.IntegerField(blank = True)
+    comments = models.TextField(max_length = 300, blank = True)
 
     class Meta:
         db_table = 'customer'

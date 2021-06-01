@@ -6,7 +6,8 @@ from .forms import customerLocalDeliveryForm
 from website.Modules.restaurantUtils import RestaurantUtils
 import website.Modules.takeawayWebshopUtils as webshopUtils
 from website.Modules.geoLocation import GeoLocationTools
-import datetime
+from django.http import HttpResponse
+from website.Modules.paymentModule import NETS
 
 # Create your views here.
 session_id_key = 'hd2900TakeAwayCartId'
@@ -53,8 +54,6 @@ class TakeawayCheckout(View):
         'totalPriceDeliveryMessage' : totalPriceDeliveryMessage}
         
         return render(request, template_name = 'takeawayWebshop/webshopCheckout.html', context = context)
-        #For address verification
-            #return render(request, template_name = 'takeawayWebshop/webshopAddressTest.html', context = context)
 
 class totalPriceDeliveryPossible(View):
     def __init__(self):
@@ -110,11 +109,9 @@ class DeliveryForm(View):
         #Display the total cost together with delivery fee and bag fee
         sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
         
-        #Get the delivery time available for delivery
-        #--------------THE SCRIPT STARTS HERE------------------------
         #Decide if delivery is still possible
         deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
-        #deliveryPossible = False #<-------------------------------------------------DELETE THIS!!!!!!!!!!!!!!!!!!!!
+
         if deliveryPossible is False:
             #Redirect the user to pickup
             context = dict()
@@ -156,3 +153,25 @@ class localDeliveryCheckoutAddressCheck(View):
         else:
             context['distance_within_delivery_range'] = False
         return JsonResponse(context, status = 200)
+
+class Payment(View):
+    def __init__(self):
+        #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
+        self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
+    
+    def get(self, request, *args, **kwargs):
+        #Assure that session is still valid
+        #Check if session is valid
+        sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
+
+        if sessionValid is False: #the session has expired and the user needs to start over
+            return redirect('/hd2900_takeaway_webshop')
+
+        #Calculate the grand total the total price in basket + delivery fee 0 bag fee
+        totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.delivery_fee + self.hd2900RestaurantObject.restaurantModelData.bagFee
+        
+        #Grab the form field information
+        
+        payment = NETS()
+
+        return HttpResponse(request, 'hello world')

@@ -18,7 +18,7 @@ from django.urls import path
 from index import views
 from index.views import indexPage, hdnytorv
 from webshopRestaurant.views import hd2900_webshop_Main, AddressCheckForDeliverability, ChangeItemQuantity
-from webshopCustomer.views import TakeawayCheckout, totalPriceDeliveryPossible, DeliveryForm, localDeliveryCheckoutAddressCheck
+from webshopCustomer.views import TakeawayCheckout, totalPriceDeliveryPossible, DeliveryForm, localDeliveryCheckoutAddressCheck, Payment
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -37,6 +37,7 @@ urlpatterns = [
     path('takeawayCheckout', TakeawayCheckout.as_view()),
     path('deliveryFormCheckout', DeliveryForm.as_view()),
     path('local_delivery_checkout_is_address_deliverable', localDeliveryCheckoutAddressCheck.as_view()),
+    path('localDeliveryPayment', Payment.as_view()),
 ] 
 
 if settings.DEBUG:

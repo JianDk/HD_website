@@ -6,6 +6,7 @@ class customerLocalDeliveryForm(forms.Form):
     customerEmail = forms.EmailField(label = 'Email', max_length=50, required=True)
     customerMobile = forms.CharField(label = 'Mobile', max_length = 10, 
     required=True, validators = [RegexValidator(r'^[0-9]+$', 'Enter a valid phone number.')])
+    comments = forms.CharField(label = 'Comments', max_length = 300, widget=forms.Textarea, required = False)
     deliveryTime = forms.ChoiceField(choices = (), required=True)
 
     def __init__(self, *args, **kwargs):

@@ -50,8 +50,10 @@
 {% include 'takeawayWebshop/webshopAddressVerification.html' %}
 <button type="button" class="btn btn-success" id ="takeawayPickUp">Takeaway pickup</button>
 <div id="localDeliveryForm">
-    {{ customerDeliveryForm.as_p }}
-    <button type="button" class="btn btn-success" id="payment">Pay</button>
+    <form action="/localDeliveryPayment" method="get">
+        {{ customerDeliveryForm.as_p }}
+        <button type="submit" class="btn btn-success" id="payment">Pay</button>
+    </form>
 </div>
 {% include 'takeawayWebshop/standardScripts.html' %}
 <script src="{% static 'scripts/checkoutLocalDeliveryFormHandler.js' %}"></script>

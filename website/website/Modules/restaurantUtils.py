@@ -123,7 +123,14 @@ class RestaurantUtils:
         '''
         weekday = self._convert_isoweekday_to_weekday(isoweekday = datetime.datetime.today().isoweekday())
         return self.restaurantModelData.__dict__['delivery_' + weekday + '_timeend']    
-
+    
+    def get_deliveryOpenTime(self):
+        '''
+        Get opening time for today's delivery and return it as a string in format HH:MM:SS
+        '''
+        weekday = self._convert_isoweekday_to_weekday(isoweekday = datetime.datetime.today().isoweekday())
+        return self.restaurantModelData.__dict__['delivery_'+ weekday + '_timestart'] 
+        
     def get_deliveryTimeList(self):
         '''
         Given the current time and a time resolution of 15 min this script creates a list of the fastest 
@@ -137,6 +144,14 @@ class RestaurantUtils:
         deliveryEndTime = datetime.datetime.strptime(today + ' ' + deliveryEndTime, '%d-%m-%Y %H:%M:%S')
         deliveryStartTime = datetime.datetime.now() + datetime.timedelta(minutes=self.restaurantModelData.pickup_preparationtime + self.restaurantModelData.delivery_preparationtime)
         
+        #check if the delivery start time is earlier than takeaway delivery opening time
+        deliveryOpenTime = self.get_deliveryOpenTime()
+        deliveryOpenTime = deliveryOpenTime.strftime('%H:%M:%S')
+        deliveryOpenTime = datetime.datetime.strptime(today + ' ' + deliveryOpenTime, '%d-%m-%Y %H:%M:%S')
+
+        if deliveryStartTime < deliveryOpenTime:
+            deliveryStartTime = deliveryOpenTime
+
         #Round up delivery start time to the closest 15 min
         deliveryStartTime = self.roundTimeUp(currentTime=deliveryStartTime, timeresolution=15)
         deliveryTimeList = list()
