@@ -15,7 +15,7 @@ document.getElementById("paymentButton").addEventListener("click", function() {
             if (response['paymentIdCreation'] == true) {
                 console.log(response);
                 const checkoutOptions = {
-                    checkoutKey: response['checkoutKey'], // Replace!
+                    checkoutKey: "test-checkout-key-e1cf229bca36462f887e9d981a7a0313", // Replace!
                     paymentId: response['paymentId'],
                     containerId: "checkout-container-div",
                   };

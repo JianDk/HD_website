@@ -66,7 +66,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware'   
 ]
+REFERRER_POLICY = 'strict-origin'
 
 CSP_DEFAULT_SRC = ["'self'", 
 'https://www.google.com',

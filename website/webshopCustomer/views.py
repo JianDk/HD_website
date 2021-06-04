@@ -112,7 +112,7 @@ class DeliveryForm(View):
         
         #Decide if delivery is still possible
         deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
-
+        deliveryPossible = True #<-----------------------------------------------CHANGE HERE
         if deliveryPossible is False:
             #Redirect the user to pickup
             context = dict()
@@ -131,8 +131,6 @@ class DeliveryForm(View):
             name = 'Hidden Dimsum 2900 Takeaway',
             paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
             unitPrice = int(totalPrice) *100)
-        
-        paymentId = paymentId.json()['paymentId']
 
         context = dict()
         #Get the total price and add on top of it the bag fee and delivery cost
@@ -143,6 +141,7 @@ class DeliveryForm(View):
         context['grandTotal'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + context['deliveryCost'] + context['bagFee']
         checkoutLocalDeliveryForm = customerLocalDeliveryForm(deliveryTimeList = deliveryTimeList, auto_id = True)
         context['customerDeliveryForm'] = checkoutLocalDeliveryForm
+        context['paymentId'] = paymentId.json()['paymentId']
 
         return render(request, template_name = "takeawayWebshop/checkoutLocalDelivery.html", context = context)
         
@@ -209,5 +208,6 @@ class Payment(View):
             context['checkoutKey'] = checkoutKey 
         
         return JsonResponse(context, status = 200)
+
 
 
