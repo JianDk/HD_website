@@ -1,3 +1,4 @@
+from types import CodeType
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import JsonResponse
@@ -53,7 +54,6 @@ class TakeawayCheckout(View):
         'deliveryPossible' : deliveryPossible,  #Relates to if it at all is possible to order delivery for today at the given time
         'deliveryButtonActive' : deliveryButtonActive, #checks if the total price is above the minimum limit for delivery
         'totalPriceDeliveryMessage' : totalPriceDeliveryMessage}
-        
         return render(request, template_name = 'takeawayWebshop/webshopCheckout.html', context = context)
 
 class totalPriceDeliveryPossible(View):
@@ -121,6 +121,19 @@ class DeliveryForm(View):
         
         #Generate time list for receiving delivery package
         deliveryTimeList = self.hd2900RestaurantObject.get_deliveryTimeList()
+
+        #Get the payment id from NETS
+        #Calculate the grand total the total price in basket + delivery fee 0 bag fee
+        totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.delivery_fee + self.hd2900RestaurantObject.restaurantModelData.bagFee
+        payment = NETS()
+        paymentId = payment.get_paymentId(platform = platform,
+            reference = 'here comes order id', 
+            name = 'Hidden Dimsum 2900 Takeaway',
+            paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
+            unitPrice = int(totalPrice) *100)
+        
+        paymentId = paymentId.json()['paymentId']
+
         context = dict()
         #Get the total price and add on top of it the bag fee and delivery cost
         context['title'] = 'Local delivery checkout'
@@ -132,6 +145,7 @@ class DeliveryForm(View):
         context['customerDeliveryForm'] = checkoutLocalDeliveryForm
 
         return render(request, template_name = "takeawayWebshop/checkoutLocalDelivery.html", context = context)
+        
 
 class localDeliveryCheckoutAddressCheck(View):
     def __init__(self):

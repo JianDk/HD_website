@@ -5,8 +5,7 @@ $( document ).ready(function(){
 })
 
 document.getElementById("paymentButton").addEventListener("click", function() {
-    //Collect all the fields value and send it to the server
-    console.log("pay button clicked")
+    //Collect all the fields value and send it to the serve
     $.ajax({
         url : "localDeliveryPayment",
         type : "get",
@@ -21,7 +20,6 @@ document.getElementById("paymentButton").addEventListener("click", function() {
                     containerId: "checkout-container-div",
                   };
                   const checkout = new Dibs.Checkout(checkoutOptions);
-                  
                   checkout.on('payment-completed', function (response) {
                     window.location = 'completed.html';
                   });
