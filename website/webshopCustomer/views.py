@@ -12,6 +12,7 @@ from website.Modules.paymentModule import NETS
 # Create your views here.
 session_id_key = 'hd2900TakeAwayCartId'
 restaurantName = "Hidden Dimsum 2900"
+platform = 'test' #The platform for NETS payment
 
 class TakeawayCheckout(View):
     def __init__(self):
@@ -164,14 +165,35 @@ class Payment(View):
         #Check if session is valid
         sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
 
+        context = dict()
         if sessionValid is False: #the session has expired and the user needs to start over
-            return redirect('/hd2900_takeaway_webshop')
+            context['sessionExpired'] = True
+        else:
+            context['sessionExpired'] = False
 
         #Calculate the grand total the total price in basket + delivery fee 0 bag fee
         totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.delivery_fee + self.hd2900RestaurantObject.restaurantModelData.bagFee
         
         #Grab the form field information
-        
         payment = NETS()
+        paymentId = payment.get_paymentId(platform = platform,
+        reference = 'here comes order id', 
+        name = 'Hidden Dimsum 2900 Takeaway',
+        paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
+        unitPrice = int(totalPrice) *100)
 
-        return HttpResponse(request, 'hello world')
+        checkoutKey = payment.getCheckoutKey(platform = platform)
+
+        if paymentId.status_code == 201:
+            context['paymentIdCreation'] = True
+            context['paymentId'] = paymentId.json()['paymentId']
+            context['checkoutKey'] = checkoutKey
+
+        else:
+            context['paymentIdCreation'] = False
+            context['paymentId'] = paymentId.json()['paymentId']
+            context['checkoutKey'] = checkoutKey 
+        
+        return JsonResponse(context, status = 200)
+
+

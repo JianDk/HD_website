@@ -52,9 +52,12 @@
 <div id="localDeliveryForm">
     <form action="/localDeliveryPayment" method="get">
         {{ customerDeliveryForm.as_p }}
-        <button type="submit" class="btn btn-success" id="payment">Pay</button>
     </form>
+    <button type="button" class="btn btn-success" id="paymentButton">Pay</button>
 </div>
+<div id="checkout-container-div"> </div>   
+
 {% include 'takeawayWebshop/standardScripts.html' %}
 <script src="{% static 'scripts/checkoutLocalDeliveryFormHandler.js' %}"></script>
+<script src="https://test.checkout.dibspayment.eu/v1/checkout.js?v=1"></script>  
 {% endblock %}

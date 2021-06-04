@@ -49,8 +49,8 @@ class NETS:
         data['checkout']['charge'] = True
         data['checkout']['publicDevice'] = False
         data['checkout']['integrationType'] = 'EmbeddedCheckout'
-        data['checkout']['url'] = 'http://127.0.0.1:8002/deliveryFormCheckout' #<-------------SHOULD BE CHANGED
-        data['checkout']['termsUrl'] = 'http://127.0.0.1:8002/deliveryFormCheckout' #<------------SHOULD BE CHANGED
+        data['checkout']['url'] = 'http://127.0.0.1:8000/deliveryFormCheckout' #<-------------SHOULD BE CHANGED
+        data['checkout']['termsUrl'] = 'http://127.0.0.1:8000/deliveryFormCheckout' #<------------SHOULD BE CHANGED
         data['checkout']['merchantHandlesConsumerData'] = True
 
         self.json_formatted_str = json.dumps(data, indent=4)
@@ -76,10 +76,11 @@ class NETS:
         
         #Do the actual post
         resp = self._requestPost(url = url, headers = headers, data = data)
-        print('here is the response from post')
-        print(resp.status_code)
-        print(resp.json())
+        return resp
     
+    def getCheckoutKey(self, platform):
+        return self.secretKeys[platform]['checkoutKey']
+
     def _requestPost(self, url, data, headers):
         with requests.Session() as session:
             resp = session.post(url = url, headers = headers, data = data)

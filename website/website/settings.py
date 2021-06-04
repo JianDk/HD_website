@@ -65,7 +65,32 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
+
+CSP_DEFAULT_SRC = ["'self'", 
+'https://www.google.com',
+'https://cdnjs.cloudflare.com',
+'https://dawa.aws.dk',
+'https://test.checkout.dibspayment.eu']
+
+CSP_SCRIPT_SRC = ["'self'", 
+'https://www.google.com', 
+'https://code.jquery.com', 
+'https://www.gstatic.com',
+'https://stackpath.bootstrapcdn.com',
+'https://www.gstatic.com/recaptcha',
+'https://cdn.jsdelivr.net',
+'https://cdnjs.cloudflare.com',
+'https://test.checkout.dibspayment.eu',
+"'unsafe-inline'"]
+
+CSP_STYLE_SRC = ["'self'", 
+'https://cdnjs.cloudflare.com', 
+'https://test.checkout.dibspayment.eu',
+"'unsafe-inline'"]
+
+CSP_IMG_SRC = ["'self'", 'data:']
 
 ROOT_URLCONF = 'website.urls'
 
@@ -86,7 +111,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'website.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
