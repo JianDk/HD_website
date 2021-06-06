@@ -99,12 +99,7 @@ def get_BasketTotalPrice(session_id):
         return totalPrice
     else:
         for item in cartItems:
-            print(item.product)
-            print(item.quantity)
-            print(item.product.price)
-            print('\n')
             totalPrice += (item.quantity * item.product.price)
-        print(totalPrice,' dkk')
         return totalPrice
 
 def createNewSessionId():

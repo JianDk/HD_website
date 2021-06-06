@@ -24,7 +24,7 @@ class hd2900_webshop_Main(View):
         #Inform visitor the delivery status today
         deliveryStatus = self.hd2900RestaurantObject.isDeliveryOpenToday()
         if deliveryStatus:
-            takeawayStatusMsg = "Local delivery is available today"
+            takeawayStatusMsg = "We offer local delivery today"
         else:
             takeawayStatusMsg = "Order online and pickup at Hidden Dimsum 2900. Local delivery not available today"
 
@@ -44,6 +44,8 @@ class hd2900_webshop_Main(View):
             productToDisplay = self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = [])
             totalItemsInBasket = 0
 
+        #Delivery radius to inform the customer in the delivery policy section
+        print(self.hd2900RestaurantObject.restaurantModelData.delivery_radius)
         #form for checking if customer address is within delivery range
         addressFieldForm = DeliveryPossible(request.GET)
     
@@ -54,8 +56,11 @@ class hd2900_webshop_Main(View):
             'addressField' : addressFieldForm,
             'products' : productToDisplay,
             'totalItemsInBasket' : totalItemsInBasket,
+            'deliveryRadius' : self.hd2900RestaurantObject.restaurantModelData.delivery_radius,
+            'deliveryFee' : self.hd2900RestaurantObject.restaurantModelData.delivery_fee,
+            'minimumOrderForDelivery' : self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery,
         }
-        return render(request, template_name="takeawayWebshop/base.html", context = context)
+        return render(request, template_name="takeawayWebshop/takeawayProducts.html", context = context)
     
     def post(self, request, *args, **kwargs):
         return HttpResponse('<h1>hello world</h1>')

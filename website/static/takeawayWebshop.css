@@ -10,7 +10,7 @@
   font-weight: bold;
 }
 
-/*Navbar for webshop*/
+/*Infor box for delivery possible today status at the header of the page*/
 #takeawayStatusInfoBox {
   background-color: black;
   color: white;
@@ -18,20 +18,47 @@
   font-family: hdFont;
   font-weight: bold;
   font-size: 1.5rem;
+  border: 5px solid green;
 }
 
-.navbar {
-	border: black 3px solid;
+#takeawayStatusTodayHeader {
+  font-family: hdFont;
+  font-size: 1.5rem;
+  color: yellow;
+}
+
+/*Header container with logo and shopping cart*/
+
+#takeawayHeaderContainer {
+  border: 3px solid red;
+  display: inline;
+}
+
+#headerLogo {
+  border: black 3px solid;
+  width: 30vw;
+}
+
+#cartIconContent {
+  border: green 3px solid;
+}
+
+#shoppingCartIcon {
+  float: right;
+  font-size: 2rem;
+  margin-right: 5vw;
 }
 
 #lblCartCount {
-    font-size: 12px;
+    font-size: 16px;
     background: #ff0000;
     color: #fff;
     padding: 0 5px;
     vertical-align: top;
-    margin-left: -10px;
+    margin-right: -3 vw;
+    float: right;
 }
+
 .badge {
   padding-left: 9px;
   padding-right: 9px;
@@ -39,12 +66,26 @@
   -moz-border-radius: 9px;
   border-radius: 9px;
 }
-
 .label-warning[href],
 .badge-warning[href] {
   background-color: #c67605;
 }
 
+/*delivery policy*/
+#deliveryPolicyMainContainer {
+  border: 1px solid red;
+}
+#deliveryPolicyHeader {
+  text-align: center;
+  font-family: hdFont;
+  width: 100%;
+}
+
+/*Delivery policy*/
+.deliveryInfo {
+  font-family: hdFont;
+  font-size: 1.5rem;
+}
 /* Address autocomplete */
 label {
   color: black;

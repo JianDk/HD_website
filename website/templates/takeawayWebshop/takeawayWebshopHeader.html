@@ -1,0 +1,27 @@
+{% load static %}
+<div class="container-fluid" id="takeawayStatusInfoBox">
+    <div class="row">
+        <div class="col-lg">
+            <h1 id="takeawayStatusTodayHeader">
+                {{takeawayStatusToday}}
+            </h1>            
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" id="takeawayHeaderContainer">
+    <div class="row">
+        <div class="col-sm" id="HD2900HeaderLogoContent">
+            <a href="hd2900">
+                <img src="{% static 'media/hd2900coverLogo.png' %}" id="headerLogo" alt="">
+            </a>
+        </div>
+
+        <div class="col-sm" id="cartIconContent">
+            <a href="/takeawayCheckout">
+                <i class="fa" id="shoppingCartIcon">&#xf07a;</i> <!--this code codes for the shopping cart icon-->
+                <span class='badge badge-warning' id='lblCartCount'> {{totalItemsInBasket}} </span>
+            </a>
+        </div>
+    </div>
+</div>

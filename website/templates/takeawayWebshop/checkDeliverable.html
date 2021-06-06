@@ -1,10 +1,29 @@
 {% if deliveryStatus %}
-<h1>Check if your address is within our delivery range</h1>
+<div class="container-fluid" id="deliveryPolicyMainContainer">
+    <div class="col">
+        <div class="row">
+            <h1 id ="deliveryPolicyHeader">TAKEAWAY DELIVERY INFORMATION</h1>
+        </div>
+        <div class="row">
+            <ul>
+                <h2 class="deliveryInfo">We deliver within a radius of {{deliveryRadius}} km</h2>    
+                <h2 class="deliveryInfo">Delivery fee {{deliveryFee}} kr</h2>
+                <h2 class="deliveryInfo">Delivery possible for order above {{minimumOrderForDelivery}} kr</h2>
+                {% include 'takeawayWebshop/webshopAddressVerification.html' %}
+            </ul>
+        </div>
 
-<form method="post" id="buttonCheckDeliveryPossible">
-    {% csrf_token %}
-    {{ addressField }}
-    <button class="btn btn-success" value ="Check" id="addressSubmitButton">Submit</button>
-</form>
-<div id="deliveryPossibleServerResponse"></div>
+        <div class="row">
+            <form method="post" id="buttonCheckDeliveryPossible">
+                {% csrf_token %}
+                {{ addressField }}
+                <button class="btn btn-success" value ="Check" id="addressSubmitButton">Submit</button>
+            </form>
+        </div>
+        
+        <div class="row">
+            <div id="deliveryPossibleServerResponse"></div>
+        </div>
+    </div>
+</div>
 {% endif %}

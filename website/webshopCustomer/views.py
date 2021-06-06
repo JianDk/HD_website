@@ -112,7 +112,7 @@ class DeliveryForm(View):
         
         #Decide if delivery is still possible
         deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
-        deliveryPossible = True #<-----------------------------------------------CHANGE HERE
+
         if deliveryPossible is False:
             #Redirect the user to pickup
             context = dict()
