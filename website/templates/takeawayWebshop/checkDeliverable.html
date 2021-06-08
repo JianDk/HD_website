@@ -3,10 +3,11 @@
     <div class="col">
         <div class="row">
             <h1 id ="deliveryPolicyHeader">TAKEAWAY DELIVERY INFORMATION</h1>
+            <hr class = "cardDeckHorisontalLine">
         </div>
         <div class="row">
             <ul>
-                <h2 class="deliveryInfo">We deliver within a radius of {{deliveryRadius}} km</h2>    
+                <h2 class="deliveryInfo">Takeaway delivery is possible today between {{deliveryStartTime}} - {{deliveryEndTime}} within a radius of {{deliveryRadius}} km</h2>    
                 <h2 class="deliveryInfo">Delivery fee {{deliveryFee}} kr</h2>
                 <h2 class="deliveryInfo">Delivery possible for order above {{minimumOrderForDelivery}} kr</h2>
                 {% include 'takeawayWebshop/webshopAddressVerification.html' %}

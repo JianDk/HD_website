@@ -23,6 +23,7 @@ class hd2900_webshop_Main(View):
     def get(self, request, *args, **kwargs):
         #Inform visitor the delivery status today
         deliveryStatus = self.hd2900RestaurantObject.isDeliveryOpenToday()
+
         if deliveryStatus:
             takeawayStatusMsg = "We offer local delivery today"
         else:
@@ -44,15 +45,18 @@ class hd2900_webshop_Main(View):
             productToDisplay = self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = [])
             totalItemsInBasket = 0
 
-        #Delivery radius to inform the customer in the delivery policy section
-        print(self.hd2900RestaurantObject.restaurantModelData.delivery_radius)
         #form for checking if customer address is within delivery range
-        addressFieldForm = DeliveryPossible(request.GET)
+        addressFieldForm = DeliveryPossible(request.GET) #<-------------------REMOVE THIS
+        print('here is delivery end time!!!!!!!!!')
+        print(self.hd2900RestaurantObject.get_deliveryOpenTime().strftime('%H:%M'))
+        
     
         context = {
             'title' : restaurantName + ' online takeaway',
             'takeawayStatusToday' : takeawayStatusMsg,
             'deliveryStatus' : deliveryStatus,
+            'deliveryStartTime' : self.hd2900RestaurantObject.get_deliveryOpenTime().strftime('%H:%M'),
+            'deliveryEndTime' : self.hd2900RestaurantObject.get_deliveryEndtime().strftime('%H:%M'),
             'addressField' : addressFieldForm,
             'products' : productToDisplay,
             'totalItemsInBasket' : totalItemsInBasket,
@@ -61,9 +65,6 @@ class hd2900_webshop_Main(View):
             'minimumOrderForDelivery' : self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery,
         }
         return render(request, template_name="takeawayWebshop/takeawayProducts.html", context = context)
-    
-    def post(self, request, *args, **kwargs):
-        return HttpResponse('<h1>hello world</h1>')
 
 class ChangeItemQuantity(View):
     def __init__(self):
