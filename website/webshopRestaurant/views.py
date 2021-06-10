@@ -1,7 +1,6 @@
 from webshopRestaurant.models import Restaurant
 from django.shortcuts import render
 from django.http import JsonResponse
-from webshopRestaurant.forms import DeliveryPossible
 # Create your views here.
 from django.views import View
 from django.http import HttpResponse
@@ -44,20 +43,14 @@ class hd2900_webshop_Main(View):
         else:
             productToDisplay = self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = [])
             totalItemsInBasket = 0
-
-        #form for checking if customer address is within delivery range
-        addressFieldForm = DeliveryPossible(request.GET) #<-------------------REMOVE THIS
-        print('here is delivery end time!!!!!!!!!')
-        print(self.hd2900RestaurantObject.get_deliveryOpenTime().strftime('%H:%M'))
-        
-    
+        print('here is product to display!!!!!!!!!!!')
+        print(productToDisplay)
         context = {
             'title' : restaurantName + ' online takeaway',
             'takeawayStatusToday' : takeawayStatusMsg,
             'deliveryStatus' : deliveryStatus,
             'deliveryStartTime' : self.hd2900RestaurantObject.get_deliveryOpenTime().strftime('%H:%M'),
             'deliveryEndTime' : self.hd2900RestaurantObject.get_deliveryEndtime().strftime('%H:%M'),
-            'addressField' : addressFieldForm,
             'products' : productToDisplay,
             'totalItemsInBasket' : totalItemsInBasket,
             'deliveryRadius' : self.hd2900RestaurantObject.restaurantModelData.delivery_radius,

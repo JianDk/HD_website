@@ -13,18 +13,6 @@
                 {% include 'takeawayWebshop/webshopAddressVerification.html' %}
             </ul>
         </div>
-
-        <div class="row">
-            <form method="post" id="buttonCheckDeliveryPossible">
-                {% csrf_token %}
-                {{ addressField }}
-                <button class="btn btn-success" value ="Check" id="addressSubmitButton">Submit</button>
-            </form>
-        </div>
-        
-        <div class="row">
-            <div id="deliveryPossibleServerResponse"></div>
-        </div>
     </div>
 </div>
 {% endif %}

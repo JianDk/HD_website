@@ -1,45 +1,51 @@
 {% load static %}
-<div class="card-deck">
-{% for item in products %}
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <!--Title -->
-    <h5 class="card-title">{{ item.product.name }}</h5>
+<div class="container-fluid">
+  <div class="row">
+    <div class="card-deck">
+      {% for item in products %}
+        <div class="col-auto">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <!--Title -->
+                <h5 class="card-title">{{ item.product.name }}</h5>
 
-    <!--Product image with link -->
-    <a href="#">
-      <img class="card-img" src="{% get_media_prefix %}{{ item.product.image_path }}" alt="{{item.meta_description}}">
-    </a>
-    
-    <!--Product description-->
-    <p class="card-text">{{item.product.description}}</p>
-    
-    <!--Allergic note -->
-    {% if item.allergic_note %}
-      <p class="card-text">{{ item.product.allergic_note }}</p>
-    {% endif %}
+                <!--Product image with link -->
+                <a href="#">
+                  <img class="card-img" src="{% get_media_prefix %}{{ item.product.image_path }}" alt="{{item.meta_description}}">
+                </a>
+                
+                <!--Product description-->
+                <p class="card-text">{{item.product.description}}</p>
+                
+                <!--Allergic note -->
+                {% if item.allergic_note %}
+                  <p class="card-text">{{ item.product.allergic_note }}</p>
+                {% endif %}
 
-    <!--Price-->
-    <h5 class="mt-4">{{item.product.price}},- </h5>
+                <!--Price-->
+                <h5 class="mt-4">{{item.product.price}},- </h5>
 
-    <div class="input-group">
-      
-      <div class="input-group-prepend">
-        <button class="btn btn-outline-secondary subtractItem" type="button" id="btn_subtract_{{item.product.slug}}" onclick="itemQuantityChangeButton(this)">
-          -
-        </button>
-      </div>
+                <div class="input-group">
+                  
+                  <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary subtractItem" type="button" id="btn_subtract_{{item.product.slug}}" onclick="itemQuantityChangeButton(this)">
+                      -
+                    </button>
+                  </div>
 
-      <input type="text" class="form-control" id="text_{{ item.product.slug }}" placeholder="{{item.quantity}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
+                  <input type="text" class="form-control" id="text_{{ item.product.slug }}" placeholder="{{item.quantity}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
 
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.product.slug}}" onclick="itemQuantityChangeButton(this)">
-          +
-        </button>
-      </div>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.product.slug}}" onclick="itemQuantityChangeButton(this)">
+                      +
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+      {% endfor %}
     </div>
-
   </div>
-</div>
-{% endfor %}
 </div>
