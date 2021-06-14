@@ -64,7 +64,7 @@ class NETS:
 
         if platform == 'production':
             secretKey = self.secretKeys['production']['secretKey']
-            url = 'api.dibspayment.eu/v1/payments/'
+            url = 'https://api.dibspayment.eu/v1/payments/'
         
         #Insert secretKey in header
         headers = {'Content-Type': 'application/json',
@@ -76,6 +76,11 @@ class NETS:
         
         #Do the actual post
         resp = self._requestPost(url = url, headers = headers, data = data)
+        print(url)
+        print('\n')
+        print(headers)
+        print('\n')
+        print(data)
         return resp
     
     def getCheckoutKey(self, platform):
@@ -84,5 +89,4 @@ class NETS:
     def _requestPost(self, url, data, headers):
         with requests.Session() as session:
             resp = session.post(url = url, headers = headers, data = data)
-
         return resp

@@ -1,4 +1,5 @@
 from webshopRestaurant.models import Restaurant
+from index.forms import newsLetterForm
 from django.shortcuts import render
 from django.http import JsonResponse
 # Create your views here.
@@ -18,6 +19,7 @@ class hd2900_webshop_Main(View):
     def __init__(self):
         #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
         self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
+        self.emailSignUp = newsLetterForm()
 
     def get(self, request, *args, **kwargs):
         #Inform visitor the delivery status today
@@ -43,8 +45,7 @@ class hd2900_webshop_Main(View):
         else:
             productToDisplay = self.hd2900RestaurantObject.generateProductsForView(allActiveProducts = allActiveProducts, sessionItems = [])
             totalItemsInBasket = 0
-        print('here is product to display!!!!!!!!!!!')
-        print(productToDisplay)
+
         context = {
             'title' : restaurantName + ' online takeaway',
             'takeawayStatusToday' : takeawayStatusMsg,
@@ -56,6 +57,14 @@ class hd2900_webshop_Main(View):
             'deliveryRadius' : self.hd2900RestaurantObject.restaurantModelData.delivery_radius,
             'deliveryFee' : self.hd2900RestaurantObject.restaurantModelData.delivery_fee,
             'minimumOrderForDelivery' : self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery,
+            'emailSignUpForm' : self.emailSignUp,
+            'facebookLink ': 'https://www.facebook.com/pages/category/Dim-Sum-Restaurant/Hidden-Dimsum-2900-100653481855726/',
+            'instagramLink' : 'https://www.instagram.com/hiddendimsum2900/',
+            'youtubeLink' : 'https://www.youtube.com/channel/UC-ryuXvGrMK2WQHBDui2lxw',
+            'shopTitle' : 'Hidden Dimsum 2900',
+            'addressStreet' : 'Strandvejen 163, 2900 Hellerup',
+            'addressPhone' : 'Phone : 40 38 88 84',
+            'addressCVR' : 'CVR : 38908901'
         }
         return render(request, template_name="takeawayWebshop/takeawayProducts.html", context = context)
 

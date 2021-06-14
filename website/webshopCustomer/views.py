@@ -131,6 +131,11 @@ class DeliveryForm(View):
             name = 'Hidden Dimsum 2900 Takeaway',
             paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
             unitPrice = int(totalPrice) *100)
+        
+        print('here is the payment ID')
+        print(paymentId)
+        print(paymentId.json())
+        print('------------------------')
 
         context = dict()
         #Get the total price and add on top of it the bag fee and delivery cost

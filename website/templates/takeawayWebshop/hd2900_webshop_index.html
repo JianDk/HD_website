@@ -1,17 +1,19 @@
 {% load static %}
-<div class="container-fluid">
+<div class="container-fluid h-100">
+  <h1 class="contentHeader">Menu</h1>
+  <hr class = "cardDeckHorisontalLine">
   <div class="row">
-    <div class="card-deck">
+    <div class="card-deck justify-content-center">
       {% for item in products %}
-        <div class="col-auto">
-            <div class="card" style="width: 18rem;">
+        <div class="col-auto mt-5">
+            <div class="card h-100 text-center" style="width: 18rem;">
               <div class="card-body">
                 <!--Title -->
                 <h5 class="card-title">{{ item.product.name }}</h5>
 
                 <!--Product image with link -->
                 <a href="#">
-                  <img class="card-img" src="{% get_media_prefix %}{{ item.product.image_path }}" alt="{{item.meta_description}}">
+                  <img class="card-img embed-responsive-item" src="{% get_media_prefix %}{{ item.product.image_path }}" alt="{{item.meta_description}}">
                 </a>
                 
                 <!--Product description-->
@@ -47,5 +49,13 @@
           </div>
       {% endfor %}
     </div>
+  </div>
+</div>
+
+<div class="container-fluid d-flex justify-content-end">
+  <div class="row">
+    <a href="/takeawayCheckout" role="button" id="checkoutLink">
+      <button type="button" class="btn btn-success btn-lg">Checkout</button>
+    </a>
   </div>
 </div>

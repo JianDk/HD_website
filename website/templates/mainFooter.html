@@ -1,68 +1,69 @@
 {% load static %}
-<section id ="anchor-mainContact">
-  <footer class="bg-dark text-light text-center">
-    <div class="container-fluid" id="footerMain">
-      
-      <!--Social media icons-->
-      <a href="{{ facebookLink }}" target="_blank">
-        <img src={% static 'media/facebookIcon.png' %} class="socialMediaIcon" alt="Hidden Dimsum Facebook profile">
-      </a>
-      <a href="{{ instagramLink }}" target="_blank">
-        <img src={% static 'media/instagramIcon.png' %} class="socialMediaIcon" alt="Hidden Dimsum Instragram profile">
-      </a>
-      <a href="{{ youtubeLink }}" target="_blank">
-        <img src={% static 'media/youtubeIcon.png' %} class="socialMediaIcon" alt="Hidden Dimsum Youtube profile">
-      </a>
+<div class="container-fluid">
+  <section id ="anchor-mainContact">
+    <footer class="bg-dark text-light text-center">
+      <div class="container-fluid" id="footerMain">
+        
+        <!--Social media icons-->
+        <a href="{{ facebookLink }}" target="_blank">
+          <img src={% static 'media/facebookIcon.png' %} class="socialMediaIcon" alt="Hidden Dimsum Facebook profile">
+        </a>
+        <a href="{{ instagramLink }}" target="_blank">
+          <img src={% static 'media/instagramIcon.png' %} class="socialMediaIcon" alt="Hidden Dimsum Instragram profile">
+        </a>
+        <a href="{{ youtubeLink }}" target="_blank">
+          <img src={% static 'media/youtubeIcon.png' %} class="socialMediaIcon" alt="Hidden Dimsum Youtube profile">
+        </a>
 
 
-      <!--News letter subscription form-->
-      <!--Grid row-->
-      <div class="row d-flex justify-content-center">
-        <!--Grid column email newsletter subscription-->
-        <div class="col-auto">
-          <p class="pt-2">
-            <form method="post" id="newsletterForm">
-              {% csrf_token %}
-              <strong id="signUpEmailTitle">
-                {{ emailSignUpForm.signUpEmail.label|linebreaks }}
-                {{ emailSignUpForm.signUpEmail }}
-              </strong>
+        <!--News letter subscription form-->
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+          <!--Grid column email newsletter subscription-->
+          <div class="col-auto">
+            <p class="pt-2">
+              <form method="post" id="newsletterForm">
+                {% csrf_token %}
+                <strong id="signUpEmailTitle">
+                  {{ emailSignUpForm.signUpEmail.label|linebreaks }}
+                  {{ emailSignUpForm.signUpEmail }}
+                </strong>
 
-              <!--Button -->
-              <button type="submit" class="btn btn-success" value ="Submit" id="newsLetterSubmitButton">Submit</button>
-              <div id="emailStatusMsg">
-                {% if messages %}
-                    {% for message in messages %}
-                      {% if 'emailSubscription' in message.tags %}
-                        {{ message }}
-                      {% endif %}
-                    {% endfor %}
-                {% endif %}
-              </div>
-            </form>
-          </p>
+                <!--Button -->
+                <button type="submit" class="btn btn-success" value ="Submit" id="newsLetterSubmitButton">Submit</button>
+                <div id="emailStatusMsg">
+                  {% if messages %}
+                      {% for message in messages %}
+                        {% if 'emailSubscription' in message.tags %}
+                          {{ message }}
+                        {% endif %}
+                      {% endfor %}
+                  {% endif %}
+                </div>
+              </form>
+            </p>
+          </div>
         </div>
+
+
+        <section class="mb-4" id="footerAddress">
+          <p>
+            <div id="shopTitle">{{ shopTitle }}</div> 
+            {{ addressStreet }}
+            <br>
+            {{ addressPhone }}
+            <br>
+            <a href="mailto:kontakt@dimsum.dk">{{ addressEmail }}</a>
+            <br>
+            {{ addressCVR }}
+            <br>
+            <br>
+            © 2020 Copyright Hidden Dimsum
+
+          </p>
+        </section>
+
       </div>
-
-
-      <section class="mb-4" id="footerAddress">
-        <p>
-          <div id="shopTitle">{{ shopTitle }}</div> 
-          {{ addressStreet }}
-          <br>
-          {{ addressPhone }}
-          <br>
-          <a href="mailto:kontakt@dimsum.dk">{{ addressEmail }}</a>
-          <br>
-          {{ addressCVR }}
-          <br>
-          <br>
-          © 2020 Copyright Hidden Dimsum
-
-        </p>
-      </section>
-
-    </div>
-  </footer>
-
-</section>
+    </footer>
+  </section>
+</div>

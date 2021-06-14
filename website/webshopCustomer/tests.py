@@ -36,8 +36,8 @@ class NETS:
         data['checkout']['charge'] = True
         data['checkout']['publicDevice'] = False
         data['checkout']['integrationType'] = 'EmbeddedCheckout'
-        data['checkout']['url'] = 'http://127.0.0.1:8001/deliveryFormCheckout' #<-------------SHOULD BE CHANGED
-        data['checkout']['termsUrl'] = 'http://127.0.0.1:8001/deliveryFormCheckout' #<------------SHOULD BE CHANGED
+        data['checkout']['url'] = 'http://127.0.0.1:8000/deliveryFormCheckout' #<-------------SHOULD BE CHANGED
+        data['checkout']['termsUrl'] = 'http://127.0.0.1:8000/deliveryFormCheckout' #<------------SHOULD BE CHANGED
         data['checkout']['merchantHandlesConsumerData'] = True
 
         self.json_formatted_str = json.dumps(data, indent=4)
@@ -62,10 +62,14 @@ class NETS:
         data = self.create_order(reference = reference, name = name, quantity = 1, unitPrice = unitPrice, paymentReference = paymentReference )
         
         #Do the actual post
+        print(url)
+        print(headers)
+        print(data)
+
+
         resp = self._requestPost(url = url, headers = headers, data = data)
         print('here is the response from post')
         print(resp.status_code)
-        print(resp.json())
     
     def _requestPost(self, url, data, headers):
         with requests.Session() as session:
@@ -73,11 +77,10 @@ class NETS:
 
         return resp
  
-platform = 'test'
+
 payment = NETS()
-payment.get_paymentId(platform = platform, 
-reference = 'here comes order id', 
-name = 'Hidden Dimsum 2900 Takeaway',
-paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
-unitPrice = 10000,
-)
+payment.get_paymentId(platform = 'test', 
+name = 'Hidden Dimsum 2900', 
+unitPrice=10000, 
+paymentReference='testRef', 
+reference='product reference')

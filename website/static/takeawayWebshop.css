@@ -71,7 +71,7 @@
 }
 
 /*delivery policy*/
-#deliveryPolicyHeader {
+.contentHeader {
   text-align: center;
   font-family: hdFont;
   width: 100%;
@@ -138,4 +138,23 @@ label {
 .dawa-autocomplete-suggestions .dawa-autocomplete-suggestion.dawa-selected,
 .dawa-autocomplete-suggestions .dawa-autocomplete-suggestion:hover {
   background: #f0f0f0;
+}
+
+/*Product cards*/
+
+.card-img {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+}
+
+#checkoutButton {
+  font-family: hdFont;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+#checkoutLink {
+  margin-right: 10vw;
 }
