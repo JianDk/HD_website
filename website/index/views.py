@@ -117,7 +117,7 @@ class hdnytorv(View):
             ('MENU', '/hdnytorv#menuHeader',),
             ('ABOUT US', '/hdnytorv#aboutUsLogo',),
             ('CONTACT', '/hdnytorv#contactForm',),
-            ('BOOK TABLE', 'https://book.easytablebooking.com/book/?id=bb7ae&lang=en',)
+            ('BOOK TABLE', '/hdnytorv#easyTableBookingContainer',)
         ])
     
     def get(self, request, *args, **kwargs):
