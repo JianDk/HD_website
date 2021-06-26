@@ -24,11 +24,11 @@ dawaAutocomplete.dawaAutocomplete( document.getElementById("checkoutLocalDeliver
             if (response['distance_within_delivery_range'] == 1) {
             localDeliveryTag.style.display = "block";
             document.getElementById("takeawayPickUp").style.display = "none"; 
-            document.getElementById("valgtadresse").innerHTML = "Takeaway can be delivered to " + selected.tekst
+            document.getElementById("valgtadresse").innerHTML = "Takeaway can be delivered to : " + selected.tekst
             } else {
               localDeliveryTag.style.display = "none";
               document.getElementById("takeawayPickUp").style.display = "block"; 
-              document.getElementById("valgtadresse").innerHTML = "Sorry your address " + selected.tekst + " is outside our delivery range. Takeaway is available for pickup."
+              document.getElementById("valgtadresse").innerHTML = "Sorry your address : " + selected.tekst + " is outside our delivery range. Takeaway is available for pickup."
             }
 
           }          

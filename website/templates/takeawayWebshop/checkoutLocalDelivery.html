@@ -50,10 +50,11 @@
 {% include 'takeawayWebshop/webshopAddressVerification.html' %}
 <button type="button" class="btn btn-success" id ="takeawayPickUp">Takeaway pickup</button>
 <div id="localDeliveryForm">
-    <form action="/localDeliveryPayment" method="get">
+    <form action="/localDeliveryPayment" method="get" id="localDeliveryCheckoutForm">
         {{ customerDeliveryForm.as_p }}
+        <button type="submit" class="btn btn-success" id="paymentButton">Payment</button>
     </form>
-    <button type="button" class="btn btn-success" id="paymentButton">Payment</button>
+    
 </div>
 <div id="checkout-container-div"> </div>   
 
