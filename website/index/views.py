@@ -60,6 +60,7 @@ class indexPage(View):
         self.ContextObject = ContextBuilder()
         self.ContextObject.importTextFile(str(settings.BASE_DIR) + '/static/mainAboutUs.txt')
         self.ContextObject.Set_headerCoverImageLinks(linksList = [
+            ('BOOK TABLE', '/hdnytorv#easyTableBookingContainer'),
             ('LOCATIONS', '#anchor_locations'),
             ('ABOUT US', '#anchor-aboutUs'),
             ('CONTACT', '#anchor-mainContact')
