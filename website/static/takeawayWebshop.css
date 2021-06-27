@@ -141,7 +141,6 @@ label {
 }
 
 /*Product cards*/
-
 .card-img {
   width: 100%;
   height: 40vh;
@@ -157,4 +156,29 @@ label {
 
 #checkoutLink {
   margin-right: 10vw;
+}
+
+/*Checkout local delivery page*/
+table {
+  width: 95%;
+  border-bottom: 1px solid black;
+  font-family: hdFont;
+  font-size: 1.3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  text-align: center;
+  border-bottom: 1px solid black ;
+}
+
+td {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.totalCost {
+  font-family: hdFont;
+  font-weight: bold;
 }

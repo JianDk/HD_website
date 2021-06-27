@@ -1,11 +1,14 @@
 {% load static %}
-<label for='adresse'>Delivery address:</label>
+<div class="container" id="addressVerificationContainer">
+  <label for='adresse'>Delivery address:</label>
     <div class='autocomplete-container'>
-      <input type="text" id="checkoutLocalDeliveryAddress">
+      <input type="text" name="addressField" id="checkoutLocalDeliveryAddress">
     </div>
+    
     <p><span id="valgtadresse"/></p>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
     <script src="{% static 'dawa-autocomplete2/dist/js/dawa-autocomplete2.min.js' %}"></script>
     <script src="{% static 'scripts/addressAutocomplete.js' %}"></script>
+</div>

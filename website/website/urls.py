@@ -29,7 +29,7 @@ urlpatterns = [
     path('', indexPage.as_view(), name = 'index'),
     path('hdnytorv', hdnytorv.as_view(), name='hdnytorv'),
     path('hd2900', views.hd2900.as_view(), name='hd2900'),
-    path('hd2900_takeaway_webshop', hd2900_webshop_Main.as_view()),
+    path('hd2900_takeaway_webshop', hd2900_webshop_Main.as_view(), name="hd2900_takeaway_webshop"),
     path('check-address-for-deliverable', AddressCheckForDeliverability.as_view()),
     path('changeItemQuantityInBasket', ChangeItemQuantity.as_view()),
     path('isPriceAboveDeliveryLimit', totalPriceDeliveryPossible.as_view()),

@@ -2,7 +2,12 @@
 {% load static %}
 {% block content %}
 {% include 'takeawayWebshop/header.html' %} 
-<h1>Local Delivery</h1>
+<div class="headerTitle">
+    <h1>PRODUCTS FOR DELIVERY</h1>
+    <hr class = "cardDeckHorisontalLine">
+    <br>
+</div>
+
 <table>
     <tr>
         <th>Item</th>
@@ -30,7 +35,7 @@
         <td>Local delivery cost</td>
         <td>{{deliveryCost}} kr</td>
         <td>1</td>
-        <td>{{deliveryCost}}</td>
+        <td>{{deliveryCost}} kr</td>
     </tr>
     
     <tr>
@@ -40,25 +45,40 @@
         <td></td>
     </tr>
     <tr>
-        <td>Total</td>
+        <td class="totalCost">Total</td>
         <td></td>
         <td></td>
-        <td>{{grandTotal}}</td>
+        <td class="totalCost">{{grandTotal}} kr</td>
     </tr>
 </table>
 
-{% include 'takeawayWebshop/webshopAddressVerification.html' %}
-<button type="button" class="btn btn-success" id ="takeawayPickUp">Takeaway pickup</button>
-<div id="localDeliveryForm">
-    <form action="/localDeliveryPayment" method="get" id="localDeliveryCheckoutForm">
-        {{ customerDeliveryForm.as_p }}
-        <button type="submit" class="btn btn-success" id="paymentButton">Payment</button>
-    </form>
-    
+<br>
+
+<div class="headerTitle">
+    <h1>TAKEAWAY DELIVERY INFORMATION</h1>
+    <hr class = "cardDeckHorisontalLine">
 </div>
-<div id="checkout-container-div"> </div>   
+
+<div class="container">
+        <form action="/localDeliveryPayment" method="POST" id="localDeliveryCheckoutForm">
+            {% csrf_token %}
+            {% include 'takeawayWebshop/webshopAddressVerification.html' %}
+            <button type="button" class="btn btn-success" id ="takeawayPickUp">Takeaway pickup</button>
+            <div id="localDeliveryForm">
+                {% for field in customerDeliveryForm %}
+                    {{field.label}}
+                    <p>
+                    {{field}}
+                    </p>
+                {% endfor %}
+            
+            <button type="submit" class="btn btn-success" id="toPaymentButton">NEXT</button>
+        </form>        
+    </div>
+</div>
+<!-- <div id="checkout-container-div"> </div>    -->
 
 {% include 'takeawayWebshop/standardScripts.html' %}
 <script src="{% static 'scripts/checkoutLocalDeliveryFormHandler.js' %}"></script>
-<script src="https://test.checkout.dibspayment.eu/v1/checkout.js?v=1"></script>  
+<!-- <script src="https://test.checkout.dibspayment.eu/v1/checkout.js?v=1"></script>   -->
 {% endblock %}

@@ -112,6 +112,8 @@ class DeliveryForm(View):
         
         #Decide if delivery is still possible
         deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
+        
+        deliveryPossible = True #<-----------------------------------------------DELETE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         if deliveryPossible is False:
             #Redirect the user to pickup
@@ -174,6 +176,9 @@ class Payment(View):
         self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
     
     def get(self, request, *args, **kwargs):
+
+        #ALL CONTENT IN THIS DEF SHOULD BE DELETED
+
         #Assure that session is still valid
         #Check if session is valid
         sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
@@ -208,6 +213,32 @@ class Payment(View):
             context['checkoutKey'] = checkoutKey 
         
         return JsonResponse(context, status = 200)
+    
+    def post(self, request, *args, **kwargs):
+        #Check if session is still valid 
+        sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
+        
+        #In this case the session has expired and the user will be redirected
+        if sessionValid is False:
+            return redirect('hd2900_takeaway_webshop')
+        
+        #log the form information into the session
+        customerName = request.POST['customerName']
+        customerEmail = request.POST['customerEmail']
+        customerMobile = request.POST['customerMobile']
+        customerComment = request.POST['comments']
+        deliveryTime = request.POST['deliveryTime']
+        customerAddress = request.POST['addressField']
+
+        #Store the logged value together with the session
+        
+        print(customerAddress)
+        print(request.POST)
+
+
+        print('session validity here!!!!!!!!!!!!')
+
+        return render(request, template_name="takeawayWebshop/webshopCheckout.html")
 
 
 
