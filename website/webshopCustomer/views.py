@@ -10,6 +10,7 @@ from website.Modules.geoLocation import GeoLocationTools
 from django.http import HttpResponse
 from website.Modules.paymentModule import NETS
 
+
 # Create your views here.
 session_id_key = 'hd2900TakeAwayCartId'
 restaurantName = "Hidden Dimsum 2900"
@@ -113,7 +114,7 @@ class DeliveryForm(View):
         #Decide if delivery is still possible
         deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
         
-        deliveryPossible = True #<-----------------------------------------------DELETE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #deliveryPossible = True #<-----------------------------------------------DELETE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         if deliveryPossible is False:
             #Redirect the user to pickup
@@ -222,22 +223,13 @@ class Payment(View):
         if sessionValid is False:
             return redirect('hd2900_takeaway_webshop')
         
-        #log the form information into the session
-        customerName = request.POST['customerName']
-        customerEmail = request.POST['customerEmail']
-        customerMobile = request.POST['customerMobile']
-        customerComment = request.POST['comments']
-        deliveryTime = request.POST['deliveryTime']
-        customerAddress = request.POST['addressField']
-
         #Store the logged value together with the session
+        sessionId = request.session[session_id_key]
+        print(sessionId)
+
+        #Write the customer info into the data base
+        webshopUtils.create_or_update_Order(session_id_key=session_id_key, request=request, deliveryType='delivery')
         
-        print(customerAddress)
-        print(request.POST)
-
-
-        print('session validity here!!!!!!!!!!!!')
-
         return render(request, template_name="takeawayWebshop/webshopCheckout.html")
 
 

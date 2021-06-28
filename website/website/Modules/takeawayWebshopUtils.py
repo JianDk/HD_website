@@ -3,6 +3,7 @@ import datetime
 from random import choice
 from string import ascii_uppercase
 from webshopCart.models import CartItem
+from webshopCustomer.models import Orders
 
 
 #Product related 
@@ -113,6 +114,71 @@ def createNewSessionId():
     session_id = firstPart + lastPart
 
     return session_id
+
+def create_or_update_Order(session_id_key, request, deliveryType):
+        '''
+        Given the session_id_key, the corresponding session id will be read from the request.session. If the session exists 
+        in data base already, the existing order will be updated with the new information posted by the user. Otherwise a 
+        new order will be created. The deliveryType can either be "delivery" or "pickup" and is used to register the order with
+        the right information
+        '''
+
+        #log the form information into the session
+        customerName = request.POST['customerName']
+        customerEmail = request.POST['customerEmail']
+        customerMobile = request.POST['customerMobile']
+        customerComment = request.POST['comments']
+        deliveryTime = request.POST['deliveryTime']
+        customerAddress = request.POST['addressField']
+
+        #First get the sessionId from the request
+        sessionId = request.session[session_id_key]
+
+        #Check if that sessionId already exists
+        orders = Orders.objects.filter(session_id = sessionId)
+
+        if not orders:
+            if deliveryType == 'delivery':
+                newOrder = Orders(fullName = customerName,
+                email = customerEmail,
+                mobile = customerMobile,
+                session_id = sessionId,
+                deliveryAddress = customerAddress,
+                comments = customerComment,
+                deliveryTime = deliveryTime,
+                delivery = True,
+                pickup = False)
+                newOrder.save()
+            
+            if deliveryType == 'pickup':
+                newOrder = Orders(fullName = customerName,
+                email = customerEmail,
+                mobile = customerMobile,
+                session_id = sessionId,
+                deliveryAddress = customerAddress,
+                comments = customerComment,
+                deliveryTime = deliveryTime,
+                delivery = False,
+                pickup = True)
+                newOrder.save()
+        else:
+            existingOrder = orders[0]
+            existingOrder.fullName = customerName
+            existingOrder.email = customerEmail
+            existingOrder.mobile = customerMobile
+            existingOrder.session_id = sessionId
+            existingOrder.deliveryAddress = customerAddress
+            existingOrder.comments = customerComment
+            existingOrder.deliveryTime = deliveryTime
+
+            if deliveryType == 'delivery':
+                existingOrder.delivery = True
+                existingOrder.pickup = False
+            
+            if deliveryType == 'pickup':
+                existingOrder.delivery = False
+                existingOrder.pickup = True
+            existingOrder.save()
 
 def checkSessionIdValidity(request, session_id_key, validPeriodInDays):
     '''

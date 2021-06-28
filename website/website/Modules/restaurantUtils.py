@@ -17,8 +17,6 @@ class RestaurantUtils:
             Filter all the products belonging to the restaurant and only return the active products
         '''
         products = self.get_all_products()
-        print('here is all products')
-        print(products)
         products = list(products)
         activeproducts = list()
         for item in products:
