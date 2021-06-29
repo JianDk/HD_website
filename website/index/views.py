@@ -262,7 +262,7 @@ class hd2900(View):
         'aboutUsImagePath' : 'static/media/aboutus2900.jpg',
         'aboutUsImageAlt' : 'Owner of Hidden Dimsum 2900 Hellerup Mak and Mai',
         'aboutUsText' : self.ContextObject.textString,
-        'dayRange1' : 'Summere Holiday - closed between',
+        'dayRange1' : 'Summer Holiday - closed between',
         'timeRange1': '01.07.2021 - 31.07.2021',
         #'dayRange2' : 'Takeaway and delivery order: 40388884',
         'shopTitle' : 'Hidden Dimsum 2900',
