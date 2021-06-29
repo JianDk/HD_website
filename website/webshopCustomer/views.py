@@ -223,14 +223,24 @@ class Payment(View):
         if sessionValid is False:
             return redirect('hd2900_takeaway_webshop')
         
-        #Store the logged value together with the session
-        sessionId = request.session[session_id_key]
-        print(sessionId)
-
         #Write the customer info into the data base
         webshopUtils.create_or_update_Order(session_id_key=session_id_key, request=request, deliveryType='delivery')
-        
-        return render(request, template_name="takeawayWebshop/webshopCheckout.html")
+
+        #Calculate the total price followed by creation of paymentID from NETS
+        totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.delivery_fee + self.hd2900RestaurantObject.restaurantModelData.bagFee
+
+        #Create an order reference and link that to NETS reference
+        reference = webshopUtils.get_order_reference(request = request, session_id_key=session_id_key)
+
+        #Get the payment id from NETS 
+        payment = NETS()
+        paymentId = payment.get_paymentId(platform = platform,
+        reference = reference, 
+        name = 'Hidden Dimsum 2900 Takeaway',
+        paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
+        unitPrice = int(totalPrice) *100)
+
+        return render(request, template_name="takeawayWebshop/webshopPayment.html")
 
 
 

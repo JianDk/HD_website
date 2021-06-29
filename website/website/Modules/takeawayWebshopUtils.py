@@ -132,7 +132,7 @@ def create_or_update_Order(session_id_key, request, deliveryType):
         customerAddress = request.POST['addressField']
 
         #First get the sessionId from the request
-        sessionId = request.session[session_id_key]
+        sessionId = get_sessionId(request = request, session_id_key = session_id_key)
 
         #Check if that sessionId already exists
         orders = Orders.objects.filter(session_id = sessionId)
@@ -179,6 +179,30 @@ def create_or_update_Order(session_id_key, request, deliveryType):
                 existingOrder.delivery = False
                 existingOrder.pickup = True
             existingOrder.save()
+
+def get_order_reference(request, session_id_key):
+    '''
+    The session id will be retried from the request.session and if the Order is created in the data base the order id will be returned
+    '''
+    sessionId = get_sessionId(request = request, session_id_key=session_id_key)
+    orders = Orders.objects.filter(session_id = sessionId)
+
+    #If for some reasons the order has not been created
+    if not orders:
+        return False
+    
+    if orders[0].delivery is True:
+        return 'delivery_' + str(orders[0].id)
+    
+    if orders[0].delivery is False:
+        return 'pickup_' + str(orders[0].id)
+
+def get_sessionId(request, session_id_key):
+    '''
+    Given the request and session_id_key and the request, the session id is retrieved
+    '''
+    return request.session[session_id_key]
+
 
 def checkSessionIdValidity(request, session_id_key, validPeriodInDays):
     '''
