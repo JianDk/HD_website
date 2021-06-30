@@ -179,6 +179,16 @@ def create_or_update_Order(session_id_key, request, deliveryType):
                 existingOrder.delivery = False
                 existingOrder.pickup = True
             existingOrder.save()
+    
+def get_order(session_id_key, request):
+    '''
+    Given the request and session_id_key the order will be retrieved from the data base and returned. This method is 
+    intend to be used at the payment confirmation page, confirming all logged information to the customer
+    '''
+    sessionId = get_sessionId(request = request, session_id_key=session_id_key)
+    order = Orders.objects.filter(session_id = sessionId)
+    order = order[0]
+    return order
 
 def get_order_reference(request, session_id_key):
     '''

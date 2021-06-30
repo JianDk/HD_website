@@ -1,0 +1,12 @@
+{% extends 'takeawayWebshop/baseTemplate.html' %}
+{% load static %}
+{% block content %}
+{% include 'takeawayWebshop/header.html' %} 
+<div class="headerTitle">
+    <h1>PAYMENT SUCCESSFUL</h1>
+    <hr class = "cardDeckHorisontalLine">
+    <br>
+</div> 
+
+{{order.fullName}}
+{% endblock %}

@@ -8,6 +8,17 @@
     <br>
 </div> 
 
+<!--Hidden element for paymentId and checkout key -->
+<div id="paymentId" hidden>
+    {{paymentId}}
+</div>
+
+<div id="checkoutKey" hidden>
+    {{checkoutKey}}
+</div>
+
 <div id="checkout-container-div"> </div>
 {% include 'takeawayWebshop/standardScripts.html' %}
+<script src="https://test.checkout.dibspayment.eu/v1/checkout.js?v=1"></script>
+<script src="{% static 'scripts/paymentRender.js' %}"></script>
 {% endblock %}

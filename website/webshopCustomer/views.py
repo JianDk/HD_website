@@ -176,45 +176,6 @@ class Payment(View):
         #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
         self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
     
-    def get(self, request, *args, **kwargs):
-
-        #ALL CONTENT IN THIS DEF SHOULD BE DELETED
-
-        #Assure that session is still valid
-        #Check if session is valid
-        sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
-
-        context = dict()
-        if sessionValid is False: #the session has expired and the user needs to start over
-            context['sessionExpired'] = True
-        else:
-            context['sessionExpired'] = False
-
-        #Calculate the grand total the total price in basket + delivery fee 0 bag fee
-        totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.delivery_fee + self.hd2900RestaurantObject.restaurantModelData.bagFee
-        
-        #Grab the form field information
-        payment = NETS()
-        paymentId = payment.get_paymentId(platform = platform,
-        reference = 'here comes order id', 
-        name = 'Hidden Dimsum 2900 Takeaway',
-        paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
-        unitPrice = int(totalPrice) *100)
-
-        checkoutKey = payment.getCheckoutKey(platform = platform)
-
-        if paymentId.status_code == 201:
-            context['paymentIdCreation'] = True
-            context['paymentId'] = paymentId.json()['paymentId']
-            context['checkoutKey'] = checkoutKey
-
-        else:
-            context['paymentIdCreation'] = False
-            context['paymentId'] = paymentId.json()['paymentId']
-            context['checkoutKey'] = checkoutKey 
-        
-        return JsonResponse(context, status = 200)
-    
     def post(self, request, *args, **kwargs):
         #Check if session is still valid 
         sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key, validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
@@ -240,7 +201,32 @@ class Payment(View):
         paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
         unitPrice = int(totalPrice) *100)
 
-        return render(request, template_name="takeawayWebshop/webshopPayment.html")
+        if paymentId.status_code == 201:
+            paymentId = paymentId.json()['paymentId']
+
+        #Put the checkout key and the payment id into the page that javascript is going to read from during payment
+        checkoutKey = payment.getCheckoutKey(platform = platform)
+
+        context = dict()
+        context['paymentId'] = paymentId
+        context['checkoutKey'] = checkoutKey
+
+        return render(request, template_name="takeawayWebshop/webshopPayment.html", context = context)
+
+class PaymentComplete(View):
+    def __init__(self):
+        #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
+        self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
+    
+    def get(self, request, *args, **kwargs):
+        #Get all user information and the ordered products and display it to the user
+        session_id = request.session[session_id_key]
+        order = webshopUtils.get_order(session_id_key = session_id_key, request = request)
+        context = dict()
+        context['order'] = order
+        print(dir(order))
+
+        return render(request, template_name = "takeawayWebshop/webshopPaymentComplete.html", context = context)
 
 
 
