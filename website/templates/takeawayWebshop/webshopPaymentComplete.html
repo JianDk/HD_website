@@ -7,8 +7,25 @@
     <hr class = "cardDeckHorisontalLine">
     <br>
 </div> 
+<div class="container bodyText" id="paymentConfirmationMessage">
+    Dear {{order.fullName}},
+    <br>
+    <br>
+    Thank you for placing the order. The below order has been received for {% if order.delivery %}takeaway delivery to 
+    <br> 
+    <br>
+    {{order.deliveryAddress}} 
+    <br>
+    delivery time : {{order.deliveryTime}}.
+    <br>
+    <br>
+    A receipt has been sent to {{order.email}}. Should we against expectation be significantly delayed, we will notify you via 
+    {{order.mobile}}. 
 
-Dear guest,
+    {% else %} pickup at Hidden Dimsum 2900, Strandvejen 163, 2900 Hellerup
+    <br>
+    pickup time : {{order.deliveryTime}} 
+    {% endif %}  
+</div>
 
-The below order has been received for takeaway 
 {% endblock %}

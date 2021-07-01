@@ -15,7 +15,13 @@
   font-family: hdFont;
   font-size: 1rem;
   font-weight: bold;
-text-align: center;
+  text-align: center;
+}
+
+.bodyText {
+  font-family: hdFont;
+  font-size: 1.3rem;
+  text-align: left;
 }
 
 /* cover section */

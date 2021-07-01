@@ -225,6 +225,7 @@ class PaymentComplete(View):
         context = dict()
         context['order'] = order
         print(dir(order))
+        print(dir(order.id))
 
         return render(request, template_name = "takeawayWebshop/webshopPaymentComplete.html", context = context)
 
