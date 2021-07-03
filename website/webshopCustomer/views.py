@@ -47,6 +47,13 @@ class TakeawayCheckout(View):
         else:
             deliveryButtonActive = True
             totalPriceDeliveryMessage = ''
+        
+        for item in sessionItems:
+            print(dir(item.product))
+            print(item.product.name)
+            print(item.quantity)
+            print(item.product.price)
+            print('\n')   
 
         #Check delivery status
         context = {'title' : 'Hidden Dimsum takeaway checkout',
@@ -55,7 +62,8 @@ class TakeawayCheckout(View):
         'deliveryPossible' : deliveryPossible,  #Relates to if it at all is possible to order delivery for today at the given time
         'deliveryButtonActive' : deliveryButtonActive, #checks if the total price is above the minimum limit for delivery
         'totalPriceDeliveryMessage' : totalPriceDeliveryMessage}
-        return render(request, template_name = 'takeawayWebshop/webshopCheckout.html', context = context)
+
+        return render(request, template_name = 'takeawayWebshop/webshop_pickup_delivery.html', context = context)
 
 class totalPriceDeliveryPossible(View):
     def __init__(self):

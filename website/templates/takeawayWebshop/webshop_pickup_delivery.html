@@ -1,0 +1,105 @@
+{% extends 'takeawayWebshop/baseTemplate.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'takeawayWebshop/header.html' %}
+
+<div class="headerTitle">
+    <h1>ITEMS IN BASKET</h1>
+    <hr class = "cardDeckHorisontalLine">
+    <br>
+</div> 
+
+<div class="container" id="displayOrderedProducts">
+    <table>
+        <th>Item</th>
+        <th>Unit Price dk</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+    
+        {% for item in checkoutProducts %}
+        <tr>
+            <td>
+                <div class="input-group-prepend">
+                    <input type="text" class="form-control" id="productname_{{ item.product.slug }}" placeholder="{{item.product}}" aria-label="Product" aria-describedby="basic-addon1" readonly>
+                </div>
+            </td>
+
+            <td>
+            {{item.product.price}} kr
+            </td>
+
+            <td>
+                <div class="input-group-append">
+                    <input type="text" class="form-control" id="text_{{ item.product.slug }}" placeholder="{{item.quantity}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
+                </div>
+            </td>
+
+            <td>
+                {% widthratio {{item.product.price}} 1 {{item.quantity}} %} kr 
+            </td>
+        </tr>
+        {% endfor %}
+        <td>
+            Total
+        </td>
+        <td></td>
+        <td></td>
+        <td>{{totalPrice}} kr</td>
+    </table>
+
+
+        {% for item in checkoutProducts%}
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <input type="text" class="form-control" id="productname_{{ item.product.slug }}" placeholder="{{item.product}}" aria-label="Product" aria-describedby="basic-addon1" readonly>
+            </div>
+
+            <div class="input-group-append">
+                <input type="text" class="form-control" id="text_{{ item.product.slug }}" placeholder="{{item.quantity}}" aria-label="ordered amount" aria-describedby="basic-addon1" readonly>
+            </div>
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary subtractItem" type="button" id="btn_subtract_{{item.product.slug}}" onclick="checkoutPlusMinusPressed(this)">
+                    -
+                </button>
+            </div>
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary addOneItem" type="button" id="btn_add_{{item.product.slug}}" onclick="checkoutPlusMinusPressed(this)">
+                    +
+                </button>
+            </div>
+        </div>
+
+        <br>
+        {% endfor %}
+
+</div>
+
+<h2>
+    <div id="totalPrice">
+        Total : {{totalPrice}} kr
+    </div>
+    {% if deliveryPossible is True %}
+    <div id="deliveryPossibleMessage">{{totalPriceDeliveryMessage}}</div>
+    {% endif %}
+</h2>
+
+<a href="/hd2900_takeaway_webshop" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Order more</a>
+<button type="button" class="btn btn-primary btn-lg">Pick up</button>
+
+    
+    {% if deliveryPossible is True and deliveryButtonActive is True %}
+        <button onclick="location.href='/deliveryFormCheckout'" type="button" class="btn btn-primary btn-lg" id="localDeliveryButton">Takeaway delivery</button>
+    {% endif %}
+
+    {% if deliveryPossible is True and deliveryButtonActive is False %}
+        <button onclick="location.href='/deliveryFormCheckout'" type="button" class="btn btn-primary btn-lg" id="localDeliveryButton" disabled>Takeaway delivery</button>
+    {% endif %}
+    <script href="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="{% static 'scripts/product_add_subtract_btn_clicked.js' %}">window.CSRF_TOKEN={{ csrf_token }}</script>
+{% endblock %}

@@ -81,6 +81,7 @@
   font-family: hdFont;
   font-size: 1.2rem;
 }
+
 /* Address autocomplete */
 label {
   color: black;
@@ -156,6 +157,11 @@ label {
 
 #checkoutLink {
   margin-right: 10vw;
+}
+
+/* display ordered products and decide for pickup or delivery */
+#displayOrderedProducts {
+  border: 1px solid black;
 }
 
 /*Checkout local delivery page*/
