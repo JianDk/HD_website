@@ -65,22 +65,42 @@
 
 <br>
 
-<div class="container" id="delivery_pickup_navigationButtonContainer">
-    {% if deliveryPossible is True %}
-    <div class="bodyText" id="deliveryPossibleMessage">{{totalPriceDeliveryMessage}}</div>
-    {% endif %}
-
-<a href="/hd2900_takeaway_webshop" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Shop More</a>
-<button type="button" class="btn btn-primary btn-lg">Pick up</button>
-
+<div class="container" id="deliveryPossible_message_container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12 bodyText" id="deliveryPossibleMessage">
+                {% if deliveryPossible is True %}
+                    {{totalPriceDeliveryMessage}}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+            
+        
     
-    {% if deliveryPossible is True and deliveryButtonActive is True %}
-        <button onclick="location.href='/deliveryFormCheckout'" type="button" class="btn btn-primary btn-lg" id="localDeliveryButton">Takeaway delivery</button>
-    {% endif %}
+<div class="container" id="delivery_pickup_navigationButtonContainer"> 
 
-    {% if deliveryPossible is True and deliveryButtonActive is False %}
-        <button onclick="location.href='/deliveryFormCheckout'" type="button" class="btn btn-primary btn-lg" id="localDeliveryButton" disabled>Takeaway delivery</button>
-    {% endif %}
+        <div class="mr-auto p-2">
+            <a href="/hd2900_takeaway_webshop" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Shop More</a>
+        </div>
+
+        <div class="p-2">
+            <button type="button" class="btn btn-primary btn-lg">Pick Up in Hidden Dimsum 2900</button>
+        </div>
+
+        {% if deliveryPossible is True and deliveryButtonActive is True %}
+        <div class="p-2"> 
+            <button onclick="location.href='/deliveryFormCheckout'" type="button" class="btn btn-primary btn-lg" id="localDeliveryButton">Takeaway Delivery</button>
+        </div>
+        {% endif %}
+        
+        {% if deliveryPossible is True and deliveryButtonActive is False %}
+        <div class="p-2">
+            <button onclick="location.href='/deliveryFormCheckout'" type="button" class="btn btn-primary btn-lg" id="localDeliveryButton" disabled>Takeaway Delivery</button>
+        </div>
+        {% endif %}
+
 </div>
 
     <script href="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>

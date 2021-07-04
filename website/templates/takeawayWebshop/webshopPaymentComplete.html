@@ -25,7 +25,46 @@
     {% else %} pickup at Hidden Dimsum 2900, Strandvejen 163, 2900 Hellerup
     <br>
     pickup time : {{order.deliveryTime}} 
+    <br>
+    pickup location : {{restaurantObject.address}}
     {% endif %}  
+
+    <br>
+    <br>
+    Thanks!
+    <br>
+    <br>
+    Best regards,
+    <br>
+    {{restaurantObject.name}}
+    <br>
+
+</div>
+
+<div class="headerTitle">
+    <h1>ORDER DETAILS</h1>
+    <hr class = "cardDeckHorisontalLine">
+    <br>
+</div> 
+
+<div class="container" id="orderDetailsContainer">
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Unit Price kr</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+
+        {% for item in orderedProducts %}
+        <tr>
+            <td>{{item.product}}</td>
+            <td>{{item.product.price}} kr</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.total}}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 
 {% endblock %}

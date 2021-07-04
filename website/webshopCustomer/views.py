@@ -47,13 +47,6 @@ class TakeawayCheckout(View):
         else:
             deliveryButtonActive = True
             totalPriceDeliveryMessage = ''
-        
-        for item in sessionItems:
-            print(dir(item.product))
-            print(item.product.name)
-            print(item.quantity)
-            print(item.product.price)
-            print('\n')   
 
         #Check delivery status
         context = {'title' : 'Hidden Dimsum takeaway checkout',
@@ -238,13 +231,29 @@ class PaymentComplete(View):
         self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
     
     def get(self, request, *args, **kwargs):
+        print('restaurant')
+        print(self.hd2900RestaurantObject.restaurantModelData.name)
+        print(dir(self.hd2900RestaurantObject.restaurantModelData))
+
         #Get all user information and the ordered products and display it to the user
         session_id = request.session[session_id_key]
         order = webshopUtils.get_order(session_id_key = session_id_key, request = request)
+
+        #Get all the products that the customer has ordered
+        sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
+        print('here are the ordered items!!!!!!!!!!!!!!!')
+        for item in sessionItems:
+            print(item.product.name)
+            print(item.product.price)
+            print(item.quantity)
+
+
         context = dict()
         context['order'] = order
-        print(dir(order))
-        print(dir(order.id))
+        context['restaurantObject'] = self.hd2900RestaurantObject.restaurantModelData
+        context['orderedProducts'] = sessionItems
+        #print(dir(order))
+        #print(dir(order.id))
 
         return render(request, template_name = "takeawayWebshop/webshopPaymentComplete.html", context = context)
 
