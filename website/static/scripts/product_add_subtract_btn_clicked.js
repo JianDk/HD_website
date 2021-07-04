@@ -14,7 +14,14 @@ function itemQuantityChanged(element) {
                 var shoppingCartElement = document.getElementById("lblCartCount");
                 
                 //If updated quantity is 0, then the quantity textfield placeholder should be blank
-                if (response["updatedQuantity"] <= 0) {quantityFieldElement.placeholder = "";} else {
+                if (response["updatedQuantity"] <= 0) {
+                    quantityFieldElement.placeholder = "0";
+                    //If in delivery pickup page before the checkout, item total price field will be set to 0 kr as well
+                    var itemTotalPriceElement = document.getElementById("totalPrice_" + response["product_to_update_slug"]);
+                    if (itemTotalPriceElement != null) {
+                        itemTotalPriceElement.innerHTML = "0 kr";
+                    }
+                } else {
                     quantityFieldElement.placeholder = response["updatedQuantity"].toString();
                 }
 
@@ -46,6 +53,14 @@ function updateTotalPrice(){
             if (response["pageRefresh"] == true) {
                 window.location.href = "/takeawayCheckout";
             } else {
+                //Update the table with product item list
+                response["ordered_product_items_list"].forEach(function (item) {
+                    var itemTotalPriceId = document.getElementById("totalPrice_" + item['productSlug']);
+                    itemTotalPriceId.innerHTML = item['totalPrice_for_ordered_item'] + " kr"
+
+                    console.log(item);
+                })
+
                 //Update the total price
                 var totalPriceElement = document.getElementById("totalPrice");
                 totalPriceElement.innerHTML = "Total : " + response["totalPrice"] + ' kr';

@@ -159,15 +159,10 @@ label {
   margin-right: 10vw;
 }
 
-/* display ordered products and decide for pickup or delivery */
-#displayOrderedProducts {
-  border: 1px solid black;
-}
-
 /*Checkout local delivery page*/
 table {
-  width: 95%;
   border-bottom: 1px solid black;
+  width: 100%;
   font-family: hdFont;
   font-size: 1.3rem;
   margin-left: auto;
@@ -176,15 +171,47 @@ table {
 
 th {
   text-align: center;
-  border-bottom: 1px solid black ;
+  border-bottom: 1px solid black;
+  width: 1vw;
+  white-space: nowrap;
 }
 
-td {
+tr td {
   text-align: center;
+  width: 1vw;
   white-space: nowrap;
 }
 
 .totalCost {
   font-family: hdFont;
   font-weight: bold;
+}
+
+#deliveryPossibleMessage {
+  color: red;
+}
+/* display ordered products and decide for pickup or delivery */
+
+.form-control {
+  text-align: center;
+}
+
+@media screen and (min-width:375px) {
+ #delivery_pickup_productTable {
+   font-size:1rem;
+ }
+
+.delivery-pickup-formcontrol {
+  font-size:0.5rem;
+}
+}
+
+@media screen and (min-width:812px) {
+  #delivery_pickup_productTable {
+    font-size:1.3rem;
+  }
+ 
+ .delivery-pickup-formcontrol {
+   font-size:1.3rem;
+ }
 }

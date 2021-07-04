@@ -101,6 +101,17 @@ class totalPriceDeliveryPossible(View):
         #Get the total price
         context['totalPrice'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key])
 
+        #Provide the item total price for each item to be updated into the table
+        context['ordered_product_items_list'] = list()
+
+        for item in sessionItems:
+            tmp = dict()
+            tmp['productSlug'] = item.product.slug
+            #tmp['productPrice'] = item.product.price
+            #tmp['orderedQuantity'] = item.quantity
+            tmp['totalPrice_for_ordered_item'] = item.product.price * item.quantity
+            context['ordered_product_items_list'].append(tmp)
+
         #If both restaurant offers delivery today and the total price is above the limit, the signal for delivery button is sent back
         deliveryPossible = self.hd2900RestaurantObject.isDeliveryPossible()
         if deliveryPossible and context['totalPrice'] >= self.hd2900RestaurantObject.restaurantModelData.minimum_order_total_for_delivery:

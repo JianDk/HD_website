@@ -106,7 +106,7 @@ class ChangeItemQuantity(View):
                 return JsonResponse(context, status = 200)
 
         if sessionValid:
-            #Extract which product element the suer has selected
+            #Extract which product element the user has selected
             productToChange = webshopUtils.productToChange(request)
 
             #Update the product in the backend 
