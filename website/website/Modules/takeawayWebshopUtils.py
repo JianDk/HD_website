@@ -213,7 +213,6 @@ def get_sessionId(request, session_id_key):
     '''
     return request.session[session_id_key]
 
-
 def checkSessionIdValidity(request, session_id_key, validPeriodInDays):
     '''
     Check if session has already assigned an id. If session id exists a check will be made to see if it is more than 

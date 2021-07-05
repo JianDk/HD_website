@@ -4,6 +4,7 @@ from django.views import View
 from django.http import JsonResponse
 from webshopCart.models import CartItem
 from .forms import customerLocalDeliveryForm
+from index.forms import newsLetterForm
 from website.Modules.restaurantUtils import RestaurantUtils
 import website.Modules.takeawayWebshopUtils as webshopUtils
 from website.Modules.geoLocation import GeoLocationTools
@@ -231,9 +232,6 @@ class PaymentComplete(View):
         self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
     
     def get(self, request, *args, **kwargs):
-        print('restaurant')
-        print(self.hd2900RestaurantObject.restaurantModelData.name)
-        print(dir(self.hd2900RestaurantObject.restaurantModelData))
 
         #Get all user information and the ordered products and display it to the user
         session_id = request.session[session_id_key]
@@ -241,19 +239,28 @@ class PaymentComplete(View):
 
         #Get all the products that the customer has ordered
         sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
-        print('here are the ordered items!!!!!!!!!!!!!!!')
-        for item in sessionItems:
-            print(item.product.name)
-            print(item.product.price)
-            print(item.quantity)
 
-
+        #Calculate the total cost
+        if order.delivery:
+            totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.delivery_fee + self.hd2900RestaurantObject.restaurantModelData.bagFee
+        else:
+            totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.bagFee
+        
         context = dict()
+        context['orderCreationTime'] = order.orderCreationDateTime.strftime('%d-%m-%Y %H:%M')
         context['order'] = order
         context['restaurantObject'] = self.hd2900RestaurantObject.restaurantModelData
         context['orderedProducts'] = sessionItems
-        #print(dir(order))
-        #print(dir(order.id))
+        context['grandTotal'] = totalPrice
+        context['emailSignUpForm'] = newsLetterForm()
+        context['shopTitle'] = self.hd2900RestaurantObject.restaurantModelData.name
+        context['addressStreet'] = self.hd2900RestaurantObject.restaurantModelData.address
+        context['addressPhone'] = self.hd2900RestaurantObject.restaurantModelData.phone
+        context['addressEmail'] = self.hd2900RestaurantObject.restaurantModelData.email
+        context['addressCVR'] = 'CVR : ' + self.hd2900RestaurantObject.restaurantModelData.cvr
+        context['instagramLink'] = 'https://www.instagram.com/hiddendimsum2900/?hl=da'
+        context['youtubeLink'] = 'https://www.youtube.com/channel/UC-ryuXvGrMK2WQHBDui2lxw'
+        context['facebookLink'] = 'https://www.facebook.com/hiddendimsum/'
 
         return render(request, template_name = "takeawayWebshop/webshopPaymentComplete.html", context = context)
 

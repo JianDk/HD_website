@@ -38,6 +38,8 @@
     <br>
     {{restaurantObject.name}}
     <br>
+    CVR : {{restaurantObject.cvr}}
+    <br>
 
 </div>
 
@@ -48,6 +50,12 @@
 </div> 
 
 <div class="container" id="orderDetailsContainer">
+    <div class="container bodyText">
+        {{orderCreationTime}}
+        <br>
+        Order id : {{order.id}}
+        <br>
+    </div>
     <table>
         <tr>
             <th>Product</th>
@@ -61,10 +69,41 @@
             <td>{{item.product}}</td>
             <td>{{item.product.price}} kr</td>
             <td>{{item.quantity}}</td>
-            <td>{{item.total}}</td>
+            <td>{{item.total}} kr</td>
         </tr>
         {% endfor %}
-    </table>
-</div>
+        <tr>
+            <td><br></td>
+            <td><br></td>
+            <td><br></td>
+            <td><br></td>
+        </tr>
 
+        <tr>
+            <td>Bag Fee</td>
+            <td>{{restaurantObject.bagFee}} kr</td>
+            <td></td>
+            <td>{{restaurantObject.bagFee}} kr</td>
+        </tr>
+        
+        {% if order.delivery %}
+            <tr>
+                <td>Delivery</td>
+                <td>{{restaurantObject.bagFee}} kr</td>
+                <td></td>
+                <td>{{restaurantObject.delivery_fee}} kr</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="totalCost">Total</td>
+            <td></td>
+            <td></td>
+            <td class="totalCost">{{grandTotal}} kr</td>
+        </tr>
+    </table>
+    <br>
+</div>
+{% include 'mainFooter.html' %}
+{% include 'takeawayWebshop/standardScripts.html' %}
 {% endblock %}
+

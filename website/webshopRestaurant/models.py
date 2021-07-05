@@ -5,6 +5,7 @@ from webshopCatalog.models import Product, Category
 class Restaurant(models.Model):
     name = models.CharField(max_length=50) 
     address = models.CharField(max_length = 255)
+    cvr = models.CharField(max_length = 20)
     phone = models.CharField(max_length = 20)
     email = models.EmailField()
     latitude = models.DecimalField(max_digits=20, decimal_places=15)
