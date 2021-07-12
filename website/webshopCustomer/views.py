@@ -10,7 +10,7 @@ import website.Modules.takeawayWebshopUtils as webshopUtils
 from website.Modules.geoLocation import GeoLocationTools
 from django.http import HttpResponse
 from website.Modules.paymentModule import NETS
-
+import mysql.connector
 
 # Create your views here.
 session_id_key = 'hd2900TakeAwayCartId'
@@ -246,6 +246,8 @@ class PaymentComplete(View):
         else:
             totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.bagFee
         
+        #Insert the order to the database
+        OrderDB = webshopUtils.OrderDatabase()
         context = dict()
         context['orderCreationTime'] = order.orderCreationDateTime.strftime('%d-%m-%Y %H:%M')
         context['order'] = order

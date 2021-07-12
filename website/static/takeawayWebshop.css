@@ -194,7 +194,6 @@ tr td {
 #delivery_pickup_navigationButtonContainer {
   display: flex;
   flex-wrap: nowrap;
-  border: 2px solid blue;
 }
 /* display ordered products and decide for pickup or delivery */
 .form-control {

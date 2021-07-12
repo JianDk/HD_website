@@ -4,7 +4,8 @@ from random import choice
 from string import ascii_uppercase
 from webshopCart.models import CartItem
 from webshopCustomer.models import Orders
-
+import mysql.connector
+import json
 
 #Product related 
 def productToChange(request):
@@ -234,3 +235,34 @@ def checkSessionIdValidity(request, session_id_key, validPeriodInDays):
         return False
     else:
         return False
+
+#Data base related such as saving a paid order
+class OrderDatabase:
+    def __init__(self):
+        #Get database username and password for connection to it
+        with open('/etc/config.json','r') as fileId:
+            databaseParam = json.load(fileId)
+
+        self.databaseParam = databaseParam['mysql']
+        #Connect to the data base
+        self.connector = mysql.connector.connect(
+            user = databaseParam['username'],
+            password = databaseParam['password'],
+            host = "localhost", 
+            database = "takeawayorders")
+        
+        self.cursor = self.connector.cursor()
+    
+    def firstTimeSetup(self):
+        '''
+        This method is intend to be run first time setting up the data base and the tables for storing the takeaway orders
+        '''
+        print('First time setup method called!!!!!!!!!!!!!')
+        self.connector = mysql.connector.connect(
+            user = databaseParam['username'],
+            password = databaseParam['password'],
+            host = "localhost"
+        )
+
+        self.cursor = self.connector.cursor()
+        self.cursor.execute("CREATE DATABASE IF NOT EXISTS takeawayorders")
