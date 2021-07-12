@@ -5,6 +5,7 @@ from string import ascii_uppercase
 from webshopCart.models import CartItem
 from webshopCustomer.models import Orders
 import mysql.connector
+from mysql.connector import errorcode
 import json
 
 #Product related 
@@ -245,11 +246,21 @@ class OrderDatabase:
 
         self.databaseParam = databaseParam['mysql']
         #Connect to the data base
-        self.connector = mysql.connector.connect(
-            user = databaseParam['username'],
-            password = databaseParam['password'],
-            host = "localhost", 
-            database = "takeawayorders")
+        try:
+            self.connector = mysql.connector.connect(
+                user = self.databaseParam['username'],
+                password = self.databaseParam['password'],
+                host = "localhost", 
+                database = "takeawayorders")
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print('something wrong with username or password')
+                self.connector.close()
+                return
+
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                #Data base does not exists
+                self.firstTimeSetup()
         
         self.cursor = self.connector.cursor()
     
@@ -259,10 +270,11 @@ class OrderDatabase:
         '''
         print('First time setup method called!!!!!!!!!!!!!')
         self.connector = mysql.connector.connect(
-            user = databaseParam['username'],
-            password = databaseParam['password'],
+            user = self.databaseParam['username'],
+            password = self.databaseParam['password'],
             host = "localhost"
         )
 
         self.cursor = self.connector.cursor()
         self.cursor.execute("CREATE DATABASE IF NOT EXISTS takeawayorders")
+        
