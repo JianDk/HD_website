@@ -245,23 +245,50 @@ class OrderDatabase:
             databaseParam = json.load(fileId)
 
         self.databaseParam = databaseParam['mysql']
-        #Connect to the data base
-        try:
+    #     #Connect to the data base
+    #     try:
+    #         self.connector = mysql.connector.connect(
+    #             user = self.databaseParam['username'],
+    #             password = self.databaseParam['password'],
+    #             host = "localhost", 
+    #             database = "takeawayorders")
+    #     except mysql.connector.Error as err:
+    #         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+    #             print('something wrong with username or password')
+    #             self.connector.close()
+    #             return
+
+    #         elif err.errno == errorcode.ER_BAD_DB_ERROR:
+    #             #Data base does not exists
+    #             self.firstTimeSetup()
+        
+    #     self.cursor = self.connector.cursor()
+    
+    def _create_database(self):
+        self._getConnector(database = 'takeawayorders')
+        self.cursor.execute("CREATE DATABASE IF NOT EXISTS takeawayorders")
+        self.connector.close()
+    
+    def _getConnector(self, **kwargs):
+        '''
+        gets the connector to the database specified by database as a string. If
+        database is None, then the default will be used which is takeawayorders.
+        '''
+        
+        if 'database' in kwargs.keys():
+            self.connector = mysql.connector.connect(
+            user = self.databaseParam['username'],
+            password = self.databaseParam['password'],
+            host = "localhost",
+            database = kwargs['database']
+        )
+        else:
             self.connector = mysql.connector.connect(
                 user = self.databaseParam['username'],
                 password = self.databaseParam['password'],
-                host = "localhost", 
-                database = "takeawayorders")
-        except mysql.connector.Error as err:
-            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                print('something wrong with username or password')
-                self.connector.close()
-                return
+                host = "localhost"
+            )
 
-            elif err.errno == errorcode.ER_BAD_DB_ERROR:
-                #Data base does not exists
-                self.firstTimeSetup()
-        
         self.cursor = self.connector.cursor()
     
     def firstTimeSetup(self):
@@ -272,9 +299,34 @@ class OrderDatabase:
         self.connector = mysql.connector.connect(
             user = self.databaseParam['username'],
             password = self.databaseParam['password'],
-            host = "localhost"
+            host = "localhost",
+            database = "takeawayorders"
         )
 
         self.cursor = self.connector.cursor()
-        self.cursor.execute("CREATE DATABASE IF NOT EXISTS takeawayorders")
+        
+        #String for create table
+        mysqlStr = '''CREATE TABLE orders (
+            sessionId VARCHAR(100),
+            orderId MEDIUMINT UNSIGNED,
+            name VARCHAR(100),
+            email VARCHAR(320),
+            mobil VARCHAR(20),
+            deliveryAddress VARCHAR(500),
+            latitude VARCHAR(20),
+            longitude VARCHAR(20),
+            deadline DATETIME,
+            takeawayType VARCHAR(20),
+            pickUp BOOLEAN DEFAULT FALSE,
+            takeaway BOOLEAN DEFAULT FALSE,
+            comment VARCHAR(500),
+            orderCreationTime DATETIME,
+            notified BOOLEAN DEFAULT false,
+            PRIMARY KEY (sessionId)
+        )
+        '''
+        self.cursor.execute(mysqlStr)
+        self.connector.close()
+
+
         

@@ -248,6 +248,8 @@ class PaymentComplete(View):
         
         #Insert the order to the database
         OrderDB = webshopUtils.OrderDatabase()
+        OrderDB.firstTimeSetup()
+        
         context = dict()
         context['orderCreationTime'] = order.orderCreationDateTime.strftime('%d-%m-%Y %H:%M')
         context['order'] = order
