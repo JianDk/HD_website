@@ -247,9 +247,14 @@ class PaymentComplete(View):
             totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.bagFee
         
         #Insert the order to the database
+        print('here is the total price!!!!!!!!!')
+        print(totalPrice)
+        print(type(totalPrice))
+        print('\n')
+
         OrderDB = webshopUtils.OrderDatabase()
-        OrderDB.firstTimeSetup()
-        
+        OrderDB.createNewOrder(session_id = session_id, order = order, totalPrice = totalPrice)
+
         context = dict()
         context['orderCreationTime'] = order.orderCreationDateTime.strftime('%d-%m-%Y %H:%M')
         context['order'] = order

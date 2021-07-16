@@ -25,6 +25,8 @@ dawaAutocomplete.dawaAutocomplete( document.getElementById("checkoutLocalDeliver
             localDeliveryTag.style.display = "block";
             document.getElementById("takeawayPickUp").style.display = "none"; 
             document.getElementById("valgtadresse").innerHTML = "Takeaway can be delivered to : " + selected.tekst
+            document.getElementById("latitude_field").value = selected.data.y;
+            document.getElementById("longitude_field").value = selected.data.x;
             } else {
               localDeliveryTag.style.display = "none";
               document.getElementById("takeawayPickUp").style.display = "block"; 

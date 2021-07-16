@@ -4,8 +4,8 @@ from random import choice
 from string import ascii_uppercase
 from webshopCart.models import CartItem
 from webshopCustomer.models import Orders
+import datetime
 import mysql.connector
-from mysql.connector import errorcode
 import json
 
 #Product related 
@@ -132,6 +132,8 @@ def create_or_update_Order(session_id_key, request, deliveryType):
         customerComment = request.POST['comments']
         deliveryTime = request.POST['deliveryTime']
         customerAddress = request.POST['addressField']
+        latitude = request.POST['address_latitude']
+        longitude = request.POST['address_longitude']
 
         #First get the sessionId from the request
         sessionId = get_sessionId(request = request, session_id_key = session_id_key)
@@ -146,6 +148,8 @@ def create_or_update_Order(session_id_key, request, deliveryType):
                 mobile = customerMobile,
                 session_id = sessionId,
                 deliveryAddress = customerAddress,
+                latitude = latitude,
+                longitude = longitude,
                 comments = customerComment,
                 deliveryTime = deliveryTime,
                 delivery = True,
@@ -176,6 +180,8 @@ def create_or_update_Order(session_id_key, request, deliveryType):
             if deliveryType == 'delivery':
                 existingOrder.delivery = True
                 existingOrder.pickup = False
+                existingOrder.latitude = latitude
+                existingOrder.longitude = longitude
             
             if deliveryType == 'pickup':
                 existingOrder.delivery = False
@@ -245,30 +251,105 @@ class OrderDatabase:
             databaseParam = json.load(fileId)
 
         self.databaseParam = databaseParam['mysql']
-    #     #Connect to the data base
-    #     try:
-    #         self.connector = mysql.connector.connect(
-    #             user = self.databaseParam['username'],
-    #             password = self.databaseParam['password'],
-    #             host = "localhost", 
-    #             database = "takeawayorders")
-    #     except mysql.connector.Error as err:
-    #         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-    #             print('something wrong with username or password')
-    #             self.connector.close()
-    #             return
-
-    #         elif err.errno == errorcode.ER_BAD_DB_ERROR:
-    #             #Data base does not exists
-    #             self.firstTimeSetup()
-        
-    #     self.cursor = self.connector.cursor()
     
     def _create_database(self):
-        self._getConnector(database = 'takeawayorders')
+        '''
+        Used for first time setting up the data base takeawayorders
+        '''
+        self._getConnector()
         self.cursor.execute("CREATE DATABASE IF NOT EXISTS takeawayorders")
         self.connector.close()
+
+    def _create_tables(self):
+        '''
+        used for first time setup creating the database tables for takeaway orders used to capture
+        paid orders for Hidden Dimsum 2900 takeaway
+        '''
+        self._getConnector(database = 'takeawayorders')
+
+        mysqlStr = '''CREATE TABLE orders (
+            sessionId VARCHAR(100),
+            orderId MEDIUMINT UNSIGNED,
+            name VARCHAR(100),
+            email VARCHAR(320),
+            mobile VARCHAR(20),
+            deliveryAddress VARCHAR(500),
+            latitude VARCHAR(20),
+            longitude VARCHAR(20),
+            deadline DATETIME,
+            pickUp BOOLEAN DEFAULT FALSE,
+            delivery BOOLEAN DEFAULT FALSE,
+            comment VARCHAR(500),
+            orderCreationTime DATETIME,
+            notified BOOLEAN DEFAULT false,
+            totalPrice MEDIUMINT UNSIGNED,
+            PRIMARY KEY (sessionId)
+        )
+        '''
+        self.cursor.execute(mysqlStr)
+        self.connector.close()
     
+    def createNewOrder(self, session_id, order, totalPrice):
+        '''
+        Used to insert a new order into the database table. A check to see if the session_id already
+        exists will be performed and if it exists the order will not be overwritten. If it does not exists
+        a new order will be created inside the data base
+        '''
+
+        self._getConnector(database = 'takeawayorders')
+        mysqlStr = '''SELECT sessionId FROM orders WHERE sessionId = %s '''
+        self.cursor.execute(mysqlStr, (session_id,))
+        data = self.cursor.fetchall()
+
+        #If session id is found in the data base table, we will no do another insertion of the same
+        #data and return
+        if data:
+            self.connector.close()
+            return
+
+        #Change reformat deadline time stamp into date time that matches mysql format
+        today = datetime.date.today()
+        deadline = today.strftime("%Y-%m-%d") + ' ' + order.deliveryTime + ':00'
+        
+        mysqlStr = f'''INSERT INTO orders (sessionId,
+        orderId,
+        name,
+        email, 
+        mobile,
+        deliveryAddress,
+        latitude,
+        longitude,
+        deadline,
+        pickUp,
+        delivery,
+        comment,
+        orderCreationTime,
+        totalPrice,
+        notified) VALUES (
+            '{session_id}',
+            '{order.id}',
+            '{order.fullName}',
+            '{order.email}',
+            '{order.mobile}',
+            '{order.deliveryAddress}',
+            '{order.latitude}', 
+            '{order.longitude}',  
+            '{deadline}',
+            {order.pickup},
+            {order.delivery},
+            '{order.comments}',
+            '{order.orderCreationDateTime}',
+            '{totalPrice}',
+            False
+            )'''
+
+        print('here is the mysql')
+        print(mysqlStr)
+        print('\n')
+        self.cursor.execute(mysqlStr)
+        self.connector.commit()
+        self.connector.close()
+
     def _getConnector(self, **kwargs):
         '''
         gets the connector to the database specified by database as a string. If
@@ -291,42 +372,6 @@ class OrderDatabase:
 
         self.cursor = self.connector.cursor()
     
-    def firstTimeSetup(self):
-        '''
-        This method is intend to be run first time setting up the data base and the tables for storing the takeaway orders
-        '''
-        print('First time setup method called!!!!!!!!!!!!!')
-        self.connector = mysql.connector.connect(
-            user = self.databaseParam['username'],
-            password = self.databaseParam['password'],
-            host = "localhost",
-            database = "takeawayorders"
-        )
-
-        self.cursor = self.connector.cursor()
         
-        #String for create table
-        mysqlStr = '''CREATE TABLE orders (
-            sessionId VARCHAR(100),
-            orderId MEDIUMINT UNSIGNED,
-            name VARCHAR(100),
-            email VARCHAR(320),
-            mobil VARCHAR(20),
-            deliveryAddress VARCHAR(500),
-            latitude VARCHAR(20),
-            longitude VARCHAR(20),
-            deadline DATETIME,
-            takeawayType VARCHAR(20),
-            pickUp BOOLEAN DEFAULT FALSE,
-            takeaway BOOLEAN DEFAULT FALSE,
-            comment VARCHAR(500),
-            orderCreationTime DATETIME,
-            notified BOOLEAN DEFAULT false,
-            PRIMARY KEY (sessionId)
-        )
-        '''
-        self.cursor.execute(mysqlStr)
-        self.connector.close()
-
 
         

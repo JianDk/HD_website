@@ -6,6 +6,8 @@ class Orders(models.Model):
     email = models.EmailField(max_length=100, blank = True)
     mobile = models.CharField(max_length = 30, blank = True)
     deliveryAddress = models.CharField(max_length = 100, blank = True)
+    latitude = models.CharField(max_length = 50)
+    longitude = models.CharField(max_length = 50)
     deliveryTime = models.CharField(max_length = 20, blank = False)
     delivery = models.BooleanField(default=False)
     pickup = models.BooleanField(default=False)
