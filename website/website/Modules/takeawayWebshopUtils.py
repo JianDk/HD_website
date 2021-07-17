@@ -287,9 +287,20 @@ class OrderDatabase:
         )
         '''
         self.cursor.execute(mysqlStr)
+
+        mysqlStr = '''CREATE TABLE orderedProducts (
+            sessionId VARCHAR(100),
+            orderId MEDIUMINT UNSIGNED,
+            product VARCHAR(100),
+            quantity SMALLINT UNSIGNED,
+            unitPrice SMALLINT UNSIGNED,
+            quantityPrice SMALLINT UNSIGNED,
+            PRIMARY KEY (sessionId)
+            )'''
+        self.cursor.execute(mysqlStr)
         self.connector.close()
     
-    def createNewOrder(self, session_id, order, totalPrice):
+    def createNewOrder(self, session_id, order, totalPrice, sessionItems):
         '''
         Used to insert a new order into the database table. A check to see if the session_id already
         exists will be performed and if it exists the order will not be overwritten. If it does not exists
@@ -348,6 +359,28 @@ class OrderDatabase:
         print('\n')
         self.cursor.execute(mysqlStr)
         self.connector.commit()
+
+        #Insert the products row by row into the data base
+        for item in sessionItems:
+            mysqlStr = f'''INSERT INTO orderedProducts (sessionId,
+            orderId,
+            product,
+            quantity,
+            unitPrice,
+            quantityPrice) VALUES (
+                '{session_id}',
+                '{order.id}',
+                '{item.product}',
+                '{item.quantity}',
+                '{item.product.price}',
+                '{item.total}'
+            )'''
+
+            print('\n')
+            print(mysqlStr)
+            
+            self.cursor.execute(mysqlStr)
+            self.connector.commit()
         self.connector.close()
 
     def _getConnector(self, **kwargs):
