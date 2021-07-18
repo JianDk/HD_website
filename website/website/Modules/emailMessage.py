@@ -73,3 +73,4 @@ class sendEmail:
         smtpObj.login(cred['email']['emailName'], cred['email']['password'])
         smtpObj.sendmail(emailFrom, emailTo, msg.as_string())
         smtpObj.quit()
+

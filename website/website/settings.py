@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'webshopCatalog',
     'webshopRestaurant',
     'webshopCart',
-    'webshopCustomer',
+    'webshopCustomer'
 ]
 #'mod_wsgi.server',
 
@@ -69,36 +69,6 @@ MIDDLEWARE = [
     'django_referrer_policy.middleware.ReferrerPolicyMiddleware'   
 ]
 REFERRER_POLICY = 'strict-origin'
-
-# CSP_DEFAULT_SRC = ["'self'", 
-# 'https://www.google.com',
-# 'https://cdnjs.cloudflare.com',
-# 'https://dawa.aws.dk',
-# 'https://test.checkout.dibspayment.eu']
-
-# CSP_SCRIPT_SRC = ["'self'", 
-# 'https://www.google.com',
-# 'https://code.jquery.com', 
-# 'https://www.gstatic.com',
-# 'https://stackpath.bootstrapcdn.com',
-# 'https://www.gstatic.com/recaptcha',    
-# 'https://cdn.jsdelivr.net',
-# 'https://cdnjs.cloudflare.com',
-# 'https://test.checkout.dibspayment.eu',
-# "'unsafe-inline'"]
-
-# CSP_SCRIPT_SRC_ELEM = ["'self'",
-# 'https://www.google-analytics.com/plugins/ua/ec.js',
-# 'https://code.jquery.com/jquery-3.6.0.js',
-# 'https://test.checkout.dibspayment.eu/v1/checkout.js?v=1',
-# ]
-
-# CSP_STYLE_SRC = ["'self'", 
-# 'https://cdnjs.cloudflare.com', 
-# 'https://test.checkout.dibspayment.eu',
-# "'unsafe-inline'"]
-
-# CSP_IMG_SRC = ["'self'", 'data:']
 
 ROOT_URLCONF = 'website.urls'
 

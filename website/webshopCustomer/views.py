@@ -10,7 +10,7 @@ import website.Modules.takeawayWebshopUtils as webshopUtils
 from website.Modules.geoLocation import GeoLocationTools
 from django.http import HttpResponse
 from website.Modules.paymentModule import NETS
-import mysql.connector
+from .models import Orders
 
 # Create your views here.
 session_id_key = 'hd2900TakeAwayCartId'
@@ -24,6 +24,7 @@ class TakeawayCheckout(View):
         self.deliveryStatus = self.hd2900RestaurantObject.isDeliveryOpenToday()
 
     def get(self, request, *args, **kwargs):
+        
         #Check if session is still valid
         sessionValid = webshopUtils.checkSessionIdValidity(request = request, session_id_key = session_id_key,  validPeriodInDays = self.hd2900RestaurantObject.restaurantModelData.session_valid_time)
         if sessionValid is False: #the session has expired and the user needs to start over
@@ -196,7 +197,7 @@ class Payment(View):
         #In this case the session has expired and the user will be redirected
         if sessionValid is False:
             return redirect('hd2900_takeaway_webshop')
-        
+
         #Write the customer info into the data base
         webshopUtils.create_or_update_Order(session_id_key=session_id_key, request=request, deliveryType='delivery')
 
@@ -248,12 +249,20 @@ class PaymentComplete(View):
         
         #Insert the order to the database
         OrderDB = webshopUtils.OrderDatabase()
-        OrderDB._create_database()
-        OrderDB._create_tables()
+        #OrderDB._create_database()
+        #OrderDB._create_tables()
         OrderDB.createNewOrder(session_id = session_id, 
         order = order, 
         totalPrice = totalPrice,
         sessionItems = sessionItems)
+
+        #Notify restaurant
+
+        #Change notify status in database
+
+        #Notify customer
+
+        #Delete session
 
         context = dict()
         context['orderCreationTime'] = order.orderCreationDateTime.strftime('%d-%m-%Y %H:%M')

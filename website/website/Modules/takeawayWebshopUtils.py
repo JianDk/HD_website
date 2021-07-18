@@ -289,13 +289,14 @@ class OrderDatabase:
         self.cursor.execute(mysqlStr)
 
         mysqlStr = '''CREATE TABLE orderedProducts (
+            uniqueId int NOT NULL AUTO_INCREMENT,
             sessionId VARCHAR(100),
             orderId MEDIUMINT UNSIGNED,
             product VARCHAR(100),
             quantity SMALLINT UNSIGNED,
             unitPrice SMALLINT UNSIGNED,
             quantityPrice SMALLINT UNSIGNED,
-            PRIMARY KEY (sessionId)
+            PRIMARY KEY (uniqueId)
             )'''
         self.cursor.execute(mysqlStr)
         self.connector.close()
@@ -315,8 +316,8 @@ class OrderDatabase:
         #If session id is found in the data base table, we will no do another insertion of the same
         #data and return
         if data:
-            self.connector.close()
-            return
+           self.connector.close()
+           return
 
         #Change reformat deadline time stamp into date time that matches mysql format
         today = datetime.date.today()
@@ -373,12 +374,12 @@ class OrderDatabase:
                 '{item.product}',
                 '{item.quantity}',
                 '{item.product.price}',
-                '{item.total}'
+                '{item.total()}'
             )'''
 
             print('\n')
             print(mysqlStr)
-            
+
             self.cursor.execute(mysqlStr)
             self.connector.commit()
         self.connector.close()

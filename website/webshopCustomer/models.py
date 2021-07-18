@@ -4,7 +4,7 @@ from django.db import models
 class Orders(models.Model):
     fullName = models.CharField(max_length=30, blank = False)
     email = models.EmailField(max_length=100, blank = True)
-    mobile = models.CharField(max_length = 30, blank = True)
+    mobile = models.CharField(max_length = 50, blank = False)
     deliveryAddress = models.CharField(max_length = 100, blank = True)
     latitude = models.CharField(max_length = 50)
     longitude = models.CharField(max_length = 50)

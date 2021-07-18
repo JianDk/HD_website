@@ -60,6 +60,7 @@
             {% include 'takeawayWebshop/webshopAddressVerification.html' %}
             <button type="button" class="btn btn-success" id ="takeawayPickUp">Takeaway pickup</button>
             <div id="localDeliveryForm">
+                <p id="errormsg"></p>
                 {% for field in customerDeliveryForm %}
                     {{field.label}}
                     <p>
@@ -67,7 +68,7 @@
                     </p>
                 {% endfor %}
 
-            <button type="submit" class="btn btn-success" id="toPaymentButton">NEXT</button>
+            <button type="submit" class="btn btn-success" id="toPaymentButton" onclick="localDeliveryFormValidation(event)">NEXT</button>
         </form>        
     </div>
 </div>
