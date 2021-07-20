@@ -61,6 +61,7 @@
             <button type="button" class="btn btn-success" id ="takeawayPickUp">Takeaway pickup</button>
             <div id="localDeliveryForm">
                 <p id="errormsg"></p>
+                <input type="hidden" name="deliveryForm">
                 {% for field in customerDeliveryForm %}
                     {{field.label}}
                     <p>

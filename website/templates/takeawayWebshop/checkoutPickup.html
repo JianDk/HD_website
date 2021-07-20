@@ -52,6 +52,7 @@
         {% csrf_token %}
         <div id="localDeliveryForm">
             <p id="errormsg"></p>
+            <input type="hidden" name="pickupForm">
             {% for field in customerPickupForm %}
                 {{field.label}}
                 <p>

@@ -240,8 +240,13 @@ class Payment(View):
         if sessionValid is False:
             return redirect('hd2900_takeaway_webshop')
 
+        if 'pickupForm' in request.POST:
+            deliveryType ='pickup'
+        elif 'deliveryForm' in request.POST:
+            deliveryType = 'delivery'
+
         #Write the customer info into the data base
-        webshopUtils.create_or_update_Order(session_id_key=session_id_key, request=request, deliveryType='delivery')
+        webshopUtils.create_or_update_Order(session_id_key=session_id_key, request=request, deliveryType = deliveryType)
 
         #Calculate the total price followed by creation of paymentID from NETS
         totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.delivery_fee + self.hd2900RestaurantObject.restaurantModelData.bagFee

@@ -127,13 +127,31 @@ def create_or_update_Order(session_id_key, request, deliveryType):
 
         #log the form information into the session
         customerName = request.POST['customerName']
-        customerEmail = request.POST['customerEmail']
-        customerMobile = request.POST['customerMobile']
+        if 'customerEmail' in request.POST:
+            customerEmail = request.POST['customerEmail']
+        else:
+            customerEmail = ''
+
+        if 'customerMobile' in request.POST:
+            customerMobile = request.POST['customerMobile']
+        else:
+            customerMobile = ''
+
         customerComment = request.POST['comments']
-        deliveryTime = request.POST['deliveryTime']
-        customerAddress = request.POST['addressField']
-        latitude = request.POST['address_latitude']
-        longitude = request.POST['address_longitude']
+
+        if 'pickupTime' in request.POST:
+            deliveryTime = request.POST['pickupTime']
+        elif 'deliveryTime' in request.POST:
+            deliveryTime = request.POST['deliveryTime']
+        
+        if 'customerAddress' in request.POST:
+            customerAddress = request.POST['addressField']
+            latitude = request.POST['address_latitude']
+            longitude = request.POST['address_longitude']
+        else:
+            customerAddress = ''
+            latitude = ''
+            longitude = ''
 
         #First get the sessionId from the request
         sessionId = get_sessionId(request = request, session_id_key = session_id_key)
@@ -174,18 +192,19 @@ def create_or_update_Order(session_id_key, request, deliveryType):
             existingOrder.mobile = customerMobile
             existingOrder.session_id = sessionId
             existingOrder.deliveryAddress = customerAddress
+            existingOrder.latitude = latitude
+            existingOrder.longitude = longitude
             existingOrder.comments = customerComment
             existingOrder.deliveryTime = deliveryTime
 
             if deliveryType == 'delivery':
                 existingOrder.delivery = True
                 existingOrder.pickup = False
-                existingOrder.latitude = latitude
-                existingOrder.longitude = longitude
-            
+                            
             if deliveryType == 'pickup':
                 existingOrder.delivery = False
                 existingOrder.pickup = True
+                
             existingOrder.save()
     
 def get_order(session_id_key, request):
