@@ -115,7 +115,7 @@ class RestaurantUtils:
         else:
             deliveryPossible = False
 
-        return deliveryPossible
+        return deliveryPossible 
 
     def get_deliveryEndtime(self):
         '''
@@ -163,6 +163,94 @@ class RestaurantUtils:
         
         return deliveryTimeList
     
+    def get_pickupTimeList(self):
+        '''
+        Given the current time and a time resolution of 15 min this script creates a list of the fastest 
+        pickup time which is the time point from now + preparation time and the time
+        point where the restaurant closes
+        '''
+        #Generate time list for collecting the ordred pickup
+        pickupEndTime = self.get_pickupEndTime()
+        pickupEndTime = pickupEndTime.strftime('%H:%M:%S')    
+        today = datetime.date.today().strftime('%d-%m-%Y')
+        pickupEndTime = datetime.datetime.strptime(today + ' ' + pickupEndTime, '%d-%m-%Y %H:%M:%S')
+        pickupStartTime = datetime.datetime.now() + datetime.timedelta(minutes=self.restaurantModelData.pickup_preparationtime)
+        
+        #check if the delivery start time is earlier than takeaway delivery opening time
+        pickupOpenTime = self.get_pickupOpenTime()
+        pickupOpenTime = pickupOpenTime.strftime('%H:%M:%S')
+        pickupOpenTime = datetime.datetime.strptime(today + ' ' + pickupOpenTime, '%d-%m-%Y %H:%M:%S')
+
+        if pickupStartTime < pickupOpenTime:
+            pickupStartTime = pickupOpenTime
+
+        #Round up pickup start time to the closest 15 min
+        pickupStartTime = self.roundTimeUp(currentTime = pickupStartTime, timeresolution=15)
+        pickupTimeList = list()
+        pickupTimeList.append( (pickupStartTime.strftime('%H:%M'), pickupStartTime.strftime('%H:%M')) )
+
+        while pickupStartTime < pickupEndTime:
+            pickupStartTime = pickupStartTime + datetime.timedelta(minutes = 15)
+            pickupTimeList.append( (pickupStartTime.strftime('%H:%M'), pickupStartTime.strftime('%H:%M')) )
+        
+        return pickupTimeList
+    
+    def get_pickupOpenTime(self):
+        '''
+        Get opening time for today's pickup and return it as a string in format HH:MM:SS
+        '''
+        weekday = self._convert_isoweekday_to_weekday(isoweekday = datetime.datetime.today().isoweekday())
+        return self.restaurantModelData.__dict__['pickup_'+ weekday + '_timestart'] 
+
+    def get_pickupEndTime(self):
+        '''
+        Get today's pickup end time and returns it as a string in format HH:MM:SS 
+        '''
+        weekday = self._convert_isoweekday_to_weekday(isoweekday = datetime.datetime.today().isoweekday())
+        return self.restaurantModelData.__dict__['pickup_' + weekday + '_timeend']    
+
+    def isPickupOpenToday(self):
+        '''
+        Check if restaurant actually offers pickup today. That is is restaurant open for 
+        takeaway pickup today. Returns either True or False
+        '''
+        self.today_weekday_string = self._convert_isoweekday_to_weekday(datetime.datetime.today().isoweekday())
+        return self.restaurantModelData.__dict__['pickup_' + self.today_weekday_string + '_active']
+
+    
+    def isPickupPossible(self):
+        '''
+        Takes the date, time and the lead time to produce a pickup order into account. Then the method returns either 
+        true or false on if pickup can be offered for today. This method is the main method used to check if pickup is
+        possible.
+        '''
+        pickupPossible = self.isPickupOpenToday()
+        
+        if pickupPossible is False:
+            return pickupPossible
+        
+        #Get the end time of today's pickup
+        pickupEndTime = self.get_pickupEndTime()
+        pickupEndTime = pickupEndTime.strftime('%H:%M:%S')       
+
+        #Get pickup end time with date and form it as a date time object to allow comparison
+        today = datetime.date.today().strftime('%d-%m-%Y')
+
+        pickupEndTime = datetime.datetime.strptime(today + ' ' + pickupEndTime, '%d-%m-%Y %H:%M:%S')
+
+        pickUpPreparationTime = self.restaurantModelData.pickup_preparationtime
+
+        #Get current time and add on top of that the pickup preparation time (time it takes to cook food) 
+        currentTime = datetime.datetime.now()
+        estimatedPickupTime = currentTime + datetime.timedelta(minutes=pickUpPreparationTime)
+
+        if estimatedPickupTime <= pickupEndTime:
+            pickupPossible = True
+        else:
+            pickupPossible = False
+
+        return pickupPossible 
+
     def roundTimeUp(self, currentTime, timeresolution):
         '''
         Given the currentTime which is a datetime object and the timeresolution which is an integer, this method rounds up the 

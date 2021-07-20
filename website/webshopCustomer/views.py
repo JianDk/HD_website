@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import JsonResponse
 from webshopCart.models import CartItem
-from .forms import customerLocalDeliveryForm
+from .forms import customerLocalDeliveryForm, customerPickupForm
 from index.forms import newsLetterForm
 from website.Modules.restaurantUtils import RestaurantUtils
 import website.Modules.takeawayWebshopUtils as webshopUtils
@@ -162,6 +162,48 @@ class DeliveryForm(View):
 
         return render(request, template_name = "takeawayWebshop/checkoutLocalDelivery.html", context = context)
         
+class PickUpForm(View):
+    def __init__(self):
+    
+    #Get model webshopRestaurant data for hd2900 restaurant for location id for this restaurant
+        self.hd2900RestaurantObject = RestaurantUtils(restaurantName = restaurantName)
+
+    def get (self, request, *args, **kwargs):
+        #Display the total cost together with bag fee
+        sessionItems = CartItem.objects.filter(cart_id = request.session[session_id_key])
+        
+        #Decide if delivery is still possible
+        pickupPossible = self.hd2900RestaurantObject.isPickupPossible()
+
+        if pickupPossible is False:
+            #Redirect the user to pickup
+            context = dict()
+            context['message'] = "Sorry takeaway is closed for today."
+            return render(request, template_name = "takeawayWebshop/takeawayClosed.html", context = context)
+        
+        #Generate time list for collecting pickup 
+        pickupTimeList = self.hd2900RestaurantObject.get_pickupTimeList()
+
+        #Get the payment id from NETS
+        #Calculate the grand total the total price in basket + bag fee
+        totalPrice = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + self.hd2900RestaurantObject.restaurantModelData.bagFee
+        payment = NETS()
+        paymentId = payment.get_paymentId(platform = platform,
+            reference = 'here comes order id', 
+            name = 'Hidden Dimsum 2900 Takeaway',
+            paymentReference ='Hidden Dimsum 2900 takeaway paymrent ref',
+            unitPrice = int(totalPrice) *100)
+
+        context = dict()
+        #Get the total price and add on top of it the bag fee 
+        context['title'] = 'Takeaway pickup checkout'
+        context['orderProducts'] = sessionItems
+        context['bagFee'] = self.hd2900RestaurantObject.restaurantModelData.bagFee
+        context['grandTotal'] = webshopUtils.get_BasketTotalPrice(request.session[session_id_key]) + context['bagFee']
+        context['customerPickupForm'] = customerPickupForm(pickupTimeList = pickupTimeList, auto_id = True)
+        context['paymentId'] = paymentId.json()['paymentId']
+
+        return render(request, template_name = "takeawayWebshop/checkoutPickup.html", context = context)
 
 class localDeliveryCheckoutAddressCheck(View):
     def __init__(self):

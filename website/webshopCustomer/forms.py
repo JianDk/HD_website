@@ -26,3 +26,13 @@ class customerLocalDeliveryForm(forms.Form):
         self.deliveryTimeList = kwargs.pop('deliveryTimeList')
         super().__init__(*args, **kwargs)
         self.fields['deliveryTime'].choices = self.deliveryTimeList
+
+class customerPickupForm(forms.Form):
+    customerName = forms.CharField(label = 'Name', max_length=50, required=True)
+    comments = forms.CharField(label = 'Comments', max_length = 300, widget=forms.Textarea, required = False)
+    pickupTime = forms.ChoiceField(choices = (), required=True)
+
+    def __init__(self, *args, **kwargs):
+        self.pickupTimeList = kwargs.pop('pickupTimeList')
+        super().__init__(*args, **kwargs)
+        self.fields['pickupTime'].choices = self.pickupTimeList

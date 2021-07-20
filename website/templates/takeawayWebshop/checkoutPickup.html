@@ -1,0 +1,69 @@
+{% extends 'takeawayWebshop/baseTemplate.html' %}
+{% load static %}
+{% block content %}
+{% include 'takeawayWebshop/header.html' %} 
+<div class="headerTitle">
+    <h1>TAKEAWAY PICKUP</h1>
+    <hr class = "cardDeckHorisontalLine">
+    <br>
+</div>
+
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+
+    {% for item in orderProducts %}
+    <tr>
+        <td>{{item.product}}</td>
+        <td>{{item.product.price}} kr</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.total}} kr</td>
+    </tr>
+    {% endfor %}
+    
+    <tr>
+        <td>Bag fee</td>
+        <td>{{bagFee}} kr</td>
+        <td>1</td>
+        <td>{{bagFee}} kr</td>
+    </tr>
+    
+    <tr>
+        <td class="totalCost">Total</td>
+        <td></td>
+        <td></td>
+        <td class="totalCost">{{grandTotal}} kr</td>
+    </tr>
+</table>
+
+<br>
+
+<div class="headerTitle">
+    <h1>TAKEAWAY PICKUP INFORMATION</h1>
+    <hr class = "cardDeckHorisontalLine">
+</div>
+
+<div class="container">
+    <form action="/localDeliveryPayment" method="POST" id="localDeliveryCheckoutForm">
+        {% csrf_token %}
+        <div id="localDeliveryForm">
+            <p id="errormsg"></p>
+            {% for field in customerPickupForm %}
+                {{field.label}}
+                <p>
+                {{field}}
+                </p>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-success" id="toPaymentButton" onclick="localPickupFormValidation(event)">NEXT</button>
+        </div>
+    </form>        
+</div>
+
+{% include 'takeawayWebshop/standardScripts.html' %}
+<script src="{% static 'scripts/checkoutPickupFormHandler.js' %}"></script>
+{% endblock %}
